@@ -2387,50 +2387,855 @@
                 </section>
 
                 <section class="page" id="page-approval-stages">
-                    <div class="page__header">
-                        <h1 class="page__title">Approval Stages</h1>
+                    <div class="page__header ast-header">
+                        <div class="ast-header__left">
+                            <div class="ast-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="ast-breadcrumb__sep">/</span>
+                                <span>Approval Stages</span>
+                            </div>
+                            <h1 class="ast-title">Approval Stage Configuration</h1>
+                            <p class="ast-description">Review the illustrative stages used to represent the application approval workflow.</p>
+                            <div class="ast-header__tags">
+                                <span class="ast-banner">Demo environment — all configuration is illustrative.</span>
+                                <span class="ast-demo-label">DEMO CONFIGURATION — NOT CONNECTED TO OFFICIAL AICTE SYSTEMS</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="placeholder-panel">
-                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+
+                    <div class="ast-summary-grid" id="astSummaryGrid"></div>
+                    <p class="ast-note">Role names and target durations are examples, not official AICTE rules or service-level commitments.</p>
+
+                    <section class="ast-panel" aria-labelledby="astWorkflowTitle">
+                        <div class="ast-section-head">
+                            <div>
+                                <h2 class="ast-section-title" id="astWorkflowTitle">Workflow Visualization</h2>
+                                <p class="ast-section-subtitle">Ordered representation of demo approval stages.</p>
+                            </div>
+                            <span class="ast-demo-chip">Illustrative</span>
+                        </div>
+                        <div class="ast-stepper ast-stepper--desktop" id="astStepperDesktop"></div>
+                        <div class="ast-stepper ast-stepper--mobile" id="astStepperMobile"></div>
+                        <p class="ast-footnote">Stepper renders from local configuration; use up/down controls to reorder (updates local state only).</p>
+                    </section>
+
+                    <section class="ast-panel" aria-labelledby="astConfigTitle">
+                        <div class="ast-section-head">
+                            <div>
+                                <h2 class="ast-section-title" id="astConfigTitle">Stage Configuration Table</h2>
+                                <p class="ast-section-subtitle">Search, filter, sort and manage demo stages locally.</p>
+                            </div>
+                            <button type="button" class="ast-btn ast-btn--primary" id="astAddStageBtn">Add Stage</button>
+                        </div>
+                        <div class="ast-toolbar">
+                            <input type="search" id="astStageSearch" class="ast-input" placeholder="Search stage name/role/description...">
+                            <select id="astStatusFilter" class="ast-select">
+                                <option value="all">All Status</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                            <select id="astReqFilter" class="ast-select">
+                                <option value="all">All Requirement</option>
+                                <option value="Required">Required</option>
+                                <option value="Optional">Optional</option>
+                            </select>
+                            <select id="astSort" class="ast-select">
+                                <option value="order-asc">Order Ascending</option>
+                                <option value="order-desc">Order Descending</option>
+                                <option value="name-asc">Name A–Z</option>
+                                <option value="name-desc">Name Z–A</option>
+                            </select>
+                        </div>
+                        <div class="ast-table-wrap">
+                            <table class="ast-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order</th>
+                                        <th>Stage Name</th>
+                                        <th>Description</th>
+                                        <th>Illustrative Responsible Role</th>
+                                        <th>Target Duration</th>
+                                        <th>Requirement Type</th>
+                                        <th>Demo Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="astConfigBody"></tbody>
+                            </table>
+                        </div>
+                        <p class="ast-footnote">All changes affect only local demo state. No server persistence.</p>
+                    </section>
+
+                    <section class="ast-panel" aria-labelledby="astPreviewTitle">
+                        <div class="ast-section-head">
+                            <div>
+                                <h2 class="ast-section-title" id="astPreviewTitle">Workflow Preview</h2>
+                                <p class="ast-section-subtitle">Preview how a fictional application moves through stages (illustrative only).</p>
+                            </div>
+                            <span class="ast-demo-chip">Preview Only</span>
+                        </div>
+                        <div class="ast-preview-meta">
+                            <div><span class="ast-meta-label">Application ID</span><span>APP-2026-0142</span></div>
+                            <div><span class="ast-meta-label">Institution</span><span>Western Institute of Technology</span></div>
+                            <div><span class="ast-meta-label">Current Demo Stage</span><span id="astPreviewCurrent">Document Review</span></div>
+                        </div>
+                        <div class="ast-preview-stage-select">
+                            <label class="ast-label" for="astPreviewStage">Preview at stage</label>
+                            <select id="astPreviewStage" class="ast-select"></select>
+                        </div>
+                        <div class="ast-preview-stepper" id="astPreviewStepper"></div>
+                        <p class="ast-note">Workflow preview uses fictional application data and does not perform an approval.</p>
+                    </section>
+
+                    <button type="button" class="ast-btn ast-btn--secondary" id="astResetDemo">Reset Demo Data</button>
+
+                    <!-- Stage Drawer/Modal -->
+                    <div id="astStageModal" class="ast-modal" aria-hidden="true" role="dialog" aria-modal="true">
+                        <div class="ast-modal__backdrop"></div>
+                        <div class="ast-modal__content" role="document">
+                            <div class="ast-modal__header">
+                                <div>
+                                    <div class="ast-modal__eyebrow" id="astModalEyebrow">Stage</div>
+                                    <h3 class="ast-modal__title" id="astModalTitle">Add/Edit Stage</h3>
+                                </div>
+                                <button type="button" class="ast-modal__close" id="astModalClose" aria-label="Close">&times;</button>
+                            </div>
+                            <div class="ast-modal__body">
+                                <input type="hidden" id="astModalId">
+                                <div class="ast-form-row">
+                                    <label class="ast-label" for="astModalName">Stage Name</label>
+                                    <input type="text" id="astModalName" class="ast-input">
+                                    <div class="ast-error" id="astErrName"></div>
+                                </div>
+                                <div class="ast-form-row">
+                                    <label class="ast-label" for="astModalDesc">Description</label>
+                                    <textarea id="astModalDesc" class="ast-textarea"></textarea>
+                                    <div class="ast-error" id="astErrDesc"></div>
+                                </div>
+                                <div class="ast-form-grid">
+                                    <div class="ast-form-row">
+                                        <label class="ast-label" for="astModalOrder">Display Order</label>
+                                        <input type="number" id="astModalOrder" class="ast-input" min="1">
+                                        <div class="ast-error" id="astErrOrder"></div>
+                                    </div>
+                                    <div class="ast-form-row">
+                                        <label class="ast-label" for="astModalRole">Illustrative Responsible Role</label>
+                                        <input type="text" id="astModalRole" class="ast-input">
+                                        <div class="ast-error" id="astErrRole"></div>
+                                    </div>
+                                </div>
+                                <div class="ast-form-grid">
+                                    <div class="ast-form-row">
+                                        <label class="ast-label" for="astModalDuration">Indicative Target Duration</label>
+                                        <input type="text" id="astModalDuration" class="ast-input" placeholder="e.g., 2–3 days">
+                                        <div class="ast-error" id="astErrDur"></div>
+                                    </div>
+                                    <div class="ast-form-row">
+                                        <label class="ast-label" for="astModalReq">Requirement Type</label>
+                                        <select id="astModalReq" class="ast-select">
+                                            <option value="Required">Required</option>
+                                            <option value="Optional">Optional</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="ast-form-row">
+                                    <label class="ast-label" for="astModalStatus">Demo Status</label>
+                                    <select id="astModalStatus" class="ast-select">
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
+                                </div>
+                                <div class="ast-modal-actions">
+                                    <button type="button" class="ast-btn ast-btn--primary" id="astModalSave">Save Changes</button>
+                                    <button type="button" class="ast-btn ast-btn--secondary" id="astModalCancel">Cancel</button>
+                                </div>
+                                <p class="ast-footnote">Demo configuration updated locally. No server changes.</p>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="ast-toast" id="astToast" role="status" aria-live="polite"></div>
                 </section>
 
                 <section class="page" id="page-audit-trail">
-                    <div class="page__header">
-                        <h1 class="page__title">Audit Trail</h1>
+                    <div class="page__header aud-header">
+                        <div class="aud-header__left">
+                            <div class="aud-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="aud-breadcrumb__sep">/</span>
+                                <span>Audit Trail</span>
+                            </div>
+                            <h1 class="aud-title">Audit Trail</h1>
+                            <p class="aud-description">Review a chronological demonstration of administrative and workflow-related activities.</p>
+                            <div class="aud-header__tags">
+                                <span class="aud-banner">Demo environment — all logs are illustrative.</span>
+                                <span class="aud-demo-label">ILLUSTRATIVE ACTIVITY LOG — NOT AN OFFICIAL AUDIT RECORD</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="placeholder-panel">
-                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
-                    </div>
-                </section>
 
-                <section class="page" id="page-user-role-management">
-                    <div class="page__header">
-                        <h1 class="page__title">User & Role Management</h1>
+                    <div class="aud-summary-grid" id="audSummaryGrid"></div>
+
+                    <section class="aud-panel" aria-labelledby="audLogTitle">
+                        <div class="aud-section-head">
+                            <div>
+                                <h2 class="aud-section-title" id="audLogTitle">Activity Log</h2>
+                                <p class="aud-section-subtitle">Searchable, filterable, sortable demo events.</p>
+                            </div>
+                            <div class="aud-head-actions">
+                                <button type="button" class="aud-btn aud-btn--secondary" id="audExportBtn">Export Demo Log (CSV)</button>
+                                <button type="button" class="aud-btn aud-btn--ghost" id="audResetBtn">Reset Demo Data</button>
+                            </div>
+                        </div>
+                        <div class="aud-toolbar">
+                            <input type="search" id="audSearch" class="aud-input" placeholder="Search events, actors, records...">
+                            <input type="text" id="audRecordId" class="aud-input" placeholder="Related record ID (e.g., APP-2026-0142)">
+                            <select id="audCategory" class="aud-select">
+                                <option value="all">All Categories</option>
+                                <option value="Application">Application</option>
+                                <option value="Document Review">Document Review</option>
+                                <option value="Compliance">Compliance</option>
+                                <option value="Workflow Configuration">Workflow Configuration</option>
+                                <option value="Deadline & Alerts">Deadline & Alerts</option>
+                                <option value="Reporting">Reporting</option>
+                            </select>
+                            <select id="audActor" class="aud-select">
+                                <option value="all">All Actors</option>
+                                <option value="Demo Administrator">Demo Administrator</option>
+                                <option value="Demo Reviewer">Demo Reviewer</option>
+                            </select>
+                            <select id="audResult" class="aud-select">
+                                <option value="all">All Results</option>
+                                <option value="Viewed">Viewed</option>
+                                <option value="Demo Update">Demo Update</option>
+                                <option value="Review Required">Review Required</option>
+                                <option value="Preview Generated">Preview Generated</option>
+                            </select>
+                            <select id="audDateRange" class="aud-select">
+                                <option value="all">All Dates</option>
+                                <option value="today">Today</option>
+                                <option value="last7">Last 7 Days</option>
+                            </select>
+                            <select id="audSort" class="aud-select">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                            </select>
+                        </div>
+                        <div class="aud-toolbar-actions">
+                            <button type="button" class="aud-btn aud-btn--primary" id="audApplyFilters">Apply Filters</button>
+                            <button type="button" class="aud-btn aud-btn--secondary" id="audResetFilters">Reset Filters</button>
+                        </div>
+                        <div class="aud-table-wrap">
+                            <table class="aud-table">
+                                <thead>
+                                    <tr>
+                                        <th>Event ID</th>
+                                        <th>Date &amp; Time</th>
+                                        <th>Activity</th>
+                                        <th>Demo Actor / Role</th>
+                                        <th>Related Record</th>
+                                        <th>Category</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="audLogBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="aud-pagination">
+                            <div class="aud-page-size">
+                                <label class="aud-label" for="audPageSize">Per page</label>
+                                <select id="audPageSize" class="aud-select aud-select--sm">
+                                    <option value="10" selected>10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+                            <div class="aud-pagination__controls">
+                                <button type="button" class="aud-pagination__btn" id="audPrev">Previous</button>
+                                <span id="audPageInfo">Page 1</span>
+                                <button type="button" class="aud-pagination__btn" id="audNext">Next</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Event Detail Drawer -->
+                    <div id="audDetailDrawer" class="aud-drawer" aria-hidden="true" role="dialog" aria-modal="true">
+                        <div class="aud-drawer__backdrop"></div>
+                        <div class="aud-drawer__content" role="document">
+                            <div class="aud-drawer__header">
+                                <div>
+                                    <div class="aud-drawer__eyebrow">Illustrative Demo Event</div>
+                                    <div class="aud-drawer__title" id="audDetailTitle">-</div>
+                                    <div class="aud-drawer__sub" id="audDetailId">-</div>
+                                </div>
+                                <button type="button" class="aud-drawer__close" id="audDetailClose" aria-label="Close">&times;</button>
+                            </div>
+                            <div class="aud-drawer__body">
+                                <div class="aud-drawer-banner">This is a fictional demonstration event, not a verified system record.</div>
+                                <div class="aud-drawer-grid">
+                                    <div class="aud-drawer-item"><span class="aud-drawer-label">Date &amp; Time</span><span class="aud-drawer-value" id="audDetailDate">-</span></div>
+                                    <div class="aud-drawer-item"><span class="aud-drawer-label">Activity</span><span class="aud-drawer-value" id="audDetailActivity">-</span></div>
+                                    <div class="aud-drawer-item"><span class="aud-drawer-label">Demo Actor / Role</span><span class="aud-drawer-value" id="audDetailActor">-</span></div>
+                                    <div class="aud-drawer-item"><span class="aud-drawer-label">Related Record</span><span class="aud-drawer-value" id="audDetailRecord">-</span></div>
+                                    <div class="aud-drawer-item"><span class="aud-drawer-label">Category</span><span class="aud-drawer-value" id="audDetailCategory">-</span></div>
+                                    <div class="aud-drawer-item"><span class="aud-drawer-label">Result</span><span class="aud-drawer-value" id="audDetailResult">-</span></div>
+                                    <div class="aud-drawer-item aud-drawer-item--full"><span class="aud-drawer-label">Additional Mock Details</span><span class="aud-drawer-value" id="audDetailDetails">-</span></div>
+                                </div>
+                                <button type="button" class="aud-btn aud-btn--secondary" id="audDetailCloseBtn">Close</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="placeholder-panel">
-                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
-                    </div>
+
+                    <div class="aud-toast" id="audToast" role="status" aria-live="polite"></div>
                 </section>
 
                 <section class="page" id="page-help">
-                    <div class="page__header">
-                        <h1 class="page__title">Help & Guidelines</h1>
+                    <div class="page__header hlp-header">
+                        <div class="hlp-header__left">
+                            <div class="hlp-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="hlp-breadcrumb__sep">/</span>
+                                <span>Help &amp; Guidelines</span>
+                            </div>
+                            <h1 class="hlp-title">Help &amp; Guidelines</h1>
+                            <p class="hlp-description">Quick guidance for navigating the PRAVAAH demo workspace.</p>
+                            <div class="hlp-header__tags">
+                                <span class="hlp-banner">Demo environment — guidance only.</span>
+                                <span class="hlp-demo-label">FRONTEND DEMONSTRATION</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="placeholder-panel">
-                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+
+                    <section class="hlp-panel" aria-labelledby="hlpNavTitle">
+                        <div class="hlp-section-head">
+                            <div>
+                                <h2 class="hlp-section-title" id="hlpNavTitle">Navigation Guide</h2>
+                                <p class="hlp-section-subtitle">Key destinations available in this demo.</p>
+                            </div>
+                        </div>
+                        <ul class="hlp-list">
+                            <li><strong>Overview/Approval Dashboard</strong> — KPIs, filters, attention items and activity (illustrative).</li>
+                            <li><strong>Applications</strong> — Browse, filter, sort, view details and manage demo actions.</li>
+                            <li><strong>Workflow Tracking</strong> — Pipeline visualization, stage details and bottlenecks.</li>
+                            <li><strong>Document Verification</strong> — Sample checklist and document preview.</li>
+                            <li><strong>Compliance Monitoring</strong> — Demo compliance register and review workspace.</li>
+                            <li><strong>Deadline &amp; Alerts</strong> — Alerts, calendar and notification preferences.</li>
+                            <li><strong>Reports &amp; Analytics</strong> — Charts, institution summary and report library with CSV export.</li>
+                            <li><strong>Approval Stages</strong> — Configure demo stages, reorder, preview workflow.</li>
+                            <li><strong>Audit Trail</strong> — Illustrative activity log with filters, details and CSV export.</li>
+                            <li><strong>User &amp; Role Management</strong> — Demo users/roles and capability matrix.</li>
+                            <li><strong>Settings &amp; Profile</strong> — Local preferences and fictional profile.</li>
+                        </ul>
+                    </section>
+
+                    <section class="hlp-panel" aria-labelledby="hlpNotesTitle">
+                        <div class="hlp-section-head">
+                            <div>
+                                <h2 class="hlp-section-title" id="hlpNotesTitle">Important Notes</h2>
+                                <p class="hlp-section-subtitle">Scope and labeling reminders.</p>
+                            </div>
+                        </div>
+                        <ul class="hlp-list">
+                            <li>All data is local mock/illustrative data — not official AICTE statistics.</li>
+                            <li>No backend, API, database, authentication or real integrations are implemented.</li>
+                            <li>Actions like export/reset/save preferences affect only local demo state.</li>
+                            <li>Compliance, roles and approvals shown are conceptual demonstrations.</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section class="page" id="page-user-role-management">
+                    <div class="page__header urm-header">
+                        <div class="urm-header__left">
+                            <div class="urm-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="urm-breadcrumb__sep">/</span>
+                                <span>User &amp; Role Management</span>
+                            </div>
+                            <h1 class="urm-title">User &amp; Role Management</h1>
+                            <p class="urm-description">Explore how user roles and interface permissions may be represented in a demonstration environment.</p>
+                            <div class="urm-header__tags">
+                                <span class="urm-banner">Demo environment — illustrative only.</span>
+                                <span class="urm-demo-label">DEMO ROLE MANAGEMENT — NO REAL USERS OR ACCESS RIGHTS ARE MODIFIED</span>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="urm-summary-grid" id="urmSummaryGrid"></div>
+
+                    <section class="urm-panel" aria-labelledby="urmUsersTitle">
+                        <div class="urm-section-head">
+                            <div>
+                                <h2 class="urm-section-title" id="urmUsersTitle">Demo Users</h2>
+                                <p class="urm-section-subtitle">Fictional users with illustrative roles and departments.</p>
+                            </div>
+                            <button type="button" class="urm-btn urm-btn--primary" id="urmAddUserBtn">Add Demo User</button>
+                        </div>
+                        <div class="urm-toolbar">
+                            <input type="search" id="urmUserSearch" class="urm-input" placeholder="Search users...">
+                            <select id="urmRoleFilter" class="urm-select">
+                                <option value="all">All Roles</option>
+                                <option value="Portal Administrator">Portal Administrator</option>
+                                <option value="Authorized Official">Authorized Official</option>
+                                <option value="Compliance Reviewer">Compliance Reviewer</option>
+                                <option value="Read-Only Viewer">Read-Only Viewer</option>
+                            </select>
+                            <select id="urmStatusFilter" class="urm-select">
+                                <option value="all">All Status</option>
+                                <option value="Active">Active</option>
+                                <option value="Invited">Invited</option>
+                            </select>
+                            <select id="urmSort" class="urm-select">
+                                <option value="name-asc">Name A–Z</option>
+                                <option value="name-desc">Name Z–A</option>
+                                <option value="role-asc">Role A–Z</option>
+                            </select>
+                        </div>
+                        <div class="urm-table-wrap">
+                            <table class="urm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Display Name</th>
+                                        <th>Demo Email</th>
+                                        <th>Assigned Role</th>
+                                        <th>Department</th>
+                                        <th>Demo Status</th>
+                                        <th>Last Activity</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="urmUsersBody"></tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section class="urm-panel" aria-labelledby="urmRolesTitle">
+                        <div class="urm-section-head">
+                            <div>
+                                <h2 class="urm-section-title" id="urmRolesTitle">Role Details &amp; Illustrative Capabilities</h2>
+                                <p class="urm-section-subtitle">Capability matrix for demonstration only — not enforced.</p>
+                            </div>
+                            <span class="urm-demo-chip">Illustrative UI Capability — Not Enforced</span>
+                        </div>
+                        <div class="urm-roles-grid" id="urmRolesGrid"></div>
+                    </section>
+
+                    <!-- User Detail Drawer -->
+                    <div id="urmUserDrawer" class="urm-drawer" aria-hidden="true" role="dialog" aria-modal="true">
+                        <div class="urm-drawer__backdrop"></div>
+                        <div class="urm-drawer__content" role="document">
+                            <div class="urm-drawer__header">
+                                <div>
+                                    <div class="urm-drawer__eyebrow">Demo User Profile</div>
+                                    <div class="urm-drawer__title" id="urmDrawerName">-</div>
+                                    <div class="urm-drawer__sub" id="urmDrawerEmail">-</div>
+                                </div>
+                                <button type="button" class="urm-drawer__close" id="urmDrawerClose" aria-label="Close">&times;</button>
+                            </div>
+                            <div class="urm-drawer__body">
+                                <div class="urm-drawer-grid">
+                                    <div class="urm-drawer-item"><span class="urm-drawer-label">Assigned Role</span><span class="urm-drawer-value" id="urmDrawerRole">-</span></div>
+                                    <div class="urm-drawer-item"><span class="urm-drawer-label">Department</span><span class="urm-drawer-value" id="urmDrawerDept">-</span></div>
+                                    <div class="urm-drawer-item"><span class="urm-drawer-label">Demo Status</span><span class="urm-drawer-value" id="urmDrawerStatus">-</span></div>
+                                    <div class="urm-drawer-item"><span class="urm-drawer-label">Last Activity</span><span class="urm-drawer-value" id="urmDrawerLast">-</span></div>
+                                </div>
+                                <div class="urm-drawer-section">
+                                    <div class="urm-drawer-section__title">Change Role Assignment (Demo)</div>
+                                    <div class="urm-role-change">
+                                        <select id="urmRoleChangeSelect" class="urm-select"></select>
+                                        <button type="button" class="urm-btn urm-btn--primary" id="urmRoleChangeBtn">Update Role (Local)</button>
+                                    </div>
+                                    <p class="urm-footnote">Change affects only current demonstration.</p>
+                                </div>
+                                <button type="button" class="urm-btn urm-btn--secondary" id="urmDrawerCloseBtn">Close</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add User Modal -->
+                    <div id="urmAddModal" class="urm-modal" aria-hidden="true" role="dialog" aria-modal="true">
+                        <div class="urm-modal__backdrop"></div>
+                        <div class="urm-modal__content" role="document">
+                            <div class="urm-modal__header">
+                                <div>
+                                    <div class="urm-modal__eyebrow">Demo User</div>
+                                    <h3 class="urm-modal__title">Add Demo User</h3>
+                                </div>
+                                <button type="button" class="urm-modal__close" id="urmAddModalClose" aria-label="Close">&times;</button>
+                            </div>
+                            <div class="urm-modal__body">
+                                <div class="urm-form-row">
+                                    <label class="urm-label" for="urmNewName">Display Name</label>
+                                    <input type="text" id="urmNewName" class="urm-input">
+                                    <div class="urm-error" id="urmErrName"></div>
+                                </div>
+                                <div class="urm-form-row">
+                                    <label class="urm-label" for="urmNewEmail">Example Email</label>
+                                    <input type="email" id="urmNewEmail" class="urm-input" placeholder="name@example.com">
+                                    <div class="urm-error" id="urmErrEmail"></div>
+                                </div>
+                                <div class="urm-form-row">
+                                    <label class="urm-label" for="urmNewDept">Department</label>
+                                    <input type="text" id="urmNewDept" class="urm-input">
+                                    <div class="urm-error" id="urmErrDept"></div>
+                                </div>
+                                <div class="urm-form-grid">
+                                    <div class="urm-form-row">
+                                        <label class="urm-label" for="urmNewRole">Demo Role</label>
+                                        <select id="urmNewRole" class="urm-select">
+                                            <option value="Portal Administrator">Portal Administrator</option>
+                                            <option value="Authorized Official">Authorized Official</option>
+                                            <option value="Compliance Reviewer">Compliance Reviewer</option>
+                                            <option value="Read-Only Viewer">Read-Only Viewer</option>
+                                        </select>
+                                    </div>
+                                    <div class="urm-form-row">
+                                        <label class="urm-label" for="urmNewStatus">Demo Status</label>
+                                        <select id="urmNewStatus" class="urm-select">
+                                            <option value="Active">Active</option>
+                                            <option value="Invited">Invited</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="urm-modal-actions">
+                                    <button type="button" class="urm-btn urm-btn--primary" id="urmAddSave">Save</button>
+                                    <button type="button" class="urm-btn urm-btn--secondary" id="urmAddCancel">Cancel</button>
+                                </div>
+                                <p class="urm-footnote">Demo user added locally. No account or login credentials were created.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="urm-toast" id="urmToast" role="status" aria-live="polite"></div>
                 </section>
 
                 <section class="page" id="page-settings">
-                    <div class="page__header">
-                        <h1 class="page__title">Settings</h1>
+                    <div class="page__header stg-header">
+                        <div class="stg-header__left">
+                            <div class="stg-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="stg-breadcrumb__sep">/</span>
+                                <span>Settings</span>
+                            </div>
+                            <h1 class="stg-title">Settings</h1>
+                            <p class="stg-description">Manage your demonstration preferences and review the platform’s interface configuration.</p>
+                            <div class="stg-header__tags">
+                                <span class="stg-banner">Demo environment — local only.</span>
+                                <span class="stg-demo-label">LOCAL DEMO SETTINGS — CHANGES ARE NOT APPLIED TO A LIVE SYSTEM</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="placeholder-panel">
-                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+
+                    <section class="stg-layout" aria-label="Settings layout">
+                        <nav class="stg-nav" aria-label="Settings categories">
+                            <button type="button" class="stg-nav__item active" data-stg="general">General</button>
+                            <button type="button" class="stg-nav__item" data-stg="appearance">Appearance</button>
+                            <button type="button" class="stg-nav__item" data-stg="notifications">Notifications</button>
+                            <button type="button" class="stg-nav__item" data-stg="language">Language &amp; Region</button>
+                            <button type="button" class="stg-nav__item" data-stg="privacy">Privacy &amp; Security</button>
+                            <button type="button" class="stg-nav__item" data-stg="accessibility">Accessibility</button>
+                            <button type="button" class="stg-nav__item" data-stg="profile">My Profile</button>
+                        </nav>
+                        <div class="stg-content">
+                            <!-- General -->
+                            <section class="stg-panel active" data-stg-panel="general">
+                                <div class="stg-panel__head">
+                                    <h2 class="stg-panel__title">General</h2>
+                                    <p class="stg-panel__sub">Platform identity and default demo preferences.</p>
+                                </div>
+                                <div class="stg-form">
+                                    <div class="stg-row">
+                                        <label class="stg-label">Application name</label>
+                                        <input type="text" class="stg-input" value="PRAVAAH" disabled>
+                                    </div>
+                                    <div class="stg-row">
+                                        <label class="stg-label">Platform subtitle</label>
+                                        <input type="text" id="stgSubtitle" class="stg-input" value="Approval Management">
+                                    </div>
+                                    <div class="stg-row">
+                                        <label class="stg-label" for="stgLanding">Dashboard landing preference</label>
+                                        <select id="stgLanding" class="stg-select">
+                                            <option value="overview" selected>Overview</option>
+                                            <option value="approval-dashboard">Approval Dashboard</option>
+                                        </select>
+                                    </div>
+                                    <div class="stg-row">
+                                        <label class="stg-label" for="stgPeriod">Default report period</label>
+                                        <select id="stgPeriod" class="stg-select">
+                                            <option value="Last 7 Days">Last 7 Days</option>
+                                            <option value="Last 30 Days" selected>Last 30 Days</option>
+                                            <option value="Last 90 Days">Last 90 Days</option>
+                                        </select>
+                                    </div>
+                                    <div class="stg-row">
+                                        <label class="stg-label" for="stgPageSize">Table page-size preference</label>
+                                        <select id="stgPageSize" class="stg-select">
+                                            <option value="5">5</option>
+                                            <option value="10" selected>10</option>
+                                            <option value="25">25</option>
+                                        </select>
+                                    </div>
+                                    <div class="stg-row stg-row--toggle">
+                                        <div>
+                                            <div class="stg-label">Confirmation before destructive demo actions</div>
+                                            <div class="stg-hint">Applies to reset/deactivate actions in demo modules.</div>
+                                        </div>
+                                        <label class="stg-switch"><input type="checkbox" id="stgConfirm" checked><span class="stg-switch__slider"></span></label>
+                                    </div>
+                                    <div class="stg-row">
+                                        <label class="stg-label" for="stgDensity">Table density</label>
+                                        <select id="stgDensity" class="stg-select">
+                                            <option value="comfortable" selected>Comfortable</option>
+                                            <option value="compact">Compact</option>
+                                        </select>
+                                    </div>
+                                    <div class="stg-actions">
+                                        <button type="button" class="stg-btn stg-btn--primary" id="stgSaveGeneral">Save Preferences</button>
+                                        <button type="button" class="stg-btn stg-btn--secondary" id="stgResetGeneral">Reset</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Appearance -->
+                            <section class="stg-panel" data-stg-panel="appearance">
+                                <div class="stg-panel__head">
+                                    <h2 class="stg-panel__title">Appearance</h2>
+                                    <p class="stg-panel__sub">Theme and layout density preferences.</p>
+                                </div>
+                                <div class="stg-form">
+                                    <div class="stg-row">
+                                        <label class="stg-label" for="stgTheme">Theme</label>
+                                        <select id="stgTheme" class="stg-select">
+                                            <option value="light" selected>Light</option>
+                                            <option value="dark">Dark</option>
+                                            <option value="system">System/default (demo)</option>
+                                        </select>
+                                    </div>
+                                    <div class="stg-row">
+                                        <label class="stg-label" for="stgSidebar">Sidebar behavior</label>
+                                        <select id="stgSidebar" class="stg-select">
+                                            <option value="expanded" selected>Expanded</option>
+                                            <option value="collapsed">Collapsed (demo)</option>
+                                        </select>
+                                    </div>
+                                    <div class="stg-preview">
+                                        <div class="stg-preview__title">Preview</div>
+                                        <div class="stg-preview__card">
+                                            <div class="stg-preview__row"><span class="stg-pill">Status</span><span class="stg-pill stg-pill--warn">Pending</span></div>
+                                            <button class="stg-preview__btn">Action</button>
+                                        </div>
+                                    </div>
+                                    <div class="stg-actions">
+                                        <button type="button" class="stg-btn stg-btn--primary" id="stgSaveAppearance">Save Preferences</button>
+                                        <button type="button" class="stg-btn stg-btn--secondary" id="stgResetAppearance">Reset</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Notifications -->
+                            <section class="stg-panel" data-stg-panel="notifications">
+                                <div class="stg-panel__head">
+                                    <h2 class="stg-panel__title">Notifications</h2>
+                                    <p class="stg-panel__sub">Notification preferences (demo only).</p>
+                                </div>
+                                <p class="stg-notice">These controls demonstrate notification preferences only. No emails, SMS, push notifications or real alerts are sent.</p>
+                                <div class="stg-form">
+                                    <div class="stg-row stg-row--toggle"><div class="stg-label">In-app deadline reminders</div><label class="stg-switch"><input type="checkbox" id="stgNotif1" checked><span class="stg-switch__slider"></span></label></div>
+                                    <div class="stg-row stg-row--toggle"><div class="stg-label">High-priority demo alerts</div><label class="stg-switch"><input type="checkbox" id="stgNotif2" checked><span class="stg-switch__slider"></span></label></div>
+                                    <div class="stg-row stg-row--toggle"><div class="stg-label">Compliance review reminders</div><label class="stg-switch"><input type="checkbox" id="stgNotif3"><span class="stg-switch__slider"></span></label></div>
+                                    <div class="stg-row stg-row--toggle"><div class="stg-label">Workflow update notifications</div><label class="stg-switch"><input type="checkbox" id="stgNotif4" checked><span class="stg-switch__slider"></span></label></div>
+                                    <div class="stg-row stg-row--toggle"><div class="stg-label">Weekly summary preference</div><label class="stg-switch"><input type="checkbox" id="stgNotif5"><span class="stg-switch__slider"></span></label></div>
+                                    <div class="stg-row">
+                                        <label class="stg-label" for="stgReminder">Upcoming deadline reminder window</label>
+                                        <select id="stgReminder" class="stg-select">
+                                            <option value="1">1 day</option>
+                                            <option value="3" selected>3 days</option>
+                                            <option value="7">7 days</option>
+                                        </select>
+                                    </div>
+                                    <div class="stg-actions">
+                                        <button type="button" class="stg-btn stg-btn--primary" id="stgSaveNotif">Save Preferences</button>
+                                        <button type="button" class="stg-btn stg-btn--secondary" id="stgResetNotif">Reset</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Language -->
+                            <section class="stg-panel" data-stg-panel="language">
+                                <div class="stg-panel__head">
+                                    <h2 class="stg-panel__title">Language &amp; Region</h2>
+                                    <p class="stg-panel__sub">Display preferences (preview).</p>
+                                </div>
+                                <div class="stg-form">
+                                    <div class="stg-row">
+                                        <label class="stg-label" for="stgLang">Interface language</label>
+                                        <select id="stgLang" class="stg-select">
+                                            <option value="en" selected>English</option>
+                                            <option value="hi">Hindi (Demo)</option>
+                                            <option value="mr">Marathi (Demo)</option>
+                                        </select>
+                                    </div>
+                                    <div class="stg-row">
+                                        <label class="stg-label" for="stgDateFmt">Date format</label>
+                                        <select id="stgDateFmt" class="stg-select">
+                                            <option value="dd-mm-yyyy" selected>DD-MM-YYYY</option>
+                                            <option value="mm-dd-yyyy">MM-DD-YYYY</option>
+                                            <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                        </select>
+                                    </div>
+                                    <div class="stg-row">
+                                        <label class="stg-label" for="stgTimeFmt">Time format</label>
+                                        <select id="stgTimeFmt" class="stg-select">
+                                            <option value="24h" selected>24-hour</option>
+                                            <option value="12h">12-hour</option>
+                                        </select>
+                                    </div>
+                                    <div class="stg-row">
+                                        <label class="stg-label" for="stgTz">Time-zone</label>
+                                        <select id="stgTz" class="stg-select">
+                                            <option value="ist" selected>IST (UTC+5:30)</option>
+                                            <option value="utc">UTC</option>
+                                        </select>
+                                    </div>
+                                    <p class="stg-footnote">Not all components may reflect changes globally; marked as preview.</p>
+                                    <div class="stg-actions">
+                                        <button type="button" class="stg-btn stg-btn--primary" id="stgSaveLang">Save Preferences</button>
+                                        <button type="button" class="stg-btn stg-btn--secondary" id="stgResetLang">Reset</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Privacy -->
+                            <section class="stg-panel" data-stg-panel="privacy">
+                                <div class="stg-panel__head">
+                                    <h2 class="stg-panel__title">Privacy &amp; Security</h2>
+                                    <p class="stg-panel__sub">Informational (non-functional) demo interface.</p>
+                                </div>
+                                <div class="stg-info-grid">
+                                    <div class="stg-info-card"><div class="stg-info-card__title">Session security</div><div class="stg-info-card__text">Preview Only</div></div>
+                                    <div class="stg-info-card"><div class="stg-info-card__title">Password policy</div><div class="stg-info-card__text">Demo guidelines — not enforced</div></div>
+                                    <div class="stg-info-card"><div class="stg-info-card__title">Multi-factor authentication</div><div class="stg-info-card__text">Status: Preview Only</div></div>
+                                    <div class="stg-info-card"><div class="stg-info-card__title">Active session preview</div><div class="stg-info-card__text">1 session (demo)</div></div>
+                                </div>
+                                <div class="stg-notice">Actual security controls require a properly implemented and authorized authentication system.</div>
+                                <p class="stg-footnote">No passwords, tokens, secrets or personal data shown.</p>
+                            </section>
+
+                            <!-- Accessibility -->
+                            <section class="stg-panel" data-stg-panel="accessibility">
+                                <div class="stg-panel__head">
+                                    <h2 class="stg-panel__title">Accessibility</h2>
+                                    <p class="stg-panel__sub">Locally controlled demo preferences.</p>
+                                </div>
+                                <div class="stg-form">
+                                    <div class="stg-row stg-row--toggle"><div class="stg-label">Reduced animation</div><label class="stg-switch"><input type="checkbox" id="stgA11y1"><span class="stg-switch__slider"></span></label></div>
+                                    <div class="stg-row stg-row--toggle"><div class="stg-label">Increased contrast</div><label class="stg-switch"><input type="checkbox" id="stgA11y2"><span class="stg-switch__slider"></span></label></div>
+                                    <div class="stg-row stg-row--toggle"><div class="stg-label">Larger interface text</div><label class="stg-switch"><input type="checkbox" id="stgA11y3"><span class="stg-switch__slider"></span></label></div>
+                                    <div class="stg-row stg-row--toggle"><div class="stg-label">Visible focus indicators (demo enhancement)</div><label class="stg-switch"><input type="checkbox" id="stgA11y4" checked><span class="stg-switch__slider"></span></label></div>
+                                    <div class="stg-actions">
+                                        <button type="button" class="stg-btn stg-btn--primary" id="stgSaveA11y">Save Preferences</button>
+                                        <button type="button" class="stg-btn stg-btn--secondary" id="stgResetA11y">Reset</button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Profile -->
+                            <section class="stg-panel" data-stg-panel="profile">
+                                <div class="stg-panel__head">
+                                    <h2 class="stg-panel__title">My Profile</h2>
+                                    <p class="stg-panel__sub">Fictional demonstration profile.</p>
+                                </div>
+                                <div class="stg-profile-grid">
+                                    <div class="stg-profile-card">
+                                        <div class="stg-profile-card__name" id="stgProfName">Portal Administrator</div>
+                                        <div class="stg-profile-card__role" id="stgProfRole">Authorized Official — Demo</div>
+                                        <div class="stg-profile-card__meta"><span>Department:</span> <span id="stgProfDept">Administration — Sample</span></div>
+                                        <div class="stg-profile-card__meta"><span>Email:</span> administrator@example.com</div>
+                                        <div class="stg-profile-card__meta"><span>Status:</span> Demo Account</div>
+                                    </div>
+                                    <div class="stg-profile-card">
+                                        <div class="stg-profile-card__title">Interface preferences summary</div>
+                                        <div class="stg-profile-card__meta"><span>Landing:</span> <span id="stgProfLand">Overview</span></div>
+                                        <div class="stg-profile-card__meta"><span>Density:</span> <span id="stgProfDensity">Comfortable</span></div>
+                                        <div class="stg-profile-card__meta"><span>Theme:</span> <span id="stgProfTheme">Light</span></div>
+                                    </div>
+                                </div>
+                                <div class="stg-profile-actions">
+                                    <button type="button" class="stg-btn stg-btn--primary" id="stgEditProfile">Edit Profile</button>
+                                    <button type="button" class="stg-btn stg-btn--secondary" id="stgSignOut">Sign Out (Demo)</button>
+                                </div>
+                                <p class="stg-footnote">Profile is fictional. Edit only updates display name and department locally.</p>
+                            </section>
+                        </div>
+                    </section>
+
+                    <!-- Profile Edit Modal -->
+                    <div id="stgProfileModal" class="stg-modal" aria-hidden="true" role="dialog" aria-modal="true">
+                        <div class="stg-modal__backdrop"></div>
+                        <div class="stg-modal__content" role="document">
+                            <div class="stg-modal__header">
+                                <div>
+                                    <div class="stg-modal__eyebrow">Edit Profile</div>
+                                    <h3 class="stg-modal__title">Edit Demo Profile</h3>
+                                </div>
+                                <button type="button" class="stg-modal__close" id="stgProfileModalClose" aria-label="Close">&times;</button>
+                            </div>
+                            <div class="stg-modal__body">
+                                <div class="stg-form-row">
+                                    <label class="stg-label" for="stgEditName">Display Name</label>
+                                    <input type="text" id="stgEditName" class="stg-input" value="Portal Administrator">
+                                </div>
+                                <div class="stg-form-row">
+                                    <label class="stg-label" for="stgEditDept">Department</label>
+                                    <input type="text" id="stgEditDept" class="stg-input" value="Administration — Sample">
+                                </div>
+                                <div class="stg-modal-actions">
+                                    <button type="button" class="stg-btn stg-btn--primary" id="stgProfileSave">Save</button>
+                                    <button type="button" class="stg-btn stg-btn--secondary" id="stgProfileCancel">Cancel</button>
+                                </div>
+                                <p class="stg-footnote">Updates local state only.</p>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="stg-toast" id="stgToast" role="status" aria-live="polite"></div>
                 </section>
             </main>
+        </div>
+    </div>
+
+    <!-- PRAVAAH Copilot -->
+    <button class="copilot-launcher" id="copilotLauncher" aria-label="Open PRAVAAH Copilot" title="PRAVAAH Copilot">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="9" cy="10" r="1" fill="currentColor"/>
+            <circle cx="15" cy="10" r="1" fill="currentColor"/>
+            <path d="M8 14c1 1 2 1.5 4 1.5s3-.5 4-1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span class="copilot-launcher__label">PRAVAAH Copilot</span>
+    </button>
+
+    <div class="copilot-panel" id="copilotPanel" aria-hidden="true" role="dialog" aria-modal="false">
+        <div class="copilot-panel__header">
+            <div class="copilot-panel__title-group">
+                <div class="copilot-panel__title">PRAVAAH Copilot</div>
+                <div class="copilot-panel__status">Demo Mode</div>
+            </div>
+            <div class="copilot-panel__header-actions">
+                <button type="button" class="copilot-panel__icon-btn" id="copilotNewConv" title="New Conversation" aria-label="New Conversation">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 3.75v10.5M3.75 9h10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </button>
+                <button type="button" class="copilot-panel__icon-btn" id="copilotMin" title="Close" aria-label="Close">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 13.5L13.5 4.5M4.5 4.5l9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </button>
+            </div>
+        </div>
+        <div class="copilot-panel__sub">Your guide to the PRAVAAH demonstration portal</div>
+        <div class="copilot-panel__messages" id="copilotMessages" aria-live="polite"></div>
+        <div class="copilot-panel__chips" id="copilotChips"></div>
+        <div class="copilot-panel__input-row">
+            <input type="text" id="copilotInput" class="copilot-panel__input" placeholder="Ask about workflows, applications, compliance..." aria-label="Ask PRAVAAH Copilot">
+            <button type="button" class="copilot-panel__send" id="copilotSend" aria-label="Send">Send</button>
         </div>
     </div>
 
@@ -2492,5 +3297,10 @@
     <script src="compliance.js"></script>
     <script src="deadline-alerts.js"></script>
     <script src="reports-analytics.js"></script>
+    <script src="approval-stages.js"></script>
+    <script src="audit-trail.js"></script>
+    <script src="user-roles.js"></script>
+    <script src="settings-profile.js"></script>
+    <script src="copilot.js"></script>
 </body>
 </html>

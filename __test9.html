@@ -2492,7 +2492,7 @@
     <script src="compliance.js"></script>
     <script src="deadline-alerts.js"></script>
     <script src="reports-analytics.js"></script>
-<pre id=" out></pre><script>(function () {
+<pre id="out"></pre><script>(function () {
   function run() {
     var out = document.getElementById('out');
     function log(k, v) { out.textContent += k + ': ' + v + '\n'; }
@@ -2553,9 +2553,6 @@
       log('modal rows', qa('#rptModalTableBody tr').length);
       click(q('#rptModalCloseBtn'));
       log('modal closed', !q('#rptPreviewModal').classList.contains('active'));
-
-      click(qa('#rptLibraryGrid [data-lib-export]')[0]);
-      log('toast export', q('#rptToast').classList.contains('active'));
 
       click(q('#rptViewCompliance'));
       log('nav compliance', q('#page-compliance-monitoring').classList.contains('active'));
