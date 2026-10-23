@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAVAAH - Application Workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="app-shell.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%230b1f44'/><path d='M16 20h32M16 32h20M16 44h28' stroke='%23ff6b1c' stroke-width='4' stroke-linecap='round'/></svg>">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar__header">
+                <div class="sidebar__brand">
+                    <div class="sidebar__logo">
+                        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" rx="6" fill="#0b1f44"/>
+                            <path d="M10 12h20M10 20h12M10 28h16" stroke="#ff6b1c" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="28" cy="20" r="2" fill="#ff6b1c"/>
+                        </svg>
+                    </div>
+                    <div class="sidebar__brand-text">
+                        <div class="sidebar__brand-name">PRAVAAH</div>
+                        <div class="sidebar__brand-label">Approval Management</div>
+                    </div>
+                </div>
+                <button class="sidebar__collapse" id="sidebarCollapse" aria-label="Toggle sidebar">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <button class="sidebar__new-btn" id="newWorkspaceBtn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span class="sidebar__new-text">+ New View</span>
+            </button>
+
+            <nav class="sidebar__nav">
+                <div class="nav__section">
+                    <button class="nav__item active" data-page="overview" title="Overview">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="2" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                <rect x="10" y="2" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                <rect x="2" y="10" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                <rect x="10" y="10" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Overview</span>
+                    </button>
+                    <button class="nav__item" data-page="approval-dashboard" title="Approval Dashboard">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="3" width="14" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M6 8h6M6 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Approval Dashboard</span>
+                    </button>
+                    <button class="nav__item" data-page="applications" title="Applications">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4h10v10H4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <path d="M6 7h6M6 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Applications</span>
+                    </button>
+                    <button class="nav__item" data-page="workflow-tracking" title="Workflow Tracking">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="4" cy="9" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="9" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="14" cy="9" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="9" cy="14" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M6 9h2M9 6v2M12 9h2M9 12v2" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Workflow Tracking</span>
+                    </button>
+                    <button class="nav__item" data-page="document-verification" title="Document Verification">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 3h6l3 3v9H5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <path d="M11 3v3h3" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M7 10l1.5 1.5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Document Verification</span>
+                    </button>
+                    <button class="nav__item" data-page="compliance-monitoring" title="Compliance Monitoring">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 2l6 3v5c0 3.5-2.5 6-6 7-3.5-1-6-3.5-6-7V5l6-3z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <path d="M6 9l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Compliance Monitoring</span>
+                    </button>
+                    <button class="nav__item" data-page="deadline-alerts" title="Deadline & Alerts">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M9 5v4l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Deadline & Alerts</span>
+                    </button>
+                    <button class="nav__item" data-page="reports-analytics" title="Reports & Analytics">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 14V4M7 14V8M11 14V6M15 14V2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Reports & Analytics</span>
+                    </button>
+                </div>
+
+                <div class="nav__divider"></div>
+                <div class="nav__section-label">ADMINISTRATION</div>
+                <div class="nav__section">
+                    <button class="nav__item" data-page="approval-stages" title="Approval Stages">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="6" cy="6" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="12" cy="6" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="6" cy="12" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                <circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M8 6h2M12 8v2M6 8v2M8 12h2" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Approval Stages</span>
+                    </button>
+                    <button class="nav__item" data-page="audit-trail" title="Audit Trail">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 4h12M3 9h8M3 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Audit Trail</span>
+                    </button>
+                    <button class="nav__item" data-page="user-role-management" title="User & Role Management">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M3 15c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">User & Role Management</span>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="sidebar__bottom">
+                <button class="nav__item" data-page="help" title="Help & Guidelines">
+                    <span class="nav__icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M9 13v-1M9 7.5c0-.828.672-1.5 1.5-1.5S12 6.672 12 7.5c0 .828-.672 1.5-1.5 1.5-.828 0-1.5.672-1.5 1.5V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span class="nav__text">Help & Guidelines</span>
+                </button>
+                <button class="nav__item" data-page="settings" title="Settings">
+                    <span class="nav__icon">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="9" cy="9" r="2" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M15 9c0-.69-.056-1.357-.162-2.004l1.702-1.316-1-1.732-1.88.774c-.524-.468-1.108-.874-1.738-1.204L12 1h-2l-.5 2.518c-.63.33-1.214.736-1.738 1.204l-1.88-.774-1 1.732 1.702 1.316A7.37 7.37 0 003 9c0 .69.056 1.357.162 2.004l-1.702 1.316 1 1.732 1.88-.774c.524.468 1.108.874 1.738 1.204L6 17h2l.5-2.518c.63-.33 1.214-.736 1.738-1.204l1.88.774 1-1.732-1.702-1.316c.106-.647.162-1.314.162-2.004z" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </span>
+                    <span class="nav__text">Settings</span>
+                </button>
+                <div class="user-profile">
+                    <div class="user-avatar">PA</div>
+                    <div class="user-info">
+                        <div class="user-name">Portal Administrator</div>
+                        <div class="user-role">Authorized Official</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header__left">
+                    <button class="header__menu-btn" id="headerMenuBtn" aria-label="Open menu">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 10h14M3 6h14M3 14h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="breadcrumb">
+                        <span class="breadcrumb__item">PRAVAAH</span>
+                        <span class="breadcrumb__separator">/</span>
+                        <span class="breadcrumb__item breadcrumb__item--active" id="breadcrumbCurrent">Overview</span>
+                    </div>
+                    <div class="header__section-title" id="headerSectionTitle">Overview</div>
+                </div>
+                <div class="header__right">
+                    <button class="header__icon-btn" id="searchBtn" aria-label="Search">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M12 12l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <button class="header__icon-btn" id="notificationBtn" aria-label="Notifications">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 2a5 5 0 015 5v2l1 2H3l1-2V7a5 5 0 015-5z" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M7 16h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span class="notification__indicator"></span>
+                    </button>
+                    <button class="header__icon-btn" id="helpBtn" aria-label="Help">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M9 13v-1M9 7.5c0-.828.672-1.5 1.5-1.5S12 6.672 12 7.5c0 .828-.672 1.5-1.5 1.5-.828 0-1.5.672-1.5 1.5V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="profile-wrapper">
+                        <button class="profile-btn" id="profileBtn" aria-label="Profile">
+                            <div class="profile-avatar">PA</div>
+                        </button>
+                        <div class="profile-dropdown" id="profileDropdown">
+                            <button class="profile-dropdown__item">Profile</button>
+                            <button class="profile-dropdown__item">Preferences</button>
+                            <div class="profile-dropdown__divider"></div>
+                            <button class="profile-dropdown__item profile-dropdown__item--signout">Sign out</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="content-area">
+                <!-- Overview Page -->
+                <section class="page active" id="page-overview">
+                    <div class="page__header">
+                        <h1 class="page__title">Welcome to PRAVAAH</h1>
+                        <p class="page__description">Your unified workspace for approval workflows, application visibility and compliance monitoring.</p>
+                    </div>
+                    <div class="welcome-panel">
+                        <h2 class="welcome-panel__title">Your Approval Workspace</h2>
+                        <div class="welcome-panel__links">
+                            <button class="welcome-link" data-page="applications">
+                                <span class="welcome-link__icon">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 5h10v10H5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                        <path d="M7 8h6M7 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <span class="welcome-link__text">Track Applications</span>
+                            </button>
+                            <button class="welcome-link" data-page="compliance-monitoring">
+                                <span class="welcome-link__icon">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 2l7 3v6c0 4-3 6.5-7 7.5-4-1-7-3.5-7-7.5V5l7-3z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                        <path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <span class="welcome-link__text">Review Compliance</span>
+                            </button>
+                            <button class="welcome-link" data-page="deadline-alerts">
+                                <span class="welcome-link__icon">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+                                        <path d="M10 6v4l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <span class="welcome-link__text">Monitor Deadlines</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Placeholder Pages -->
+                <section class="page" id="page-approval-dashboard">
+                    <div class="page__header">
+                        <h1 class="page__title">Approval Dashboard</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+
+                <section class="page" id="page-applications">
+                    <div class="page__header">
+                        <h1 class="page__title">Applications</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+
+                <section class="page" id="page-workflow-tracking">
+                    <div class="page__header">
+                        <h1 class="page__title">Workflow Tracking</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+
+                <section class="page" id="page-document-verification">
+                    <div class="page__header">
+                        <h1 class="page__title">Document Verification</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+
+                <section class="page" id="page-compliance-monitoring">
+                    <div class="page__header">
+                        <h1 class="page__title">Compliance Monitoring</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+
+                <section class="page" id="page-deadline-alerts">
+                    <div class="page__header">
+                        <h1 class="page__title">Deadline & Alerts</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+
+                <section class="page" id="page-reports-analytics">
+                    <div class="page__header">
+                        <h1 class="page__title">Reports & Analytics</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+
+                <section class="page" id="page-approval-stages">
+                    <div class="page__header">
+                        <h1 class="page__title">Approval Stages</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+
+                <section class="page" id="page-audit-trail">
+                    <div class="page__header">
+                        <h1 class="page__title">Audit Trail</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+
+                <section class="page" id="page-user-role-management">
+                    <div class="page__header">
+                        <h1 class="page__title">User & Role Management</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+
+                <section class="page" id="page-help">
+                    <div class="page__header">
+                        <h1 class="page__title">Help & Guidelines</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+
+                <section class="page" id="page-settings">
+                    <div class="page__header">
+                        <h1 class="page__title">Settings</h1>
+                    </div>
+                    <div class="placeholder-panel">
+                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="overlay" id="searchOverlay">
+        <div class="overlay__backdrop"></div>
+        <div class="overlay__content overlay__content--search">
+            <div class="overlay__header">
+                <h3 class="overlay__title">Search</h3>
+                <button class="overlay__close" id="searchClose">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="overlay__body">
+                <input type="text" class="search-input" placeholder="Search applications, workflows, documents..." id="searchInput">
+                <p class="search-hint">Search is UI-only and does not call APIs.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Panel -->
+    <div class="overlay" id="notificationsOverlay">
+        <div class="overlay__backdrop"></div>
+        <div class="overlay__content overlay__content--notifications">
+            <div class="overlay__header">
+                <h3 class="overlay__title">Notifications</h3>
+                <button class="overlay__close" id="notificationsClose">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="overlay__body">
+                <div class="notification-item">
+                    <div class="notification-item__title">Application Update</div>
+                    <div class="notification-item__text">APP-2024-0156 requires additional documents</div>
+                    <div class="notification-item__time">2 hours ago</div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-item__title">Deadline Approaching</div>
+                    <div class="notification-item__text">Compliance review due in 3 days</div>
+                    <div class="notification-item__time">5 hours ago</div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-item__title">Workflow Update</div>
+                    <div class="notification-item__text">Application moved to Scrutiny stage</div>
+                    <div class="notification-item__time">1 day ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app-shell.js"></script>
+</body>
+</html>
