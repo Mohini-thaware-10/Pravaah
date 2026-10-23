@@ -287,32 +287,938 @@
                     </div>
                 </section>
 
-                <!-- Placeholder Pages -->
+                <!-- Approval Dashboard Page -->
                 <section class="page" id="page-approval-dashboard">
-                    <div class="page__header">
-                        <h1 class="page__title">Approval Dashboard</h1>
+                    <!-- Dashboard Header -->
+                    <div class="dashboard__header">
+                        <div class="dashboard__header-left">
+                            <div class="dashboard__breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="breadcrumb__separator">/</span>
+                                <span>Overview</span>
+                            </div>
+                            <h1 class="dashboard__title">Approval Dashboard</h1>
+                            <p class="dashboard__description">Monitor application progress, approval workflows, compliance deadlines and pending actions from one unified workspace.</p>
+                        </div>
+                        <div class="dashboard__header-right">
+                            <div class="dashboard__controls">
+                                <select id="dateRangeSelect" class="dashboard__select" aria-label="Date range">
+                                    <option value="7days" selected>Last 7 Days</option>
+                                    <option value="30days">Last 30 Days</option>
+                                    <option value="quarter">This Quarter</option>
+                                </select>
+                                <button id="filterBtn" class="dashboard__btn dashboard__btn--secondary" aria-label="Filter">Filter</button>
+                                <button id="downloadReportBtn" class="dashboard__btn dashboard__btn--primary" aria-label="Download Report">Download Report</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="placeholder-panel">
-                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+
+                    <!-- Filter Panel -->
+                    <div id="filterPanel" class="filter-panel" aria-hidden="true">
+                        <div class="filter-panel__header">
+                            <h3 class="filter-panel__title">Filter Applications</h3>
+                            <button id="filterPanelClose" class="filter-panel__close" aria-label="Close filter">×</button>
+                        </div>
+                        <div class="filter-panel__body">
+                            <div class="filter-group">
+                                <label class="filter-group__label">Status</label>
+                                <div class="filter-options">
+                                    <label class="filter-option"><input type="checkbox" value="Action Required" checked> Action Required</label>
+                                    <label class="filter-option"><input type="checkbox" value="Due Soon" checked> Due Soon</label>
+                                    <label class="filter-option"><input type="checkbox" value="Under Review" checked> Under Review</label>
+                                </div>
+                            </div>
+                            <div class="filter-panel__actions">
+                                <button id="applyFilterBtn" class="dashboard__btn dashboard__btn--primary">Apply Filter</button>
+                                <button id="resetFilterBtn" class="dashboard__btn dashboard__btn--secondary">Reset</button>
+                            </div>
+                            <p class="filter-note">Filters apply to the Applications Requiring Attention table (frontend only).</p>
+                        </div>
+                    </div>
+
+                    <!-- KPI Cards -->
+                    <div class="kpi-grid">
+                        <article class="kpi-card">
+                            <div class="kpi-card__header">
+                                <div class="kpi-card__icon kpi-card__icon--navy">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="4" width="14" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                        <path d="M7 8h6M7 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="kpi-card__trend">+5.2% <span class="kpi-card__trend-label">Illustrative</span></div>
+                            </div>
+                            <div class="kpi-card__value">1,248</div>
+                            <div class="kpi-card__label">Total Applications</div>
+                            <div class="kpi-card__secondary">Illustrative demo data</div>
+                        </article>
+
+                        <article class="kpi-card">
+                            <div class="kpi-card__header">
+                                <div class="kpi-card__icon kpi-card__icon--saffron">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+                                        <path d="M10 6v4l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="kpi-card__trend kpi-card__trend--neutral">— <span class="kpi-card__trend-label">Illustrative</span></div>
+                            </div>
+                            <div class="kpi-card__value">186</div>
+                            <div class="kpi-card__label">Pending Review</div>
+                            <div class="kpi-card__secondary">Illustrative demo data</div>
+                        </article>
+
+                        <article class="kpi-card">
+                            <div class="kpi-card__header">
+                                <div class="kpi-card__icon kpi-card__icon--navy">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 2l7 3v6c0 4-3 6.5-7 7.5-4-1-7-3.5-7-7.5V5l7-3z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                        <path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="kpi-card__trend kpi-card__trend--neutral">— <span class="kpi-card__trend-label">Illustrative</span></div>
+                            </div>
+                            <div class="kpi-card__value">324</div>
+                            <div class="kpi-card__label">Under Scrutiny</div>
+                            <div class="kpi-card__secondary">Illustrative demo data</div>
+                        </article>
+
+                        <article class="kpi-card">
+                            <div class="kpi-card__header">
+                                <div class="kpi-card__icon kpi-card__icon--saffron">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+                                        <path d="M10 7v3M10 13h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="kpi-card__trend kpi-card__trend--warning">-2.1% <span class="kpi-card__trend-label">Illustrative</span></div>
+                            </div>
+                            <div class="kpi-card__value">42</div>
+                            <div class="kpi-card__label">Compliance Due Soon</div>
+                            <div class="kpi-card__secondary">Illustrative demo data</div>
+                        </article>
+
+                        <article class="kpi-card">
+                            <div class="kpi-card__header">
+                                <div class="kpi-card__icon kpi-card__icon--muted">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+                                        <path d="M10 6v4M10 13h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="kpi-card__trend kpi-card__trend--warning">+1.8% <span class="kpi-card__trend-label">Illustrative</span></div>
+                            </div>
+                            <div class="kpi-card__value">18</div>
+                            <div class="kpi-card__label">Overdue Actions</div>
+                            <div class="kpi-card__secondary">Illustrative demo data</div>
+                        </article>
+                    </div>
+
+                    <!-- Approval Workflow Overview -->
+                    <section class="dashboard-section">
+                        <div class="dashboard-section__header">
+                            <h2 class="dashboard-section__title">Approval Workflow Overview</h2>
+                        </div>
+                        <div class="workflow-overview">
+                            <div class="workflow-steps">
+                                <div class="workflow-step">
+                                    <div class="workflow-step__circle">1</div>
+                                    <div class="workflow-step__name">Application Submitted</div>
+                                    <div class="workflow-step__count">126</div>
+                                    <div class="workflow-step__bar"></div>
+                                </div>
+                                <div class="workflow-step__arrow">→</div>
+                                <div class="workflow-step">
+                                    <div class="workflow-step__circle">2</div>
+                                    <div class="workflow-step__name">Initial Scrutiny</div>
+                                    <div class="workflow-step__count">324</div>
+                                    <div class="workflow-step__bar"></div>
+                                </div>
+                                <div class="workflow-step__arrow">→</div>
+                                <div class="workflow-step">
+                                    <div class="workflow-step__circle">3</div>
+                                    <div class="workflow-step__name">Document Review</div>
+                                    <div class="workflow-step__count">278</div>
+                                    <div class="workflow-step__bar"></div>
+                                </div>
+                                <div class="workflow-step__arrow">→</div>
+                                <div class="workflow-step">
+                                    <div class="workflow-step__circle">4</div>
+                                    <div class="workflow-step__name">Compliance Review</div>
+                                    <div class="workflow-step__count">186</div>
+                                    <div class="workflow-step__bar"></div>
+                                </div>
+                                <div class="workflow-step__arrow">→</div>
+                                <div class="workflow-step">
+                                    <div class="workflow-step__circle">5</div>
+                                    <div class="workflow-step__name">Final Decision</div>
+                                    <div class="workflow-step__count">94</div>
+                                    <div class="workflow-step__bar"></div>
+                                </div>
+                            </div>
+                            <p class="dashboard-note">Illustrative workflow. Actual stages and routing depend on applicable AICTE regulations and approval processes.</p>
+                        </div>
+                    </section>
+
+                    <!-- Main Dashboard Grid -->
+                    <div class="dashboard-main-grid">
+                        <section class="dashboard-section dashboard-section--main">
+                            <div class="dashboard-section__header">
+                                <h2 class="dashboard-section__title">Applications Requiring Attention</h2>
+                                <p class="dashboard-section__subtitle">Sample data — not actual AICTE records</p>
+                            </div>
+                            <div class="table-wrapper">
+                                <table class="applications-table" id="applicationsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Application ID</th>
+                                            <th>Institution</th>
+                                            <th>Current Stage</th>
+                                            <th>Pending Action</th>
+                                            <th>Due Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-id="APP-2026-0142" data-status="Action Required">
+                                            <td class="table-cell--id">APP-2026-0142</td>
+                                            <td>Western Institute of Technology</td>
+                                            <td>Document Review</td>
+                                            <td>Missing supporting document</td>
+                                            <td>28 Oct 2026</td>
+                                            <td><span class="status-badge status-badge--action">Action Required</span></td>
+                                            <td><button class="table-action-btn" data-app="APP-2026-0142">View Details</button></td>
+                                        </tr>
+                                        <tr data-id="APP-2026-0187" data-status="Due Soon">
+                                            <td class="table-cell--id">APP-2026-0187</td>
+                                            <td>Deccan College of Engineering</td>
+                                            <td>Compliance Review</td>
+                                            <td>Undertaking submission pending</td>
+                                            <td>29 Oct 2026</td>
+                                            <td><span class="status-badge status-badge--due">Due Soon</span></td>
+                                            <td><button class="table-action-btn" data-app="APP-2026-0187">View Details</button></td>
+                                        </tr>
+                                        <tr data-id="APP-2026-0214" data-status="Under Review">
+                                            <td class="table-cell--id">APP-2026-0214</td>
+                                            <td>National Technical Institute</td>
+                                            <td>Initial Scrutiny</td>
+                                            <td>Reviewer action pending</td>
+                                            <td>31 Oct 2026</td>
+                                            <td><span class="status-badge status-badge--review">Under Review</span></td>
+                                            <td><button class="table-action-btn" data-app="APP-2026-0214">View Details</button></td>
+                                        </tr>
+                                        <tr data-id="APP-2026-0238" data-status="Action Required">
+                                            <td class="table-cell--id">APP-2026-0238</td>
+                                            <td>Sahyadri Institute of Technology</td>
+                                            <td>Document Review</td>
+                                            <td>Document validity check</td>
+                                            <td>26 Oct 2026</td>
+                                            <td><span class="status-badge status-badge--action">Action Required</span></td>
+                                            <td><button class="table-action-btn" data-app="APP-2026-0238">View Details</button></td>
+                                        </tr>
+                                        <tr data-id="APP-2026-0251" data-status="Due Soon">
+                                            <td class="table-cell--id">APP-2026-0251</td>
+                                            <td>Central Institute of Engineering</td>
+                                            <td>Compliance Review</td>
+                                            <td>Compliance response pending</td>
+                                            <td>30 Oct 2026</td>
+                                            <td><span class="status-badge status-badge--due">Due Soon</span></td>
+                                            <td><button class="table-action-btn" data-app="APP-2026-0251">View Details</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <div class="dashboard-side-grid">
+                            <section class="dashboard-section dashboard-section--compact">
+                                <div class="dashboard-section__header">
+                                    <h2 class="dashboard-section__title">Compliance & Deadline Monitoring</h2>
+                                </div>
+                                <div class="compliance-panels">
+                                    <div class="compliance-panel">
+                                        <div class="compliance-panel__value">42</div>
+                                        <div class="compliance-panel__label">Due in 7 Days</div>
+                                        <div class="compliance-panel__text">Compliance items approaching their deadline</div>
+                                    </div>
+                                    <div class="compliance-panel">
+                                        <div class="compliance-panel__value">18</div>
+                                        <div class="compliance-panel__label">Overdue</div>
+                                        <div class="compliance-panel__text">Items requiring follow-up</div>
+                                    </div>
+                                    <div class="compliance-panel">
+                                        <div class="compliance-panel__value">27</div>
+                                        <div class="compliance-panel__label">Document Validity</div>
+                                        <div class="compliance-panel__text">Documents requiring validity review</div>
+                                    </div>
+                                </div>
+                                <div class="upcoming-deadlines">
+                                    <h3 class="upcoming-deadlines__title">Upcoming Illustrative Deadlines</h3>
+                                    <ul class="deadline-list">
+                                        <li class="deadline-item"><span class="deadline-date">26 Oct</span><span class="deadline-text">Supporting document validity review</span></li>
+                                        <li class="deadline-item"><span class="deadline-date">28 Oct</span><span class="deadline-text">Missing document follow-up</span></li>
+                                        <li class="deadline-item"><span class="deadline-date">29 Oct</span><span class="deadline-text">Undertaking submission</span></li>
+                                        <li class="deadline-item"><span class="deadline-date">30 Oct</span><span class="deadline-text">Compliance response</span></li>
+                                    </ul>
+                                </div>
+                            </section>
+
+                            <section class="dashboard-section dashboard-section--compact">
+                                <div class="dashboard-section__header">
+                                    <h2 class="dashboard-section__title">Quick Actions</h2>
+                                </div>
+                                <div class="quick-actions">
+                                    <button class="quick-action-btn" data-nav="applications">View All Applications</button>
+                                    <button class="quick-action-btn" data-nav="compliance-monitoring">Review Compliance</button>
+                                    <button class="quick-action-btn" data-nav="deadline-alerts">Check Upcoming Deadlines</button>
+                                    <button class="quick-action-btn" data-nav="workflow-tracking">Open Workflow Tracker</button>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-charts-activity-grid">
+                        <section class="dashboard-section dashboard-section--chart">
+                            <div class="dashboard-section__header">
+                                <h2 class="dashboard-section__title">Application Status Distribution</h2>
+                                <p class="dashboard-section__subtitle">Illustrative demo data</p>
+                            </div>
+                            <div class="status-chart">
+                                <div class="status-bar">
+                                    <div class="status-bar__label">Submitted</div>
+                                    <div class="status-bar__track"><div class="status-bar__fill" style="width: 24.4%" aria-label="Submitted: 126"></div></div>
+                                    <div class="status-bar__count">126</div>
+                                </div>
+                                <div class="status-bar">
+                                    <div class="status-bar__label">Under Review</div>
+                                    <div class="status-bar__track"><div class="status-bar__fill status-bar__fill--navy" style="width: 62.7%" aria-label="Under Review: 324"></div></div>
+                                    <div class="status-bar__count">324</div>
+                                </div>
+                                <div class="status-bar">
+                                    <div class="status-bar__label">Compliance Pending</div>
+                                    <div class="status-bar__track"><div class="status-bar__fill status-bar__fill--saffron" style="width: 36.0%" aria-label="Compliance Pending: 186"></div></div>
+                                    <div class="status-bar__count">186</div>
+                                </div>
+                                <div class="status-bar">
+                                    <div class="status-bar__label">Awaiting Decision</div>
+                                    <div class="status-bar__track"><div class="status-bar__fill status-bar__fill--muted" style="width: 18.2%" aria-label="Awaiting Decision: 94"></div></div>
+                                    <div class="status-bar__count">94</div>
+                                </div>
+                                <div class="status-bar">
+                                    <div class="status-bar__label">Completed</div>
+                                    <div class="status-bar__track"><div class="status-bar__fill status-bar__fill--success" style="width: 100%" aria-label="Completed: 518"></div></div>
+                                    <div class="status-bar__count">518</div>
+                                </div>
+                            </div>
+                            <div class="status-legend">
+                                <div class="legend-item"><span class="legend-swatch legend-swatch--default"></span> Submitted</div>
+                                <div class="legend-item"><span class="legend-swatch legend-swatch--navy"></span> Under Review</div>
+                                <div class="legend-item"><span class="legend-swatch legend-swatch--saffron"></span> Compliance Pending</div>
+                                <div class="legend-item"><span class="legend-swatch legend-swatch--muted"></span> Awaiting Decision</div>
+                                <div class="legend-item"><span class="legend-swatch legend-swatch--success"></span> Completed</div>
+                            </div>
+                        </section>
+
+                        <section class="dashboard-section dashboard-section--activity">
+                            <div class="dashboard-section__header">
+                                <h2 class="dashboard-section__title">Recent Activity</h2>
+                                <p class="dashboard-section__subtitle">Sample activities, not actual audit events</p>
+                            </div>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-item__icon activity-item__icon--navy">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 5h10M3 8h7M3 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <div class="activity-item__content">
+                                        <div class="activity-item__desc">Sample application moved to Document Review</div>
+                                        <div class="activity-item__meta"><span class="activity-item__time">2 hours ago</span><span class="activity-item__category">Workflow</span></div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-item__icon activity-item__icon--saffron">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3l1.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <div class="activity-item__content">
+                                        <div class="activity-item__desc">A compliance deadline was marked as approaching</div>
+                                        <div class="activity-item__meta"><span class="activity-item__time">5 hours ago</span><span class="activity-item__category">Compliance</span></div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-item__icon activity-item__icon--muted">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h8v8H4z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M6 7h4M6 10h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <div class="activity-item__content">
+                                        <div class="activity-item__desc">A supporting document was flagged for review</div>
+                                        <div class="activity-item__meta"><span class="activity-item__time">1 day ago</span><span class="activity-item__category">Documents</span></div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-item__icon activity-item__icon--navy">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="8" r="1.5" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="4" r="1.5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="8" r="1.5" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="12" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 8h1.5M8 5.5v1.5M10.5 8h1.5M8 10.5v1.5" stroke="currentColor" stroke-width="1.5"/></svg>
+                                    </div>
+                                    <div class="activity-item__content">
+                                        <div class="activity-item__desc">A sample workflow stage was updated</div>
+                                        <div class="activity-item__meta"><span class="activity-item__time">2 days ago</span><span class="activity-item__category">Workflow</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Dashboard Sample Detail Modal -->
+                    <div id="appDetailModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+                        <div class="modal__backdrop" id="appDetailBackdrop"></div>
+                        <div class="modal__content" role="document">
+                            <div class="modal__header">
+                                <h3 class="modal__title">Application Details (Sample)</h3>
+                                <button class="modal__close" id="appDetailClose" aria-label="Close">&times;</button>
+                            </div>
+                            <div class="modal__body">
+                                <div class="detail-row"><span class="detail-label">Application ID</span><span class="detail-value" id="detailId">-</span></div>
+                                <div class="detail-row"><span class="detail-label">Institution</span><span class="detail-value" id="detailInst">-</span></div>
+                                <div class="detail-row"><span class="detail-label">Current Stage</span><span class="detail-value" id="detailStage">-</span></div>
+                                <div class="detail-row"><span class="detail-label">Pending Action</span><span class="detail-value" id="detailAction">-</span></div>
+                                <div class="detail-row"><span class="detail-label">Due Date</span><span class="detail-value" id="detailDue">-</span></div>
+                                <div class="detail-row"><span class="detail-label">Status</span><span class="detail-value" id="detailStatus">-</span></div>
+                                <p class="modal-note">This is sample data for UI demonstration only — not actual AICTE records.</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 <section class="page" id="page-applications">
-                    <div class="page__header">
-                        <h1 class="page__title">Applications</h1>
+                    <div class="page__header appmgr-header">
+                        <div class="appmgr-header__left">
+                            <div class="appmgr-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="breadcrumb__separator">/</span>
+                                <span>Applications</span>
+                            </div>
+                            <h1 class="appmgr-title">Applications Management</h1>
+                            <p class="appmgr-description">Review application records, monitor approval progress and identify pending actions across the approval lifecycle.</p>
+                            <div class="appmgr-banner">Demo environment — all application records shown are illustrative.</div>
+                        </div>
+                        <div class="appmgr-header__right">
+                            <div class="appmgr-controls">
+                                <button id="appFilterBtn" class="appmgr-btn appmgr-btn--secondary" aria-label="Filter">Filter</button>
+                                <select id="appSortSelect" class="appmgr-select" aria-label="Sort">
+                                    <option value="newest" selected>Newest First</option>
+                                    <option value="oldest">Oldest First</option>
+                                    <option value="due-soon">Due Soon</option>
+                                </select>
+                                <div class="appmgr-view-toggle" role="group" aria-label="View toggle">
+                                    <button class="appmgr-view-btn active" data-view="table" aria-pressed="true">Table</button>
+                                    <button class="appmgr-view-btn" data-view="card" aria-pressed="false">Card</button>
+                                </div>
+                                <button id="newAppBtn" class="appmgr-btn appmgr-btn--primary" aria-label="New Application">New Application</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="placeholder-panel">
-                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+
+                    <!-- Status Summary Strip -->
+                    <div class="app-status-strip" id="appStatusStrip">
+                        <button class="app-status-item active" data-status="all">
+                            <span class="app-status-item__label">All Applications</span>
+                            <span class="app-status-item__count">1248</span>
+                        </button>
+                        <button class="app-status-item" data-status="Submitted">
+                            <span class="app-status-item__label">Submitted</span>
+                            <span class="app-status-item__count">126</span>
+                        </button>
+                        <button class="app-status-item" data-status="Under Review">
+                            <span class="app-status-item__label">Under Review</span>
+                            <span class="app-status-item__count">324</span>
+                        </button>
+                        <button class="app-status-item" data-status="Compliance Pending">
+                            <span class="app-status-item__label">Compliance Pending</span>
+                            <span class="app-status-item__count">186</span>
+                        </button>
+                        <button class="app-status-item" data-status="Awaiting Decision">
+                            <span class="app-status-item__label">Awaiting Decision</span>
+                            <span class="app-status-item__count">94</span>
+                        </button>
+                        <button class="app-status-item" data-status="Completed">
+                            <span class="app-status-item__label">Completed</span>
+                            <span class="app-status-item__count">518</span>
+                        </button>
+                    </div>
+
+                    <!-- Search and Filters -->
+                    <div class="app-search-filter">
+                        <div class="app-search">
+                            <input type="text" id="appSearchInput" class="app-search-input" placeholder="Search by application ID, institution or pending action..." aria-label="Search applications">
+                        </div>
+                        <div class="app-filter-bar">
+                            <select id="appStatusFilter" class="app-filter-select" aria-label="Filter by status">
+                                <option value="all">All Status</option>
+                                <option value="Submitted">Submitted</option>
+                                <option value="Under Review">Under Review</option>
+                                <option value="Compliance Pending">Compliance Pending</option>
+                                <option value="Awaiting Decision">Awaiting Decision</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Action Required">Action Required</option>
+                                <option value="Due Soon">Due Soon</option>
+                            </select>
+                            <select id="appStageFilter" class="app-filter-select" aria-label="Filter by stage">
+                                <option value="all">All Stages</option>
+                                <option value="Application Submitted">Application Submitted</option>
+                                <option value="Initial Scrutiny">Initial Scrutiny</option>
+                                <option value="Document Review">Document Review</option>
+                                <option value="Compliance Review">Compliance Review</option>
+                                <option value="Final Decision">Final Decision</option>
+                            </select>
+                            <select id="appTypeFilter" class="app-filter-select" aria-label="Filter by institution type">
+                                <option value="all">All Types</option>
+                                <option value="Engineering College">Engineering College</option>
+                                <option value="Technical Institution">Technical Institution</option>
+                                <option value="Polytechnic">Polytechnic</option>
+                            </select>
+                            <input type="date" id="appDateFilter" class="app-filter-select" aria-label="Submission date">
+                            <select id="appDeadlineFilter" class="app-filter-select" aria-label="Deadline category">
+                                <option value="all">All Deadlines</option>
+                                <option value="overdue">Overdue</option>
+                                <option value="7days">Due in 7 Days</option>
+                                <option value="30days">Due in 30 Days</option>
+                            </select>
+                            <button id="appApplyFilter" class="app-filter-btn app-filter-btn--primary">Apply Filters</button>
+                            <button id="appResetFilter" class="app-filter-btn app-filter-btn--secondary">Reset Filters</button>
+                        </div>
+                        <div class="app-active-filters" id="appActiveFilters"></div>
+                        <div class="app-results-info">
+                            <span id="appResultsCount">Showing 0 applications</span>
+                        </div>
+                    </div>
+
+                    <!-- Applications List -->
+                    <div class="app-list-container">
+                        <div id="appTableView" class="app-view active">
+                            <div class="app-table-wrapper">
+                                <table class="app-table" id="appsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Application ID</th>
+                                            <th>Institution Name</th>
+                                            <th>Institution Type</th>
+                                            <th>Submitted On</th>
+                                            <th>Current Stage</th>
+                                            <th>Pending Action</th>
+                                            <th>Deadline</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="appsTableBody"></tbody>
+                                </table>
+                            </div>
+                            <div id="appTableEmpty" class="app-empty" style="display:none;">
+                                <p>No applications match the current filters.</p>
+                            </div>
+                            <div class="app-pagination">
+                                <div class="app-pagination__info">
+                                    <span id="appPageInfo">Page 1</span>
+                                </div>
+                                <div class="app-pagination__controls">
+                                    <button id="appPrevPage" class="app-pagination__btn">Previous</button>
+                                    <button id="appNextPage" class="app-pagination__btn">Next</button>
+                                    <select id="appRowsPerPage" class="app-pagination__select" aria-label="Rows per page">
+                                        <option value="5">5 per page</option>
+                                        <option value="10" selected>10 per page</option>
+                                        <option value="25">25 per page</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="appCardView" class="app-view">
+                            <div class="app-card-grid" id="appCardGrid"></div>
+                            <div id="appCardEmpty" class="app-empty" style="display:none;">
+                                <p>No applications match the current filters.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Application Detail Drawer -->
+                    <div id="appDetailDrawer" class="app-drawer" aria-hidden="true" role="dialog" aria-modal="true">
+                        <div class="app-drawer__backdrop" id="appDrawerBackdrop"></div>
+                        <div class="app-drawer__content" role="document">
+                            <div class="app-drawer__header">
+                                <div class="app-drawer__header-top">
+                                    <div>
+                                        <div class="app-drawer__id" id="drawerAppId">-</div>
+                                        <div class="app-drawer__inst" id="drawerAppInst">-</div>
+                                    </div>
+                                    <button class="app-drawer__close" id="appDrawerClose" aria-label="Close">×</button>
+                                </div>
+                                <div class="app-drawer__status-row">
+                                    <span class="app-drawer__status" id="drawerAppStatus">-</span>
+                                </div>
+                            </div>
+                            <div class="app-drawer__body">
+                                <section class="drawer-section">
+                                    <h4 class="drawer-section__title">Overview</h4>
+                                    <div class="drawer-grid">
+                                        <div class="drawer-item"><span class="drawer-label">Institution Type</span><span class="drawer-value" id="drawerAppType">-</span></div>
+                                        <div class="drawer-item"><span class="drawer-label">Submission Date</span><span class="drawer-value" id="drawerAppSubmitted">-</span></div>
+                                        <div class="drawer-item"><span class="drawer-label">Current Stage</span><span class="drawer-value" id="drawerAppStage">-</span></div>
+                                        <div class="drawer-item"><span class="drawer-label">Assigned Role</span><span class="drawer-value">Review Officer (Fictional)</span></div>
+                                        <div class="drawer-item"><span class="drawer-label">Next Pending Action</span><span class="drawer-value" id="drawerAppAction">-</span></div>
+                                        <div class="drawer-item"><span class="drawer-label">Due Date</span><span class="drawer-value" id="drawerAppDue">-</span></div>
+                                    </div>
+                                </section>
+                                <section class="drawer-section">
+                                    <h4 class="drawer-section__title">Workflow Timeline (Illustrative)</h4>
+                                    <div class="timeline" id="drawerTimeline">
+                                        <div class="timeline-item" data-stage="Application Submitted"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-stage">Application Submitted</div><div class="timeline-status">Completed</div></div></div>
+                                        <div class="timeline-item" data-stage="Initial Scrutiny"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-stage">Initial Scrutiny</div><div class="timeline-status">Pending/Current</div></div></div>
+                                        <div class="timeline-item" data-stage="Document Review"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-stage">Document Review</div><div class="timeline-status">Upcoming</div></div></div>
+                                        <div class="timeline-item" data-stage="Compliance Review"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-stage">Compliance Review</div><div class="timeline-status">Upcoming</div></div></div>
+                                        <div class="timeline-item" data-stage="Final Decision"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-stage">Final Decision</div><div class="timeline-status">Upcoming</div></div></div>
+                                    </div>
+                                    <p class="drawer-note">Timeline is illustrative and configurable per applicable approval process.</p>
+                                </section>
+                                <section class="drawer-section">
+                                    <h4 class="drawer-section__title">Required Documents (Sample)</h4>
+                                    <ul class="doc-list">
+                                        <li class="doc-item"><span class="doc-status doc-status--received">Received</span><span class="doc-name">Application form</span></li>
+                                        <li class="doc-item"><span class="doc-status doc-status--pending">Pending</span><span class="doc-name">Supporting institutional documents</span></li>
+                                        <li class="doc-item"><span class="doc-status doc-status--pending">Pending</span><span class="doc-name">Required undertaking</span></li>
+                                        <li class="doc-item"><span class="doc-status doc-status--needs">Needs Review</span><span class="doc-name">Compliance response</span></li>
+                                    </ul>
+                                </section>
+                                <section class="drawer-section">
+                                    <h4 class="drawer-section__title">Activity History (Fictional)</h4>
+                                    <div class="activity-history">
+                                        <div class="activity-h-item"><div class="activity-h-time">18 Oct 2026</div><div class="activity-h-desc">Application received and logged.</div></div>
+                                        <div class="activity-h-item"><div class="activity-h-time">19 Oct 2026</div><div class="activity-h-desc">Initial scrutiny assigned (Fictional).</div></div>
+                                        <div class="activity-h-item"><div class="activity-h-time">20 Oct 2026</div><div class="activity-h-desc">Document review initiated.</div></div>
+                                    </div>
+                                </section>
+                                <div class="drawer-actions">
+                                    <button id="drawerCloseBtn" class="drawer-action-btn">Close Details</button>
+                                    <button id="drawerWorkflowBtn" class="drawer-action-btn">View Workflow</button>
+                                    <button id="drawerDocsBtn" class="drawer-action-btn">Review Documents</button>
+                                </div>
+                                <p class="drawer-footnote">All actions are frontend-only placeholders. No real administrative actions are performed.</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 <section class="page" id="page-workflow-tracking">
-                    <div class="page__header">
-                        <h1 class="page__title">Workflow Tracking</h1>
+                    <div class="page__header wf-header">
+                        <div class="wf-header__left">
+                            <div class="wf-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="breadcrumb__separator">/</span>
+                                <span>Workflow Tracking</span>
+                            </div>
+                            <h1 class="wf-title">Workflow Tracking</h1>
+                            <p class="wf-description">Visualize approval progress, identify stage-wise delays and monitor the next required action.</p>
+                            <div class="wf-banner">Demonstration workflow — actual stages and routing depend on applicable AICTE regulations and approval processes.</div>
+                        </div>
+                        <div class="wf-header__right">
+                            <div class="wf-controls">
+                                <input type="text" id="wfSearchInput" class="wf-input" placeholder="Search by Application ID or Institution" aria-label="Search applications">
+                                <select id="wfStageFilter" class="wf-select" aria-label="Filter by stage">
+                                    <option value="all">All Stages</option>
+                                    <option value="Application Submitted">Application Submitted</option>
+                                    <option value="Initial Scrutiny">Initial Scrutiny</option>
+                                    <option value="Document Review">Document Review</option>
+                                    <option value="Compliance Review">Compliance Review</option>
+                                    <option value="Final Decision">Final Decision</option>
+                                </select>
+                                <select id="wfStatusFilter" class="wf-select" aria-label="Filter by status">
+                                    <option value="all">All Status</option>
+                                    <option value="Submitted">Submitted</option>
+                                    <option value="Under Review">Under Review</option>
+                                    <option value="Action Required">Action Required</option>
+                                    <option value="Due Soon">Due Soon</option>
+                                    <option value="Compliance Pending">Compliance Pending</option>
+                                    <option value="Awaiting Decision">Awaiting Decision</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                                <select id="wfDateRange" class="wf-select" aria-label="Date range">
+                                    <option value="all" selected>All Time</option>
+                                    <option value="7">Last 7 Days</option>
+                                    <option value="30">Last 30 Days</option>
+                                </select>
+                                <button id="wfResetFilters" class="wf-btn wf-btn--secondary">Reset Filters</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="placeholder-panel">
-                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+
+                    <!-- Workflow Overview Metrics -->
+                    <div class="wf-kpi-grid">
+                        <article class="wf-kpi-card">
+                            <div class="wf-kpi-card__header">
+                                <div class="wf-kpi-card__icon wf-kpi-card__icon--navy">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M9 5v4l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </div>
+                            </div>
+                            <div class="wf-kpi-card__value">684</div>
+                            <div class="wf-kpi-card__label">Applications in Progress</div>
+                            <div class="wf-kpi-card__secondary">Illustrative demo data</div>
+                        </article>
+                        <article class="wf-kpi-card">
+                            <div class="wf-kpi-card__header">
+                                <div class="wf-kpi-card__icon wf-kpi-card__icon--saffron">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M9 6v3M9 12h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </div>
+                            </div>
+                            <div class="wf-kpi-card__value">142</div>
+                            <div class="wf-kpi-card__label">Awaiting Official Action</div>
+                            <div class="wf-kpi-card__secondary">Illustrative demo data</div>
+                        </article>
+                        <article class="wf-kpi-card">
+                            <div class="wf-kpi-card__header">
+                                <div class="wf-kpi-card__icon wf-kpi-card__icon--muted">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M9 6v3M9 12h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </div>
+                            </div>
+                            <div class="wf-kpi-card__value">37</div>
+                            <div class="wf-kpi-card__label">Potentially Delayed</div>
+                            <div class="wf-kpi-card__secondary">Illustrative demo data</div>
+                        </article>
+                        <article class="wf-kpi-card">
+                            <div class="wf-kpi-card__header">
+                                <div class="wf-kpi-card__icon wf-kpi-card__icon--success">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M6 9l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </div>
+                            </div>
+                            <div class="wf-kpi-card__value">518</div>
+                            <div class="wf-kpi-card__label">Completed Workflows</div>
+                            <div class="wf-kpi-card__secondary">Illustrative demo data</div>
+                        </article>
                     </div>
+
+                    <!-- Workflow Pipeline -->
+                    <section class="wf-section">
+                        <div class="wf-section__header">
+                            <h2 class="wf-section__title">Approval Lifecycle Overview</h2>
+                        </div>
+                        <div class="wf-pipeline" id="wfPipeline">
+                            <div class="wf-pipeline-step active" data-stage="Application Submitted">
+                                <div class="wf-pipeline-step__num">1</div>
+                                <div class="wf-pipeline-step__name">Application Submitted</div>
+                                <div class="wf-pipeline-step__count">126</div>
+                                <div class="wf-pipeline-step__bar"></div>
+                                <div class="wf-pipeline-step__status">Submitted</div>
+                            </div>
+                            <div class="wf-pipeline-arrow">→</div>
+                            <div class="wf-pipeline-step" data-stage="Initial Scrutiny">
+                                <div class="wf-pipeline-step__num">2</div>
+                                <div class="wf-pipeline-step__name">Initial Scrutiny</div>
+                                <div class="wf-pipeline-step__count">324</div>
+                                <div class="wf-pipeline-step__bar"></div>
+                                <div class="wf-pipeline-step__status">In Progress</div>
+                            </div>
+                            <div class="wf-pipeline-arrow">→</div>
+                            <div class="wf-pipeline-step" data-stage="Document Review">
+                                <div class="wf-pipeline-step__num">3</div>
+                                <div class="wf-pipeline-step__name">Document Review</div>
+                                <div class="wf-pipeline-step__count">278</div>
+                                <div class="wf-pipeline-step__bar"></div>
+                                <div class="wf-pipeline-step__status">In Progress</div>
+                            </div>
+                            <div class="wf-pipeline-arrow">→</div>
+                            <div class="wf-pipeline-step" data-stage="Compliance Review">
+                                <div class="wf-pipeline-step__num">4</div>
+                                <div class="wf-pipeline-step__name">Compliance Review</div>
+                                <div class="wf-pipeline-step__count">186</div>
+                                <div class="wf-pipeline-step__bar"></div>
+                                <div class="wf-pipeline-step__status">In Progress</div>
+                            </div>
+                            <div class="wf-pipeline-arrow">→</div>
+                            <div class="wf-pipeline-step" data-stage="Final Decision">
+                                <div class="wf-pipeline-step__num">5</div>
+                                <div class="wf-pipeline-step__name">Final Decision</div>
+                                <div class="wf-pipeline-step__count">94</div>
+                                <div class="wf-pipeline-step__bar"></div>
+                                <div class="wf-pipeline-step__status">Awaiting</div>
+                            </div>
+                        </div>
+                        <p class="wf-note">Stage counts are illustrative and not additive; applications may move between stages over time.</p>
+                    </section>
+
+                    <!-- Stage Details -->
+                    <section class="wf-section">
+                        <div class="wf-section__header">
+                            <h2 class="wf-section__title">Stage Details</h2>
+                        </div>
+                        <div class="wf-stage-details" id="wfStageDetails">
+                            <div class="wf-stage-details__grid">
+                                <div class="wf-detail-item"><span class="wf-detail-label">Stage</span><span class="wf-detail-value" id="wfStageDetailName">Application Submitted</span></div>
+                                <div class="wf-detail-item"><span class="wf-detail-label">Applications</span><span class="wf-detail-value" id="wfStageDetailCount">126</span></div>
+                                <div class="wf-detail-item"><span class="wf-detail-label">Pending Actions</span><span class="wf-detail-value" id="wfStageDetailPending">Pending assignment</span></div>
+                                <div class="wf-detail-item"><span class="wf-detail-label">Illustrative avg time in stage</span><span class="wf-detail-value" id="wfStageDetailTime">—</span></div>
+                                <div class="wf-detail-item"><span class="wf-detail-label">Sample reasons for delays</span><span class="wf-detail-value" id="wfStageDetailReasons">Initial assignment backlog (demo)</span></div>
+                                <div class="wf-detail-item"><span class="wf-detail-label">Suggested follow-up actions</span><span class="wf-detail-value" id="wfStageDetailFollowup">Assign to review officer (demo)</span></div>
+                            </div>
+                            <div class="wf-stage-apps" id="wfStageApps" aria-label="Sample applications in selected stage"></div>
+                            <p class="wf-note">Suggested follow-ups are UI demonstrations and do not replace statutory scrutiny or decisions by authorized officials.</p>
+                        </div>
+                    </section>
+
+                    <!-- Track Application and Pendency -->
+                    <div class="wf-grid-2">
+                        <section class="wf-section">
+                            <div class="wf-section__header">
+                                <h2 class="wf-section__title">Track an Application</h2>
+                            </div>
+                            <div class="wf-track-app">
+                                <label for="wfAppSelect" class="wf-label">Select Application</label>
+                                <select id="wfAppSelect" class="wf-select wf-select--full"></select>
+                                <div class="wf-app-summary">
+                                    <div class="wf-detail-item"><span class="wf-detail-label">Application ID</span><span class="wf-detail-value" id="wfTrackId">-</span></div>
+                                    <div class="wf-detail-item"><span class="wf-detail-label">Institution</span><span class="wf-detail-value" id="wfTrackInst">-</span></div>
+                                    <div class="wf-detail-item"><span class="wf-detail-label">Current Stage</span><span class="wf-detail-value" id="wfTrackStage">-</span></div>
+                                    <div class="wf-detail-item"><span class="wf-detail-label">Overall Progress</span><span class="wf-detail-value" id="wfTrackProgress">-</span></div>
+                                    <div class="wf-detail-item"><span class="wf-detail-label">Submission Date</span><span class="wf-detail-value" id="wfTrackSubmit">-</span></div>
+                                    <div class="wf-detail-item"><span class="wf-detail-label">Next Pending Action</span><span class="wf-detail-value" id="wfTrackAction">-</span></div>
+                                    <div class="wf-detail-item"><span class="wf-detail-label">Due Date</span><span class="wf-detail-value" id="wfTrackDue">-</span></div>
+                                </div>
+                                <h3 class="wf-subtitle">Application Workflow Timeline</h3>
+                                <div class="wf-vertical-timeline" id="wfVerticalTimeline">
+                                    <div class="wf-vt-item" data-stage="Application Submitted"><div class="wf-vt-dot"></div><div class="wf-vt-content"><div class="wf-vt-stage">Application Submitted</div><div class="wf-vt-status">Completed</div></div></div>
+                                    <div class="wf-vt-item" data-stage="Initial Scrutiny"><div class="wf-vt-dot"></div><div class="wf-vt-content"><div class="wf-vt-stage">Initial Scrutiny</div><div class="wf-vt-status">Pending</div></div></div>
+                                    <div class="wf-vt-item" data-stage="Document Review"><div class="wf-vt-dot"></div><div class="wf-vt-content"><div class="wf-vt-stage">Document Review</div><div class="wf-vt-status">Upcoming</div></div></div>
+                                    <div class="wf-vt-item" data-stage="Compliance Review"><div class="wf-vt-dot"></div><div class="wf-vt-content"><div class="wf-vt-stage">Compliance Review</div><div class="wf-vt-status">Upcoming</div></div></div>
+                                    <div class="wf-vt-item" data-stage="Final Decision"><div class="wf-vt-dot"></div><div class="wf-vt-content"><div class="wf-vt-stage">Final Decision</div><div class="wf-vt-status">Upcoming</div></div></div>
+                                </div>
+                                <p class="wf-note">All dates and history are illustrative.</p>
+                            </div>
+                        </section>
+
+                        <section class="wf-section">
+                            <div class="wf-section__header">
+                                <h2 class="wf-section__title">Stage-wise Pendency</h2>
+                            </div>
+                            <div class="wf-pendency">
+                                <div class="wf-bar">
+                                    <div class="wf-bar__label">Initial Scrutiny</div>
+                                    <div class="wf-bar__track"><div class="wf-bar__fill" style="width: 62.7%"></div></div>
+                                    <div class="wf-bar__count">324</div>
+                                </div>
+                                <div class="wf-bar">
+                                    <div class="wf-bar__label">Document Review</div>
+                                    <div class="wf-bar__track"><div class="wf-bar__fill wf-bar__fill--saffron" style="width: 53.8%"></div></div>
+                                    <div class="wf-bar__count">278</div>
+                                </div>
+                                <div class="wf-bar">
+                                    <div class="wf-bar__label">Compliance Review</div>
+                                    <div class="wf-bar__track"><div class="wf-bar__fill wf-bar__fill--muted" style="width: 36.0%"></div></div>
+                                    <div class="wf-bar__count">186</div>
+                                </div>
+                                <div class="wf-bar">
+                                    <div class="wf-bar__label">Awaiting Final Decision</div>
+                                    <div class="wf-bar__track"><div class="wf-bar__fill wf-bar__fill--success" style="width: 18.2%"></div></div>
+                                    <div class="wf-bar__count">94</div>
+                                </div>
+                            </div>
+                            <p class="wf-note">This view highlights where sample applications are concentrated. It does not establish the cause of delays.</p>
+                        </section>
+                    </div>
+
+                    <!-- Bottlenecks -->
+                    <section class="wf-section">
+                        <div class="wf-section__header">
+                            <h2 class="wf-section__title">Potential Bottlenecks</h2>
+                        </div>
+                        <div class="wf-table-wrapper">
+                            <table class="wf-table">
+                                <thead>
+                                    <tr>
+                                        <th>Application ID</th>
+                                        <th>Institution</th>
+                                        <th>Current Stage</th>
+                                        <th>Pending Action</th>
+                                        <th>Illustrative Days Pending</th>
+                                        <th>Priority</th>
+                                        <th>Suggested Follow-up</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><button class="wf-link-btn" data-app="APP-2026-0142">APP-2026-0142</button></td>
+                                        <td>Western Institute of Technology</td>
+                                        <td>Document Review</td>
+                                        <td>Supporting document required</td>
+                                        <td>5 days</td>
+                                        <td><span class="wf-priority wf-priority--high">High</span></td>
+                                        <td>Review missing-document status</td>
+                                        <td><button class="wf-view-app-btn" data-app="APP-2026-0142">View Application</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button class="wf-link-btn" data-app="APP-2026-0187">APP-2026-0187</button></td>
+                                        <td>Deccan College of Engineering</td>
+                                        <td>Compliance Review</td>
+                                        <td>Undertaking submission pending</td>
+                                        <td>4 days</td>
+                                        <td><span class="wf-priority wf-priority--medium">Medium</span></td>
+                                        <td>Check compliance submission</td>
+                                        <td><button class="wf-view-app-btn" data-app="APP-2026-0187">View Application</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button class="wf-link-btn" data-app="APP-2026-0238">APP-2026-0238</button></td>
+                                        <td>Sahyadri Institute of Technology</td>
+                                        <td>Document Review</td>
+                                        <td>Document validity check</td>
+                                        <td>7 days</td>
+                                        <td><span class="wf-priority wf-priority--high">High</span></td>
+                                        <td>Review document validity</td>
+                                        <td><button class="wf-view-app-btn" data-app="APP-2026-0238">View Application</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button class="wf-link-btn" data-app="APP-2026-0251">APP-2026-0251</button></td>
+                                        <td>Central Institute of Engineering</td>
+                                        <td>Compliance Review</td>
+                                        <td>Compliance response pending</td>
+                                        <td>3 days</td>
+                                        <td><span class="wf-priority wf-priority--medium">Medium</span></td>
+                                        <td>Review pending response</td>
+                                        <td><button class="wf-view-app-btn" data-app="APP-2026-0251">View Application</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="wf-note">These records are fictional sample data, not actual AICTE records.</p>
+                    </section>
+
+                    <!-- Recent Activity -->
+                    <section class="wf-section">
+                        <div class="wf-section__header">
+                            <h2 class="wf-section__title">Recent Workflow Activity</h2>
+                        </div>
+                        <div class="wf-activity">
+                            <div class="wf-activity-item">
+                                <div class="wf-activity-icon wf-activity-icon--navy">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 5h8M3 7h6M3 9h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </div>
+                                <div class="wf-activity-content"><div class="wf-activity-desc">Sample application entered Document Review</div><div class="wf-activity-meta"><span>2 hours ago</span> <span>Workflow</span></div></div>
+                            </div>
+                            <div class="wf-activity-item">
+                                <div class="wf-activity-icon wf-activity-icon--saffron">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3l1.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </div>
+                                <div class="wf-activity-content"><div class="wf-activity-desc">Sample compliance item was marked for follow-up</div><div class="wf-activity-meta"><span>5 hours ago</span> <span>Compliance</span></div></div>
+                            </div>
+                            <div class="wf-activity-item">
+                                <div class="wf-activity-icon wf-activity-icon--navy">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2v6M5 5l2-3 2 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </div>
+                                <div class="wf-activity-content"><div class="wf-activity-desc">Sample application advanced to Compliance Review</div><div class="wf-activity-meta"><span>1 day ago</span> <span>Workflow</span></div></div>
+                            </div>
+                            <div class="wf-activity-item">
+                                <div class="wf-activity-icon wf-activity-icon--muted">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h6v6H4z" stroke="currentColor" stroke-width="1.5"/><path d="M6 7h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </div>
+                                <div class="wf-activity-content"><div class="wf-activity-desc">A review stage was updated in the demonstration timeline</div><div class="wf-activity-meta"><span>2 days ago</span> <span>Demo</span></div></div>
+                            </div>
+                        </div>
+                        <p class="wf-note">These are mock activity entries, not actual audit records.</p>
+                    </section>
                 </section>
 
                 <section class="page" id="page-document-verification">
@@ -325,12 +1231,505 @@
                 </section>
 
                 <section class="page" id="page-compliance-monitoring">
-                    <div class="page__header">
-                        <h1 class="page__title">Compliance Monitoring</h1>
+                    <div class="page__header cmp-header">
+                        <div class="cmp-header__left">
+                            <div class="cmp-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="cmp-breadcrumb__sep">/</span>
+                                <span>Compliance Monitoring</span>
+                            </div>
+                            <h1 class="cmp-title">Compliance Monitoring Centre</h1>
+                            <p class="cmp-description">Maintain visibility into compliance requirements, supporting evidence, pending undertakings and review actions across approval workflows.</p>
+                            <div class="cmp-header__tags">
+                                <span class="cmp-banner">Demo environment — all compliance records and metrics are illustrative.</span>
+                                <span class="cmp-demo-label">DEMO WORKSPACE &middot; ILLUSTRATIVE RECORDS</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="placeholder-panel">
-                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+
+                    <!-- Compliance Overview -->
+                    <div class="cmp-kpi-grid" role="group" aria-label="Compliance overview metrics">
+                        <button type="button" class="cmp-kpi cmp-kpi--total" data-kpi="total" aria-pressed="false">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--navy" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 4h10M3 8h10M3 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value">486</div>
+                            <div class="cmp-kpi__label">Total Tracked Items</div>
+                            <div class="cmp-kpi__text">All sample compliance items in this demo register.</div>
+                        </button>
+                        <button type="button" class="cmp-kpi cmp-kpi--compliant" data-kpi="compliant" aria-pressed="false">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--green" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 8l1.8 1.8L11 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value">371</div>
+                            <div class="cmp-kpi__label">Marked Compliant</div>
+                            <div class="cmp-kpi__text">Example items marked as compliant in this demo.</div>
+                        </button>
+                        <button type="button" class="cmp-kpi cmp-kpi--pending" data-kpi="pending" aria-pressed="false">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--navy" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.5v3.8l2.2 1.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value">72</div>
+                            <div class="cmp-kpi__label">Pending Review</div>
+                            <div class="cmp-kpi__text">Sample items awaiting a review action.</div>
+                        </button>
+                        <button type="button" class="cmp-kpi cmp-kpi--action" data-kpi="action" aria-pressed="false">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--red" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5M8 10.8v.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value">24</div>
+                            <div class="cmp-kpi__label">Action Required</div>
+                            <div class="cmp-kpi__text">Demo items with an outstanding follow-up.</div>
+                        </button>
+                        <button type="button" class="cmp-kpi cmp-kpi--deadline" data-kpi="deadline" aria-pressed="false">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--amber" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2.5" y="3.5" width="11" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 6.5h11M5.5 2.5v2M10.5 2.5v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value">19</div>
+                            <div class="cmp-kpi__label">Upcoming Deadlines</div>
+                            <div class="cmp-kpi__text">Sample items approaching an illustrative deadline.</div>
+                        </button>
                     </div>
+                    <p class="cmp-kpi-note">Metric values are fictional and do not represent actual AICTE data. Tracked items may not share the same regulatory basis.</p>
+
+                    <!-- Compliance Health -->
+                    <section class="cmp-panel cmp-health" aria-labelledby="cmpHealthTitle">
+                        <div class="cmp-section-head">
+                            <div>
+                                <h2 class="cmp-section-title" id="cmpHealthTitle">Compliance Health Overview</h2>
+                                <p class="cmp-section-subtitle">Illustrative demo data</p>
+                            </div>
+                            <span class="cmp-demo-chip">Sample summary</span>
+                        </div>
+                        <div class="cmp-health__grid">
+                            <div class="cmp-health__left">
+                                <div class="cmp-donut" role="img" aria-label="Sample compliance completion: 76 percent, calculated from illustrative demo data">
+                                    <div class="cmp-donut__center">
+                                        <span class="cmp-donut__value">76%</span>
+                                        <span class="cmp-donut__label">Sample Compliance Completion</span>
+                                    </div>
+                                </div>
+                                <ul class="cmp-health-legend">
+                                    <li><span class="cmp-swatch cmp-swatch--compliant"></span><span class="cmp-health-legend__label">Marked Compliant</span><span class="cmp-health-legend__count">371</span></li>
+                                    <li><span class="cmp-swatch cmp-swatch--pending"></span><span class="cmp-health-legend__label">Pending Review</span><span class="cmp-health-legend__count">72</span></li>
+                                    <li><span class="cmp-swatch cmp-swatch--action"></span><span class="cmp-health-legend__label">Action Required</span><span class="cmp-health-legend__count">24</span></li>
+                                    <li><span class="cmp-swatch cmp-swatch--deadline"></span><span class="cmp-health-legend__label">Upcoming Deadlines</span><span class="cmp-health-legend__count">19</span></li>
+                                </ul>
+                            </div>
+                            <div class="cmp-health__right">
+                                <h3 class="cmp-health__heading">Interpretation</h3>
+                                <div class="cmp-health-row">
+                                    <span class="cmp-health-row__dot cmp-health-row__dot--compliant" aria-hidden="true"></span>
+                                    <div class="cmp-health-row__body">
+                                        <div class="cmp-health-row__label">Completed review items</div>
+                                        <div class="cmp-health-row__text">Sample items marked compliant in this register.</div>
+                                    </div>
+                                    <span class="cmp-health-row__count">371</span>
+                                </div>
+                                <div class="cmp-health-row">
+                                    <span class="cmp-health-row__dot cmp-health-row__dot--pending" aria-hidden="true"></span>
+                                    <div class="cmp-health-row__body">
+                                        <div class="cmp-health-row__label">Outstanding review items</div>
+                                        <div class="cmp-health-row__text">Sample items awaiting a reviewer action.</div>
+                                    </div>
+                                    <span class="cmp-health-row__count">72</span>
+                                </div>
+                                <div class="cmp-health-row">
+                                    <span class="cmp-health-row__dot cmp-health-row__dot--deadline" aria-hidden="true"></span>
+                                    <div class="cmp-health-row__body">
+                                        <div class="cmp-health-row__label">Upcoming deadline attention</div>
+                                        <div class="cmp-health-row__text">Illustrative due dates approaching in the demo.</div>
+                                    </div>
+                                    <span class="cmp-health-row__count">19</span>
+                                </div>
+                                <div class="cmp-health-row">
+                                    <span class="cmp-health-row__dot cmp-health-row__dot--action" aria-hidden="true"></span>
+                                    <div class="cmp-health-row__body">
+                                        <div class="cmp-health-row__label">Items needing assessment</div>
+                                        <div class="cmp-health-row__text">Require an authorized official's assessment.</div>
+                                    </div>
+                                    <span class="cmp-health-row__count">24</span>
+                                </div>
+                                <p class="cmp-footnote">The displayed percentage is calculated from illustrative demo data and is not an official compliance score or a legal determination.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Compliance Requirement Register -->
+                    <section class="cmp-panel cmp-register" id="cmpRegister" aria-labelledby="cmpRegisterTitle">
+                        <div class="cmp-section-head">
+                            <div>
+                                <h2 class="cmp-section-title" id="cmpRegisterTitle">Compliance Requirement Register</h2>
+                                <p class="cmp-section-subtitle">Sample requirements across compliance categories. Status labels are UI-level example classifications only.</p>
+                            </div>
+                            <span class="cmp-demo-chip">Illustrative records</span>
+                        </div>
+
+                        <div class="cmp-toolbar">
+                            <div class="cmp-search">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="6" cy="6" r="4.25" stroke="currentColor" stroke-width="1.5"/><path d="M9.2 9.2L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                <input type="search" id="cmpSearch" placeholder="Search by application, institution or requirement..." aria-label="Search compliance requirements">
+                            </div>
+                            <select id="cmpStatusFilter" class="cmp-select" aria-label="Filter by review status">
+                                <option value="all">All Status</option>
+                                <option value="Marked Compliant">Marked Compliant</option>
+                                <option value="Pending Review">Pending Review</option>
+                                <option value="Action Required">Action Required</option>
+                                <option value="Upcoming Deadline">Upcoming Deadline</option>
+                                <option value="Under Review">Under Review</option>
+                            </select>
+                            <select id="cmpCategoryFilter" class="cmp-select" aria-label="Filter by requirement category">
+                                <option value="all">All Categories</option>
+                                <option value="Required Undertaking">Required Undertaking</option>
+                                <option value="Supporting Documentation">Supporting Documentation</option>
+                                <option value="Institutional Record">Institutional Record</option>
+                                <option value="Compliance Response">Compliance Response</option>
+                                <option value="Document Validity Review">Document Validity Review</option>
+                                <option value="Reviewer Follow-up">Reviewer Follow-up</option>
+                            </select>
+                            <select id="cmpStageFilter" class="cmp-select" aria-label="Filter by workflow stage">
+                                <option value="all">All Stages</option>
+                                <option value="Application Submitted">Application Submitted</option>
+                                <option value="Initial Scrutiny">Initial Scrutiny</option>
+                                <option value="Document Review">Document Review</option>
+                                <option value="Compliance Review">Compliance Review</option>
+                                <option value="Final Decision">Final Decision</option>
+                            </select>
+                            <select id="cmpDeadlineFilter" class="cmp-select" aria-label="Filter by deadline">
+                                <option value="all">All Deadlines</option>
+                                <option value="overdue">Overdue</option>
+                                <option value="7days">Due in 7 Days</option>
+                                <option value="30days">Due in 30 Days</option>
+                            </select>
+                            <select id="cmpSortSelect" class="cmp-select" aria-label="Sort compliance requirements">
+                                <option value="due-asc">Due Date (Soonest)</option>
+                                <option value="due-desc">Due Date (Latest)</option>
+                                <option value="req-asc">Requirement ID</option>
+                                <option value="inst-asc">Institution A–Z</option>
+                                <option value="priority-desc">Priority (High First)</option>
+                                <option value="status-asc">Status A–Z</option>
+                            </select>
+                            <button type="button" id="cmpResetFilters" class="cmp-btn cmp-btn--secondary">Reset Filters</button>
+                        </div>
+
+                        <div class="cmp-results-bar">
+                            <span id="cmpResultsCount">Showing 0 sample items</span>
+                            <span class="cmp-results-note">All rows are illustrative sample records.</span>
+                        </div>
+
+                        <div class="cmp-table-wrap">
+                            <table class="cmp-table" id="cmpTable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"><button type="button" class="cmp-sort-btn" data-sort="req">Requirement ID <span class="cmp-sort-ind" aria-hidden="true">&#8597;</span></button></th>
+                                        <th scope="col">Application ID</th>
+                                        <th scope="col"><button type="button" class="cmp-sort-btn" data-sort="institution">Institution <span class="cmp-sort-ind" aria-hidden="true">&#8597;</span></button></th>
+                                        <th scope="col">Requirement Category</th>
+                                        <th scope="col">Evidence / Required Action</th>
+                                        <th scope="col"><button type="button" class="cmp-sort-btn" data-sort="status">Review Status <span class="cmp-sort-ind" aria-hidden="true">&#8597;</span></button></th>
+                                        <th scope="col"><button type="button" class="cmp-sort-btn" data-sort="due">Illustrative Due Date <span class="cmp-sort-ind" aria-hidden="true">&#8597;</span></button></th>
+                                        <th scope="col"><button type="button" class="cmp-sort-btn" data-sort="priority">Priority <span class="cmp-sort-ind" aria-hidden="true">&#8597;</span></button></th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cmpTableBody"></tbody>
+                            </table>
+                            <div class="cmp-empty" id="cmpEmpty" hidden>
+                                <div class="cmp-empty__title">No sample compliance requirements match the current filters.</div>
+                                <p class="cmp-empty__text">Adjust the filters or reset the register to view the illustrative records.</p>
+                                <button type="button" class="cmp-btn cmp-btn--primary" data-cmp-clear>Clear Filters</button>
+                            </div>
+                        </div>
+
+                        <div class="cmp-pagination">
+                            <span id="cmpPageInfo">Page 1 of 1</span>
+                            <div class="cmp-pagination__controls">
+                                <label class="cmp-pagination__label" for="cmpRowsPerPage">Rows</label>
+                                <select id="cmpRowsPerPage" class="cmp-select cmp-select--sm" aria-label="Rows per page">
+                                    <option value="5">5</option>
+                                    <option value="8" selected>8</option>
+                                    <option value="10">10</option>
+                                    <option value="16">16</option>
+                                </select>
+                                <button type="button" id="cmpPrevPage" class="cmp-pagination__btn">Previous</button>
+                                <button type="button" id="cmpNextPage" class="cmp-pagination__btn">Next</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Deadlines and Follow-ups -->
+                    <section class="cmp-panel cmp-deadlines" aria-labelledby="cmpDeadlinesTitle">
+                        <div class="cmp-section-head">
+                            <div>
+                                <h2 class="cmp-section-title" id="cmpDeadlinesTitle">Compliance Deadlines &amp; Follow-ups</h2>
+                                <p class="cmp-section-subtitle">Illustrative due dates for demonstration. No background monitoring, real alerts or automatic escalation is performed.</p>
+                            </div>
+                            <span class="cmp-demo-chip">Sample dates</span>
+                        </div>
+                        <div class="cmp-deadline-grid">
+                            <div class="cmp-deadline-group">
+                                <div class="cmp-deadline-group__head">
+                                    <h3>Upcoming</h3>
+                                    <span class="cmp-deadline-group__count">3 sample items</span>
+                                </div>
+                                <div class="cmp-deadline-item">
+                                    <div class="cmp-deadline-item__main">
+                                        <div class="cmp-deadline-item__title">Supporting evidence review</div>
+                                        <div class="cmp-deadline-item__meta"><span>REQ-2026-0101</span><span>APP-2026-0238</span><span>26 Oct 2026</span></div>
+                                    </div>
+                                    <div class="cmp-deadline-item__actions">
+                                        <span class="cmp-badge cmp-badge--deadline">Upcoming Deadline</span>
+                                        <button type="button" class="cmp-link-btn" data-req="REQ-2026-0101">View Details</button>
+                                    </div>
+                                </div>
+                                <div class="cmp-deadline-item">
+                                    <div class="cmp-deadline-item__main">
+                                        <div class="cmp-deadline-item__title">Document validity review</div>
+                                        <div class="cmp-deadline-item__meta"><span>REQ-2026-0102</span><span>APP-2026-0142</span><span>28 Oct 2026</span></div>
+                                    </div>
+                                    <div class="cmp-deadline-item__actions">
+                                        <span class="cmp-badge cmp-badge--pending">Pending Review</span>
+                                        <button type="button" class="cmp-link-btn" data-req="REQ-2026-0102">View Details</button>
+                                    </div>
+                                </div>
+                                <div class="cmp-deadline-item">
+                                    <div class="cmp-deadline-item__main">
+                                        <div class="cmp-deadline-item__title">Undertaking follow-up</div>
+                                        <div class="cmp-deadline-item__meta"><span>REQ-2026-0103</span><span>APP-2026-0187</span><span>29 Oct 2026</span></div>
+                                    </div>
+                                    <div class="cmp-deadline-item__actions">
+                                        <span class="cmp-badge cmp-badge--pending">Pending Review</span>
+                                        <button type="button" class="cmp-link-btn" data-req="REQ-2026-0103">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cmp-deadline-group">
+                                <div class="cmp-deadline-group__head">
+                                    <h3>Due Soon</h3>
+                                    <span class="cmp-deadline-group__count">2 sample items</span>
+                                </div>
+                                <div class="cmp-deadline-item">
+                                    <div class="cmp-deadline-item__main">
+                                        <div class="cmp-deadline-item__title">Compliance response review</div>
+                                        <div class="cmp-deadline-item__meta"><span>REQ-2026-0104</span><span>APP-2026-0251</span><span>30 Oct 2026</span></div>
+                                    </div>
+                                    <div class="cmp-deadline-item__actions">
+                                        <span class="cmp-badge cmp-badge--deadline">Upcoming Deadline</span>
+                                        <button type="button" class="cmp-link-btn" data-req="REQ-2026-0104">View Details</button>
+                                    </div>
+                                </div>
+                                <div class="cmp-deadline-item">
+                                    <div class="cmp-deadline-item__main">
+                                        <div class="cmp-deadline-item__title">Supporting document review</div>
+                                        <div class="cmp-deadline-item__meta"><span>REQ-2026-0105</span><span>APP-2026-0278</span><span>31 Oct 2026</span></div>
+                                    </div>
+                                    <div class="cmp-deadline-item__actions">
+                                        <span class="cmp-badge cmp-badge--deadline">Upcoming Deadline</span>
+                                        <button type="button" class="cmp-link-btn" data-req="REQ-2026-0105">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cmp-deadline-group cmp-deadline-group--overdue">
+                                <div class="cmp-deadline-group__head">
+                                    <h3>Overdue in Demo Records</h3>
+                                    <span class="cmp-deadline-group__count">2 sample items</span>
+                                </div>
+                                <div class="cmp-deadline-item">
+                                    <div class="cmp-deadline-item__main">
+                                        <div class="cmp-deadline-item__title">Pending clarification</div>
+                                        <div class="cmp-deadline-item__meta"><span>REQ-2026-0106</span><span>APP-2026-0302</span><span>21 Oct 2026</span></div>
+                                    </div>
+                                    <div class="cmp-deadline-item__actions">
+                                        <span class="cmp-badge cmp-badge--action">Action Required</span>
+                                        <button type="button" class="cmp-link-btn" data-req="REQ-2026-0106">View Details</button>
+                                    </div>
+                                </div>
+                                <div class="cmp-deadline-item">
+                                    <div class="cmp-deadline-item__main">
+                                        <div class="cmp-deadline-item__title">Supporting record review</div>
+                                        <div class="cmp-deadline-item__meta"><span>REQ-2026-0107</span><span>APP-2026-0289</span><span>22 Oct 2026</span></div>
+                                    </div>
+                                    <div class="cmp-deadline-item__actions">
+                                        <span class="cmp-badge cmp-badge--action">Action Required</span>
+                                        <button type="button" class="cmp-link-btn" data-req="REQ-2026-0107">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="cmp-footnote">All dates are illustrative examples for the demonstration and do not trigger real alerts or escalation.</p>
+                    </section>
+
+                    <!-- Attention Prioritization -->
+                    <section class="cmp-panel cmp-attention" aria-labelledby="cmpAttentionTitle">
+                        <div class="cmp-section-head">
+                            <div>
+                                <h2 class="cmp-section-title" id="cmpAttentionTitle">Items Requiring Attention</h2>
+                                <p class="cmp-section-subtitle">Transparent, rule-based demo labels applied to sample records.</p>
+                            </div>
+                            <span class="cmp-demo-chip">Rule-based sample</span>
+                        </div>
+                        <div class="cmp-attention-grid" id="cmpAttentionGrid"></div>
+                        <p class="cmp-footnote">Attention labels are illustrative interface classifications and do not determine compliance or approval eligibility.</p>
+                    </section>
+
+                    <!-- Review Distribution -->
+                    <section class="cmp-panel cmp-distribution" aria-labelledby="cmpDistributionTitle">
+                        <div class="cmp-section-head">
+                            <div>
+                                <h2 class="cmp-section-title" id="cmpDistributionTitle">Compliance Review Distribution</h2>
+                                <p class="cmp-section-subtitle">Illustrative demo data</p>
+                            </div>
+                            <span class="cmp-demo-chip">Fictional totals</span>
+                        </div>
+                        <div class="cmp-dist">
+                            <div class="cmp-dist-row">
+                                <span class="cmp-swatch cmp-swatch--compliant"></span>
+                                <span class="cmp-dist-row__label">Marked Compliant</span>
+                                <span class="cmp-dist-row__track"><span class="cmp-dist-row__fill cmp-dist-row__fill--compliant" style="width: 76.3%"></span></span>
+                                <span class="cmp-dist-row__count">371</span>
+                                <span class="cmp-dist-row__pct">76%</span>
+                            </div>
+                            <div class="cmp-dist-row">
+                                <span class="cmp-swatch cmp-swatch--pending"></span>
+                                <span class="cmp-dist-row__label">Pending Review</span>
+                                <span class="cmp-dist-row__track"><span class="cmp-dist-row__fill cmp-dist-row__fill--pending" style="width: 14.8%"></span></span>
+                                <span class="cmp-dist-row__count">72</span>
+                                <span class="cmp-dist-row__pct">15%</span>
+                            </div>
+                            <div class="cmp-dist-row">
+                                <span class="cmp-swatch cmp-swatch--action"></span>
+                                <span class="cmp-dist-row__label">Action Required</span>
+                                <span class="cmp-dist-row__track"><span class="cmp-dist-row__fill cmp-dist-row__fill--action" style="width: 4.9%"></span></span>
+                                <span class="cmp-dist-row__count">24</span>
+                                <span class="cmp-dist-row__pct">5%</span>
+                            </div>
+                            <div class="cmp-dist-row">
+                                <span class="cmp-swatch cmp-swatch--deadline"></span>
+                                <span class="cmp-dist-row__label">Upcoming Deadline</span>
+                                <span class="cmp-dist-row__track"><span class="cmp-dist-row__fill cmp-dist-row__fill--deadline" style="width: 3.9%"></span></span>
+                                <span class="cmp-dist-row__count">19</span>
+                                <span class="cmp-dist-row__pct">4%</span>
+                            </div>
+                        </div>
+                        <ul class="cmp-dist-legend">
+                            <li><span class="cmp-swatch cmp-swatch--compliant"></span>Compliant sample items</li>
+                            <li><span class="cmp-swatch cmp-swatch--pending"></span>Awaiting review</li>
+                            <li><span class="cmp-swatch cmp-swatch--action"></span>Outstanding follow-up</li>
+                            <li><span class="cmp-swatch cmp-swatch--deadline"></span>Approaching due date</li>
+                        </ul>
+                        <p class="cmp-footnote">Values sum to the fictional 486-item demo total; percentages are rounded and are not an official compliance measure.</p>
+                    </section>
+
+                    <!-- Review Workspace -->
+                    <section class="cmp-panel cmp-workspace" aria-labelledby="cmpWorkspaceTitle">
+                        <div class="cmp-section-head">
+                            <div>
+                                <h2 class="cmp-section-title" id="cmpWorkspaceTitle">Review Workspace</h2>
+                                <p class="cmp-section-subtitle">Select a sample application to review associated demo compliance items. State changes remain in this browser session only.</p>
+                            </div>
+                            <span class="cmp-demo-chip">Local demo state</span>
+                        </div>
+                        <div class="cmp-workspace__grid">
+                            <div class="cmp-workspace__left">
+                                <label class="cmp-label" for="cmpWsSearch">Search applications</label>
+                                <input type="search" id="cmpWsSearch" class="cmp-input cmp-input--full" placeholder="Search by application ID or institution..." aria-label="Search applications in the review workspace">
+                                <label class="cmp-label" for="cmpWsAppSelect">Sample application</label>
+                                <select id="cmpWsAppSelect" class="cmp-select cmp-select--full" aria-label="Select a sample application"></select>
+                                <div class="cmp-ws-appmeta" id="cmpWsAppMeta">-</div>
+                                <h3 class="cmp-ws-subtitle">Associated sample items</h3>
+                                <div class="cmp-ws-items" id="cmpWsItems"></div>
+                            </div>
+                            <div class="cmp-workspace__right">
+                                <div class="cmp-ws-summary" id="cmpWsSummary"></div>
+                                <div class="cmp-ws-details" id="cmpWsDetails"></div>
+                                <div class="cmp-ws-confirm" id="cmpWsConfirm" role="status" aria-live="polite"></div>
+                            </div>
+                        </div>
+                        <p class="cmp-footnote">Workspace actions update temporary frontend state only. No record is persisted, approved or enforced.</p>
+                    </section>
+
+                    <!-- Compliance Detail Drawer -->
+                    <div id="complianceDrawer" class="cmp-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cmpDrawerId">
+                        <div class="cmp-drawer__backdrop" data-cmp-close></div>
+                        <div class="cmp-drawer__content" role="document">
+                            <div class="cmp-drawer__header">
+                                <div class="cmp-drawer__eyebrow">Sample requirement record</div>
+                                <div class="cmp-drawer__top">
+                                    <div>
+                                        <div class="cmp-drawer__id" id="cmpDrawerId">-</div>
+                                        <div class="cmp-drawer__inst" id="cmpDrawerInst">-</div>
+                                    </div>
+                                    <button type="button" class="cmp-drawer__close" id="cmpDrawerClose" aria-label="Close details">&times;</button>
+                                </div>
+                                <div class="cmp-drawer__badges">
+                                    <span class="cmp-badge" id="cmpDrawerStatus">-</span>
+                                    <span class="cmp-demo-tag" id="cmpDrawerDemoState" hidden></span>
+                                </div>
+                            </div>
+                            <div class="cmp-drawer__body">
+                                <section class="cmp-drawer-section">
+                                    <h3 class="cmp-drawer-section__title">Requirement overview</h3>
+                                    <div class="cmp-drawer-grid">
+                                        <div class="cmp-drawer-item"><span class="cmp-drawer-label">Requirement ID</span><span class="cmp-drawer-value" id="cmpDrawerReq">-</span></div>
+                                        <div class="cmp-drawer-item"><span class="cmp-drawer-label">Application ID</span><span class="cmp-drawer-value"><button type="button" class="cmp-link-btn" id="cmpDrawerApp">-</button></span></div>
+                                        <div class="cmp-drawer-item"><span class="cmp-drawer-label">Institution</span><span class="cmp-drawer-value" id="cmpDrawerInst2">-</span></div>
+                                        <div class="cmp-drawer-item"><span class="cmp-drawer-label">Requirement category</span><span class="cmp-drawer-value" id="cmpDrawerCategory">-</span></div>
+                                        <div class="cmp-drawer-item"><span class="cmp-drawer-label">Review status</span><span class="cmp-drawer-value" id="cmpDrawerStatus2">-</span></div>
+                                        <div class="cmp-drawer-item"><span class="cmp-drawer-label">Illustrative due date</span><span class="cmp-drawer-value" id="cmpDrawerDue">-</span></div>
+                                        <div class="cmp-drawer-item"><span class="cmp-drawer-label">Priority</span><span class="cmp-drawer-value" id="cmpDrawerPriority">-</span></div>
+                                        <div class="cmp-drawer-item"><span class="cmp-drawer-label">Responsible role</span><span class="cmp-drawer-value">Review Officer (Fictional)</span></div>
+                                    </div>
+                                </section>
+                                <section class="cmp-drawer-section">
+                                    <h3 class="cmp-drawer-section__title">Requirement description</h3>
+                                    <p class="cmp-drawer-text" id="cmpDrawerDescription">-</p>
+                                </section>
+                                <section class="cmp-drawer-section">
+                                    <h3 class="cmp-drawer-section__title">Evidence checklist <span class="cmp-drawer-section__hint">Illustrative state only</span></h3>
+                                    <ul class="cmp-checklist" id="cmpDrawerChecklist"></ul>
+                                </section>
+                                <section class="cmp-drawer-section">
+                                    <h3 class="cmp-drawer-section__title">Activity timeline <span class="cmp-drawer-section__hint">Mock history</span></h3>
+                                    <ul class="cmp-mock-timeline" id="cmpDrawerTimeline"></ul>
+                                    <p class="cmp-footnote">Sample dates are shown for demonstration and are not an official audit trail.</p>
+                                </section>
+                                <section class="cmp-drawer-section">
+                                    <h3 class="cmp-drawer-section__title">Suggested follow-up</h3>
+                                    <p class="cmp-drawer-text" id="cmpDrawerFollowUp">-</p>
+                                    <p class="cmp-footnote">Suggestions are neutral UI guidance, not legal advice or an automatic compliance determination.</p>
+                                </section>
+                                <section class="cmp-drawer-section">
+                                    <h3 class="cmp-drawer-section__title">Actions <span class="cmp-drawer-section__hint">Demo only</span></h3>
+                                    <div class="cmp-drawer-actions">
+                                        <button type="button" class="cmp-btn cmp-btn--primary" id="cmpDrawerReview">Mark Reviewed (Demo)</button>
+                                        <button type="button" class="cmp-btn cmp-btn--secondary" id="cmpDrawerFlag">Flag for Follow-up (Demo)</button>
+                                        <button type="button" class="cmp-btn cmp-btn--secondary" id="cmpDrawerAppBtn">View Application</button>
+                                        <button type="button" class="cmp-btn cmp-btn--ghost" id="cmpDrawerCloseBtn">Close Details</button>
+                                    </div>
+                                    <p class="cmp-footnote">Demo actions update temporary frontend state only and do not persist, approve or enforce any record.</p>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cmp-toast" id="cmpToast" role="status" aria-live="polite"></div>
                 </section>
 
                 <section class="page" id="page-deadline-alerts">
@@ -451,5 +1850,9 @@
     </div>
 
     <script src="app-shell.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="applications.js"></script>
+    <script src="workflow.js"></script>
+    <script src="compliance.js"></script>
 </body>
 </html>

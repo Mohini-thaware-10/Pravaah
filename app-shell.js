@@ -93,10 +93,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update header
         if (pageTitles[pageId]) {
             if (breadcrumbCurrent) {
-                breadcrumbCurrent.textContent = pageTitles[pageId];
+                if (pageId === 'applications') {
+                    breadcrumbCurrent.textContent = 'Applications';
+                } else if (pageId === 'approval-dashboard') {
+                    breadcrumbCurrent.textContent = 'Approval Dashboard';
+                } else {
+                    breadcrumbCurrent.textContent = pageTitles[pageId];
+                }
             }
             if (headerSectionTitle) {
-                headerSectionTitle.textContent = pageTitles[pageId];
+                if (pageId === 'applications') {
+                    headerSectionTitle.textContent = 'Applications';
+                } else if (pageId === 'approval-dashboard') {
+                    headerSectionTitle.textContent = 'Approval Dashboard';
+                } else {
+                    headerSectionTitle.textContent = pageTitles[pageId];
+                }
             }
         }
         
