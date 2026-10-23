@@ -27,7 +27,8 @@ const cmpFilters = {
     status: 'all',
     category: 'all',
     stage: 'all',
-    deadline: 'all'
+    deadline: 'all',
+    attention: 'all'
 };
 let cmpSort = 'due-asc';
 let cmpPage = 1;
@@ -101,13 +102,14 @@ function cmpFilteredItems() {
     const search = cmpFilters.search.toLowerCase();
     return cmpItems.filter(item => {
         const app = cmpApp(item.appId);
+        if (cmpFilters.attention !== 'all' && cmpAttentionGroup(item) !== cmpFilters.attention) return false;
         if (cmpFilters.status !== 'all' && item.status !== cmpFilters.status) return false;
         if (cmpFilters.category !== 'all' && item.category !== cmpFilters.category) return false;
         if (cmpFilters.stage !== 'all' && app.stage !== cmpFilters.stage) return false;
         if (cmpFilters.deadline !== 'all') {
             const days = cmpDaysUntil(item.due);
             if (days === null) return false;
-            if (cmpFilters.deadline === 'overdue' && days >= 0) return false;
+            if (cmpFilters.deadline === 'overdue' && (days >= 0 || item.status === 'Marked Compliant')) return false;
             if (cmpFilters.deadline === '7days' && (days < 0 || days > 7)) return false;
             if (cmpFilters.deadline === '30days' && (days < 0 || days > 30)) return false;
         }
@@ -125,6 +127,10 @@ function cmpSortedItems(data) {
     const key = cmpSort.split('-')[0];
     const dir = cmpSort.split('-')[1] === 'desc' ? -1 : 1;
     sorted.sort((a, b) => {
+        if (key === 'priority') {
+            const diff = priorityRank[a.priority] - priorityRank[b.priority];
+            return dir === -1 ? diff : -diff;
+        }
         let av;
         let bv;
         if (key === 'req') {
@@ -133,14 +139,11 @@ function cmpSortedItems(data) {
         } else if (key === 'institution') {
             av = cmpApp(a.appId).institution.toLowerCase();
             bv = cmpApp(b.appId).institution.toLowerCase();
-        } else if (key === 'priority') {
-            av = priorityRank[a.priority];
-            bv = priorityRank[b.priority];
         } else if (key === 'status') {
             av = a.status.toLowerCase();
             bv = b.status.toLowerCase();
         } else {
-            av = (cmpParseDate(a.due) || 0).getTime ? (cmpParseDate(a.due) || new Date(0)).getTime() : 0;
+            av = (cmpParseDate(a.due) || new Date(0)).getTime();
             bv = (cmpParseDate(b.due) || new Date(0)).getTime();
         }
         if (av < bv) return -1 * dir;
@@ -231,6 +234,15 @@ function cmpRenderRegister() {
     cmpUpdateKpiState();
 }
 
+function cmpAttentionGroup(item) {
+    const days = cmpDaysUntil(item.due);
+    if (item.status === 'Marked Compliant') return 'none';
+    if (item.status === 'Action Required' || (days !== null && days < 0)) return 'high';
+    if (item.status === 'Pending Review' || item.status === 'Upcoming Deadline') return 'medium';
+    if (item.status === 'Under Review') return 'routine';
+    return 'none';
+}
+
 function cmpRenderAttention() {
     const groups = {
         high: { title: 'High Attention', desc: 'Overdue sample item or missing supporting evidence.', items: [] },
@@ -238,14 +250,8 @@ function cmpRenderAttention() {
         routine: { title: 'Routine Review', desc: 'Record awaiting ordinary review.', items: [] }
     };
     cmpItems.forEach(item => {
-        const days = cmpDaysUntil(item.due);
-        if (item.status === 'Action Required' || (days !== null && days < 0 && item.status !== 'Marked Compliant')) {
-            groups.high.items.push(item);
-        } else if (item.status === 'Pending Review' || item.status === 'Upcoming Deadline') {
-            groups.medium.items.push(item);
-        } else if (item.status === 'Under Review') {
-            groups.routine.items.push(item);
-        }
+        const group = cmpAttentionGroup(item);
+        if (groups[group]) groups[group].items.push(item);
     });
     Object.keys(groups).forEach(key => {
         groups[key].items.sort((a, b) => (cmpParseDate(a.due) || new Date(0)) - (cmpParseDate(b.due) || new Date(0)));
@@ -256,7 +262,6 @@ function cmpRenderAttention() {
     grid.innerHTML = Object.keys(groups).map(key => {
         const group = groups[key];
         const shown = group.items.slice(0, 3);
-        const filterStatus = key === 'high' ? 'Action Required' : (key === 'medium' ? 'Pending Review' : 'Under Review');
         const itemsHtml = shown.length ? shown.map(item => {
             const reason = key === 'high'
                 ? (cmpIsOverdue(item) ? 'Illustrative due date has passed.' : 'Supporting evidence or clarification is marked as pending.')
@@ -285,7 +290,7 @@ function cmpRenderAttention() {
                     <span class="cmp-attention-card__count">${group.items.length}</span>
                 </div>
                 <ul class="cmp-attention-list">${itemsHtml}</ul>
-                <button type="button" class="cmp-link-btn cmp-attention-all" data-status="${filterStatus}">View all in register</button>
+                <button type="button" class="cmp-link-btn cmp-attention-all" data-group="${key}">View all in register</button>
             </div>
         `;
     }).join('');
@@ -601,6 +606,7 @@ function cmpApplyKpi(kpi) {
         deadline: 'Upcoming Deadline'
     };
     cmpActiveKpi = kpi;
+    cmpFilters.attention = 'all';
     cmpFilters.status = map[kpi] || 'all';
     cmpFilters.search = '';
     cmpFilters.category = 'all';
@@ -629,6 +635,7 @@ function cmpResetFilters() {
     cmpFilters.category = 'all';
     cmpFilters.stage = 'all';
     cmpFilters.deadline = 'all';
+    cmpFilters.attention = 'all';
     cmpActiveKpi = 'total';
     const values = {
         cmpSearch: '',
@@ -651,6 +658,7 @@ function cmpSyncFiltersFromControls() {
     cmpFilters.category = document.getElementById('cmpCategoryFilter')?.value || 'all';
     cmpFilters.stage = document.getElementById('cmpStageFilter')?.value || 'all';
     cmpFilters.deadline = document.getElementById('cmpDeadlineFilter')?.value || 'all';
+    cmpFilters.attention = 'all';
     cmpActiveKpi = null;
     cmpPage = 1;
     cmpRenderRegister();
@@ -734,10 +742,11 @@ document.addEventListener('DOMContentLoaded', function() {
             cmpFilters.category = 'all';
             cmpFilters.stage = 'all';
             cmpFilters.deadline = 'all';
-            cmpFilters.status = attentionAll.getAttribute('data-status');
+            cmpFilters.status = 'all';
+            cmpFilters.attention = attentionAll.getAttribute('data-group') || 'all';
             cmpActiveKpi = null;
             const statusSel = document.getElementById('cmpStatusFilter');
-            if (statusSel) statusSel.value = cmpFilters.status;
+            if (statusSel) statusSel.value = 'all';
             const searchInput = document.getElementById('cmpSearch');
             if (searchInput) searchInput.value = '';
             const catSel = document.getElementById('cmpCategoryFilter');

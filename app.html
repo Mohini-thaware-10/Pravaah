@@ -1733,21 +1733,657 @@
                 </section>
 
                 <section class="page" id="page-deadline-alerts">
-                    <div class="page__header">
-                        <h1 class="page__title">Deadline & Alerts</h1>
+                    <div class="page__header da-header">
+                        <div class="da-header__left">
+                            <div class="da-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="da-breadcrumb__sep">/</span>
+                                <span>Deadline &amp; Alerts</span>
+                            </div>
+                            <h1 class="da-title">Deadline &amp; Alerts Centre</h1>
+                            <p class="da-description">Monitor approaching deadlines, identify overdue actions and prioritize follow-ups across approval workflows.</p>
+                            <div class="da-header__tags">
+                                <span class="da-banner">Demonstration environment — all alerts and records are illustrative.</span>
+                                <span class="da-demo-label">DEMO WORKSPACE &middot; ILLUSTRATIVE ALERTS</span>
+                            </div>
+                        </div>
+                        <div class="da-header__right">
+                            <div class="da-controls">
+                                <div class="da-search">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="6" cy="6" r="4.25" stroke="currentColor" stroke-width="1.5"/><path d="M9.2 9.2L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                    <input type="search" id="daSearchInput" placeholder="Search alerts, application IDs or institutions..." aria-label="Search alerts">
+                                </div>
+                                <select id="daDateRange" class="da-select" aria-label="Filter by date range">
+                                    <option value="all">All Dates</option>
+                                    <option value="today">Today</option>
+                                    <option value="7days">Next 7 Days</option>
+                                    <option value="30days">Next 30 Days</option>
+                                    <option value="overdue">Overdue</option>
+                                </select>
+                                <select id="daCategoryFilter" class="da-select" aria-label="Filter by alert category">
+                                    <option value="all">All Categories</option>
+                                    <option value="Deadlines">Deadlines</option>
+                                    <option value="Compliance">Compliance</option>
+                                    <option value="Documents">Documents</option>
+                                    <option value="Workflow">Workflow</option>
+                                    <option value="Follow-up">Follow-up</option>
+                                </select>
+                                <select id="daPriorityFilter" class="da-select" aria-label="Filter by priority">
+                                    <option value="all">All Priorities</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Routine">Routine</option>
+                                </select>
+                                <button type="button" id="daResetFilters" class="da-btn da-btn--secondary">Reset Filters</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="placeholder-panel">
-                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+
+                    <!-- Alert Overview -->
+                    <div class="da-kpi-grid" role="group" aria-label="Alert overview">
+                        <button type="button" class="da-kpi da-kpi--total" data-da-kpi="all">
+                            <div class="da-kpi__head">
+                                <span class="da-kpi__icon da-kpi__icon--navy" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h8v8H4z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M6 7h4M6 10h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+                                <span class="da-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="da-kpi__value">48</div>
+                            <div class="da-kpi__label">Total Alerts</div>
+                            <div class="da-kpi__text">Sample alerts across all categories.</div>
+                        </button>
+                        <button type="button" class="da-kpi da-kpi--high" data-da-kpi="high">
+                            <div class="da-kpi__head">
+                                <span class="da-kpi__icon da-kpi__icon--red" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5M8 10.8v.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+                                <span class="da-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="da-kpi__value">8</div>
+                            <div class="da-kpi__label">High Priority</div>
+                            <div class="da-kpi__text">Illustrative high-attention alerts.</div>
+                        </button>
+                        <button type="button" class="da-kpi da-kpi--due7" data-da-kpi="due7">
+                            <div class="da-kpi__head">
+                                <span class="da-kpi__icon da-kpi__icon--amber" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2.5" y="3.5" width="11" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 6.5h11M5.5 2.5v2M10.5 2.5v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+                                <span class="da-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="da-kpi__value">19</div>
+                            <div class="da-kpi__label">Due Within 7 Days</div>
+                            <div class="da-kpi__text">Sample items approaching due dates.</div>
+                        </button>
+                        <button type="button" class="da-kpi da-kpi--overdue" data-da-kpi="overdue">
+                            <div class="da-kpi__head">
+                                <span class="da-kpi__icon da-kpi__icon--red" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.5v3.8l2.2 1.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+                                <span class="da-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="da-kpi__value">12</div>
+                            <div class="da-kpi__label">Overdue Actions</div>
+                            <div class="da-kpi__text">Illustrative past-due actions.</div>
+                        </button>
+                        <button type="button" class="da-kpi da-kpi--resolved" data-da-kpi="resolved">
+                            <div class="da-kpi__head">
+                                <span class="da-kpi__icon da-kpi__icon--green" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 8l1.8 1.8L11 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                <span class="da-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="da-kpi__value">9</div>
+                            <div class="da-kpi__label">Recently Resolved</div>
+                            <div class="da-kpi__text">Sample resolved alerts (demo).</div>
+                        </button>
                     </div>
+                    <p class="da-kpi-note">All values are fictional illustrative figures. No real notifications or automatic background checks are performed.</p>
+
+                    <!-- Main Layout -->
+                    <div class="da-layout">
+                        <div class="da-main-col">
+                            <!-- Alert Feed -->
+                            <section class="da-panel da-feed" aria-labelledby="daFeedTitle">
+                                <div class="da-section-head">
+                                    <div>
+                                        <h2 class="da-section-title" id="daFeedTitle">Recent Alerts</h2>
+                                        <p class="da-section-subtitle">Sample alerts across categories. Read/dismiss actions update local UI state only.</p>
+                                    </div>
+                                    <span class="da-demo-chip">Demo feed</span>
+                                </div>
+                                <div class="da-tabs" role="tablist" aria-label="Filter alerts by category">
+                                    <button type="button" class="da-tab active" data-da-tab="all" role="tab" aria-selected="true">All</button>
+                                    <button type="button" class="da-tab" data-da-tab="Deadlines" role="tab" aria-selected="false">Deadlines</button>
+                                    <button type="button" class="da-tab" data-da-tab="Compliance" role="tab" aria-selected="false">Compliance</button>
+                                    <button type="button" class="da-tab" data-da-tab="Documents" role="tab" aria-selected="false">Documents</button>
+                                    <button type="button" class="da-tab" data-da-tab="Workflow" role="tab" aria-selected="false">Workflow</button>
+                                    <button type="button" class="da-tab" data-da-tab="Follow-up" role="tab" aria-selected="false">Follow-up</button>
+                                </div>
+                                <div class="da-feed-meta">
+                                    <span id="daFeedCount">Showing 0 alerts</span>
+                                    <span class="da-feed-note">Unread items are highlighted</span>
+                                </div>
+                                <div class="da-alert-list" id="daAlertList" aria-live="polite"></div>
+                                <div class="da-empty" id="daFeedEmpty" hidden>
+                                    <div class="da-empty__title">No alerts match the current filters.</div>
+                                    <p class="da-empty__text">Adjust search, tabs or filters to view sample alerts.</p>
+                                    <button type="button" class="da-btn da-btn--primary" id="daFeedClear">Clear Filters</button>
+                                </div>
+                            </section>
+
+                            <!-- Deadline Queue -->
+                            <section class="da-panel da-queue" aria-labelledby="daQueueTitle">
+                                <div class="da-section-head">
+                                    <div>
+                                        <h2 class="da-section-title" id="daQueueTitle">Deadline &amp; Follow-up Queue</h2>
+                                        <p class="da-section-subtitle">Fictional records consistent with existing sample applications.</p>
+                                    </div>
+                                    <span class="da-demo-chip">Demo queue</span>
+                                </div>
+                                <div class="da-queue-toolbar">
+                                    <select id="daQueueStatus" class="da-select da-select--sm" aria-label="Filter queue by status">
+                                        <option value="all">All Status</option>
+                                        <option value="Due Soon">Due Soon</option>
+                                        <option value="Action Required">Action Required</option>
+                                        <option value="Due Today">Due Today</option>
+                                        <option value="Overdue">Overdue</option>
+                                    </select>
+                                    <select id="daQueueSort" class="da-select da-select--sm" aria-label="Sort queue">
+                                        <option value="due-asc">Due Date (Soonest)</option>
+                                        <option value="due-desc">Due Date (Latest)</option>
+                                        <option value="priority-desc">Priority (High First)</option>
+                                        <option value="app-asc">Application ID</option>
+                                    </select>
+                                </div>
+                                <div class="da-table-wrap">
+                                    <table class="da-table" id="daQueueTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Application ID</th>
+                                                <th>Institution</th>
+                                                <th>Pending Action</th>
+                                                <th>Due Date</th>
+                                                <th>Days Remaining / Overdue</th>
+                                                <th>Priority</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="daQueueBody"></tbody>
+                                    </table>
+                                </div>
+                                <p class="da-footnote">Relative labels are calculated from a fixed demo reference date (23 Oct 2026).</p>
+                            </section>
+                        </div>
+
+                        <div class="da-side-col">
+                            <!-- Upcoming Deadlines Calendar -->
+                            <section class="da-panel da-calendar" aria-labelledby="daCalTitle">
+                                <div class="da-section-head">
+                                    <div>
+                                        <h2 class="da-section-title" id="daCalTitle">Upcoming Deadlines</h2>
+                                        <p class="da-section-subtitle">October 2026 sample deadline markers.</p>
+                                    </div>
+                                    <span class="da-demo-chip">Demo calendar</span>
+                                </div>
+                                <div class="da-cal-toggle" role="group" aria-label="Calendar view toggle">
+                                    <button type="button" class="da-cal-btn active" data-cal-view="calendar" aria-pressed="true">Calendar View</button>
+                                    <button type="button" class="da-cal-btn" data-cal-view="list" aria-pressed="false">List View</button>
+                                </div>
+                                <div class="da-cal-view" id="daCalView">
+                                    <div class="da-cal-header">
+                                        <button type="button" class="da-cal-nav" id="daCalPrev" aria-label="Previous month">&#10094;</button>
+                                        <div class="da-cal-month" id="daCalMonth">October 2026</div>
+                                        <button type="button" class="da-cal-nav" id="daCalNext" aria-label="Next month">&#10095;</button>
+                                    </div>
+                                    <div class="da-cal-weekdays">
+                                        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                                    </div>
+                                    <div class="da-cal-grid" id="daCalGrid" role="grid" aria-label="October 2026 calendar"></div>
+                                </div>
+                                <div class="da-cal-listview" id="daCalListView" hidden>
+                                    <ul class="da-cal-list" id="daCalList"></ul>
+                                </div>
+                                <div class="da-cal-events">
+                                    <div class="da-cal-events__head">
+                                        <h3 class="da-cal-events__title">Selected day events</h3>
+                                        <span class="da-cal-events__date" id="daCalSelectedDate">-</span>
+                                    </div>
+                                    <div id="daCalEventsList"></div>
+                                    <p class="da-cal-events__empty" id="daCalEventsEmpty" hidden>No demo events for this day.</p>
+                                </div>
+                                <p class="da-footnote">All month and event dates are demonstration data only.</p>
+                            </section>
+
+                            <!-- Escalation Overview -->
+                            <section class="da-panel da-escal" aria-labelledby="daEscTitle">
+                                <div class="da-section-head">
+                                    <div>
+                                        <h2 class="da-section-title" id="daEscTitle">Escalation Overview</h2>
+                                        <p class="da-section-subtitle">Visibility-only demonstration. Not an automated escalation engine.</p>
+                                    </div>
+                                    <span class="da-demo-chip">Demo overview</span>
+                                </div>
+                                <div class="da-escal-stats">
+                                    <div class="da-escal-stat">
+                                        <div class="da-escal-stat__value">14</div>
+                                        <div class="da-escal-stat__label">Follow-up Suggested</div>
+                                    </div>
+                                    <div class="da-escal-stat">
+                                        <div class="da-escal-stat__value">8</div>
+                                        <div class="da-escal-stat__label">Awaiting Official Review</div>
+                                    </div>
+                                    <div class="da-escal-stat">
+                                        <div class="da-escal-stat__value">4</div>
+                                        <div class="da-escal-stat__label">Escalation Review Pending</div>
+                                    </div>
+                                </div>
+                                <div class="da-escal-table-wrap">
+                                    <table class="da-escal-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Application ID</th>
+                                                <th>Pending Action</th>
+                                                <th>Illustrative Delay</th>
+                                                <th>Suggested Review Level</th>
+                                                <th>Current Demo Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td><button class="da-link-btn" data-app="APP-2026-0142">APP-2026-0142</button></td><td>Supporting document required</td><td>5 days</td><td>Department Review</td><td><span class="da-badge da-badge--amber">Follow-up Suggested</span></td></tr>
+                                            <tr><td><button class="da-link-btn" data-app="APP-2026-0238">APP-2026-0238</button></td><td>Document validity check</td><td>7 days</td><td>Authorized Official</td><td><span class="da-badge da-badge--red">Escalation Review Pending</span></td></tr>
+                                            <tr><td><button class="da-link-btn" data-app="APP-2026-0302">APP-2026-0302</button></td><td>Response review pending</td><td>6 days</td><td>Department Review</td><td><span class="da-badge da-badge--amber">Awaiting Official Review</span></td></tr>
+                                            <tr><td><button class="da-link-btn" data-app="APP-2026-0187">APP-2026-0187</button></td><td>Undertaking submission pending</td><td>4 days</td><td>Assigned Reviewer</td><td><span class="da-badge da-badge--navy">Follow-up Suggested</span></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p class="da-footnote">Suggested levels are fictional examples (Assigned Reviewer / Department Review / Authorized Official). Not official AICTE escalation levels.</p>
+                                <p class="da-footnote">Escalation visibility is a UI demonstration. Actual escalation policies and responsible authorities must be configured according to applicable procedures.</p>
+                            </section>
+
+                            <!-- Alerts by Category -->
+                            <section class="da-panel da-distribution" aria-labelledby="daDistTitle">
+                                <div class="da-section-head">
+                                    <div>
+                                        <h2 class="da-section-title" id="daDistTitle">Alerts by Category</h2>
+                                        <p class="da-section-subtitle">Illustrative demo data</p>
+                                    </div>
+                                    <span class="da-demo-chip">Demo chart</span>
+                                </div>
+                                <div class="da-dist">
+                                    <div class="da-dist-row"><span class="da-swatch da-swatch--amber"></span><span class="da-dist-row__label">Deadlines</span><span class="da-dist-row__track"><span class="da-dist-row__fill da-dist-row__fill--amber" style="width: 33.3%"></span></span><span class="da-dist-row__count">16</span><span class="da-dist-row__pct">33%</span></div>
+                                    <div class="da-dist-row"><span class="da-swatch da-swatch--navy"></span><span class="da-dist-row__label">Compliance</span><span class="da-dist-row__track"><span class="da-dist-row__fill da-dist-row__fill--navy" style="width: 25%"></span></span><span class="da-dist-row__count">12</span><span class="da-dist-row__pct">25%</span></div>
+                                    <div class="da-dist-row"><span class="da-swatch da-swatch--saffron"></span><span class="da-dist-row__label">Documents</span><span class="da-dist-row__track"><span class="da-dist-row__fill da-dist-row__fill--saffron" style="width: 18.75%"></span></span><span class="da-dist-row__count">9</span><span class="da-dist-row__pct">19%</span></div>
+                                    <div class="da-dist-row"><span class="da-swatch da-swatch--muted"></span><span class="da-dist-row__label">Workflow</span><span class="da-dist-row__track"><span class="da-dist-row__fill da-dist-row__fill--muted" style="width: 14.6%"></span></span><span class="da-dist-row__count">7</span><span class="da-dist-row__pct">15%</span></div>
+                                    <div class="da-dist-row"><span class="da-swatch da-swatch--green"></span><span class="da-dist-row__label">Follow-up</span><span class="da-dist-row__track"><span class="da-dist-row__fill da-dist-row__fill--green" style="width: 8.3%"></span></span><span class="da-dist-row__count">4</span><span class="da-dist-row__pct">8%</span></div>
+                                </div>
+                                <p class="da-footnote">Counts are illustrative demo data.</p>
+                            </section>
+
+                            <!-- Notification Preferences -->
+                            <section class="da-panel da-prefs" aria-labelledby="daPrefsTitle">
+                                <div class="da-section-head">
+                                    <div>
+                                        <h2 class="da-section-title" id="daPrefsTitle">Notification Preferences</h2>
+                                        <p class="da-section-subtitle">Frontend-only toggles. No email/SMS/push delivery is enabled.</p>
+                                    </div>
+                                    <span class="da-demo-chip">Local demo</span>
+                                </div>
+                                <div class="da-prefs-list">
+                                    <label class="da-pref-item"><input type="checkbox" id="daPref1" checked><span class="da-pref-text"><span class="da-pref-label">Upcoming deadline reminders</span><span class="da-pref-desc">Sample reminders for illustrative deadlines.</span></span></label>
+                                    <label class="da-pref-item"><input type="checkbox" id="daPref2" checked><span class="da-pref-text"><span class="da-pref-label">Overdue-action reminders</span><span class="da-pref-desc">Demo alerts for past-due actions.</span></span></label>
+                                    <label class="da-pref-item"><input type="checkbox" id="daPref3" checked><span class="da-pref-text"><span class="da-pref-label">Document-validity reminders</span><span class="da-pref-desc">Sample notifications for document review items.</span></span></label>
+                                    <label class="da-pref-item"><input type="checkbox" id="daPref4" checked><span class="da-pref-text"><span class="da-pref-label">Compliance follow-up reminders</span><span class="da-pref-desc">Illustrative compliance follow-ups.</span></span></label>
+                                    <label class="da-pref-item"><input type="checkbox" id="daPref5"><span class="da-pref-text"><span class="da-pref-label">Daily summary preview</span><span class="da-pref-desc">UI preview only; not sent anywhere.</span></span></label>
+                                </div>
+                                <button type="button" id="daSavePrefs" class="da-btn da-btn--primary da-prefs-save">Save Demo Preferences</button>
+                                <p class="da-prefs-msg" id="daPrefsMsg" role="status" aria-live="polite"></p>
+                                <p class="da-footnote">Preferences are updated for the current UI demonstration only. No contact information is collected.</p>
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- Alert Detail Drawer -->
+                    <div id="daAlertDrawer" class="da-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="daDrawerTitle">
+                        <div class="da-drawer__backdrop" data-da-close></div>
+                        <div class="da-drawer__content" role="document">
+                            <div class="da-drawer__header">
+                                <div class="da-drawer__eyebrow">Alert detail (demo)</div>
+                                <div class="da-drawer__top">
+                                    <div>
+                                        <h3 class="da-drawer__title" id="daDrawerTitle">-</h3>
+                                        <div class="da-drawer__meta" id="daDrawerMeta">-</div>
+                                    </div>
+                                    <button type="button" class="da-drawer__close" id="daDrawerClose" aria-label="Close alert details">&times;</button>
+                                </div>
+                                <div class="da-drawer__badges">
+                                    <span class="da-badge" id="daDrawerPriority">-</span>
+                                    <span class="da-badge da-badge--muted" id="daDrawerCategory">-</span>
+                                    <span class="da-badge da-badge--status" id="daDrawerStatus">Unread</span>
+                                </div>
+                            </div>
+                            <div class="da-drawer__body">
+                                <section class="da-drawer-section">
+                                    <h4 class="da-drawer-section__title">Overview</h4>
+                                    <div class="da-drawer-grid">
+                                        <div class="da-drawer-item"><span class="da-drawer-label">Alert ID</span><span class="da-drawer-value" id="daDrawerId">-</span></div>
+                                        <div class="da-drawer-item"><span class="da-drawer-label">Related application</span><span class="da-drawer-value"><button type="button" class="da-link-btn" id="daDrawerApp">-</button></span></div>
+                                        <div class="da-drawer-item"><span class="da-drawer-label">Institution</span><span class="da-drawer-value" id="daDrawerInst">-</span></div>
+                                        <div class="da-drawer-item"><span class="da-drawer-label">Related compliance item</span><span class="da-drawer-value" id="daDrawerRel">-</span></div>
+                                        <div class="da-drawer-item"><span class="da-drawer-label">Illustrative created</span><span class="da-drawer-value" id="daDrawerCreated">-</span></div>
+                                        <div class="da-drawer-item"><span class="da-drawer-label">Illustrative due date</span><span class="da-drawer-value" id="daDrawerDue">-</span></div>
+                                    </div>
+                                </section>
+                                <section class="da-drawer-section">
+                                    <h4 class="da-drawer-section__title">Alert description</h4>
+                                    <p class="da-drawer-text" id="daDrawerDesc">-</p>
+                                </section>
+                                <section class="da-drawer-section">
+                                    <h4 class="da-drawer-section__title">Suggested next action</h4>
+                                    <p class="da-drawer-text" id="daDrawerAction">-</p>
+                                    <p class="da-footnote">Suggestions are UI guidance only; no automatic action is taken.</p>
+                                </section>
+                                <section class="da-drawer-section">
+                                    <h4 class="da-drawer-section__title">Demo controls</h4>
+                                    <div class="da-drawer-actions">
+                                        <button type="button" class="da-btn da-btn--primary" id="daDrawerMarkRead">Mark as Read</button>
+                                        <button type="button" class="da-btn da-btn--secondary" id="daDrawerViewApp">View Application</button>
+                                        <button type="button" class="da-btn da-btn--secondary" id="daDrawerViewReq">View Related Requirement</button>
+                                        <button type="button" class="da-btn da-btn--ghost" id="daDrawerCloseBtn">Close</button>
+                                    </div>
+                                    <p class="da-footnote">All actions update local UI state only.</p>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="da-toast" id="daToast" role="status" aria-live="polite"></div>
                 </section>
 
                 <section class="page" id="page-reports-analytics">
-                    <div class="page__header">
-                        <h1 class="page__title">Reports & Analytics</h1>
+                    <div class="page__header rpt-header">
+                        <div class="rpt-header__left">
+                            <div class="rpt-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="rpt-breadcrumb__sep">/</span>
+                                <span>Reports &amp; Analytics</span>
+                            </div>
+                            <h1 class="rpt-title">Reports &amp; Analytics</h1>
+                            <p class="rpt-description">Monitor approval performance, application pendency, compliance activity and deadline trends in one place.</p>
+                            <div class="rpt-header__tags">
+                                <span class="rpt-banner">Demonstration environment — all reports and figures are illustrative.</span>
+                                <span class="rpt-demo-label">ILLUSTRATIVE DEMO DATA — NOT OFFICIAL AICTE STATISTICS</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="placeholder-panel">
-                        <p class="placeholder-panel__text">This workspace section will be developed in a subsequent step</p>
+
+                    <!-- Report Filter Bar -->
+                    <section class="rpt-panel rpt-filter" aria-labelledby="rptFilterTitle">
+                        <div class="rpt-section-head">
+                            <div>
+                                <h2 class="rpt-section-title" id="rptFilterTitle">Report Filter Bar</h2>
+                                <p class="rpt-section-subtitle">Apply filters to update the visible analytics from local mock data.</p>
+                            </div>
+                            <span class="rpt-demo-chip">Local filters</span>
+                        </div>
+                        <div class="rpt-filter-grid">
+                            <div class="rpt-filter-item">
+                                <label class="rpt-label" for="rptDateRange">Date range</label>
+                                <select id="rptDateRange" class="rpt-select">
+                                    <option value="Last 7 Days">Last 7 Days</option>
+                                    <option value="Last 30 Days" selected>Last 30 Days</option>
+                                    <option value="Last 90 Days">Last 90 Days</option>
+                                    <option value="custom">Custom Range</option>
+                                </select>
+                            </div>
+                            <div class="rpt-filter-item" id="rptCustomRange" hidden>
+                                <label class="rpt-label">Custom range</label>
+                                <div class="rpt-filter-row">
+                                    <input type="date" id="rptDateStart" class="rpt-input" aria-label="Start date">
+                                    <input type="date" id="rptDateEnd" class="rpt-input" aria-label="End date">
+                                </div>
+                            </div>
+                            <div class="rpt-filter-item">
+                                <label class="rpt-label" for="rptAppType">Application type</label>
+                                <select id="rptAppType" class="rpt-select">
+                                    <option value="all">All Types</option>
+                                    <option value="Engineering College">Engineering College</option>
+                                    <option value="Technical Institution">Technical Institution</option>
+                                    <option value="Polytechnic">Polytechnic</option>
+                                </select>
+                            </div>
+                            <div class="rpt-filter-item">
+                                <label class="rpt-label" for="rptStageFilter">Workflow stage</label>
+                                <select id="rptStageFilter" class="rpt-select">
+                                    <option value="all">All Stages</option>
+                                    <option value="Application Submitted">Application Submitted</option>
+                                    <option value="Initial Scrutiny">Initial Scrutiny</option>
+                                    <option value="Document Review">Document Review</option>
+                                    <option value="Compliance Review">Compliance Review</option>
+                                    <option value="Awaiting Final Decision">Awaiting Final Decision</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </div>
+                            <div class="rpt-filter-item">
+                                <label class="rpt-label" for="rptInstSearch">Institution search</label>
+                                <input type="search" id="rptInstSearch" class="rpt-input" placeholder="Search institutions...">
+                            </div>
+                            <div class="rpt-filter-item">
+                                <label class="rpt-label" for="rptStatusFilter">Status</label>
+                                <select id="rptStatusFilter" class="rpt-select">
+                                    <option value="all">All Status</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="In Review">In Review</option>
+                                    <option value="Completed">Completed</option>
+                                    <option value="Overdue">Overdue</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="rpt-filter-actions">
+                            <button type="button" id="rptResetFilters" class="rpt-btn rpt-btn--secondary">Reset Filters</button>
+                            <button type="button" id="rptGenerate" class="rpt-btn rpt-btn--primary">Generate Report</button>
+                        </div>
+                    </section>
+
+                    <!-- Performance KPI Cards -->
+                    <div class="rpt-kpi-grid" id="rptKpiGrid" aria-label="Performance KPIs"></div>
+
+                    <!-- Application Processing Analytics -->
+                    <section class="rpt-panel rpt-analytics" aria-labelledby="rptAnalyticsTitle">
+                        <div class="rpt-section-head">
+                            <div>
+                                <h2 class="rpt-section-title" id="rptAnalyticsTitle">Application Processing Analytics</h2>
+                                <p class="rpt-section-subtitle">Illustrative submitted and processed counts over time.</p>
+                            </div>
+                            <span class="rpt-demo-chip">Demo charts</span>
+                        </div>
+                        <div class="rpt-analytics-grid">
+                            <div class="rpt-trend-card">
+                                <div class="rpt-trend-card__head">
+                                    <h3 class="rpt-subtitle">Application Processing Trend</h3>
+                                    <div class="rpt-trend-toggle" role="group" aria-label="Trend period">
+                                        <button type="button" class="rpt-trend-btn active" data-period="Day" aria-pressed="true">Day</button>
+                                        <button type="button" class="rpt-trend-btn" data-period="Week" aria-pressed="false">Week</button>
+                                        <button type="button" class="rpt-trend-btn" data-period="Month" aria-pressed="false">Month</button>
+                                    </div>
+                                </div>
+                                <div class="rpt-trend-legend" id="rptTrendLegend"></div>
+                                <div class="rpt-trend-bars" id="rptTrendBars"></div>
+                            </div>
+                            <div class="rpt-stage-card">
+                                <h3 class="rpt-subtitle">Applications by Workflow Stage</h3>
+                                <div class="rpt-stage-list" id="rptStageList"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Pendency & Turnaround -->
+                    <section class="rpt-panel rpt-pendency" aria-labelledby="rptPendencyTitle">
+                        <div class="rpt-section-head">
+                            <div>
+                                <h2 class="rpt-section-title" id="rptPendencyTitle">Pendency &amp; Processing Time</h2>
+                                <p class="rpt-section-subtitle">Identify workflow bottlenecks using illustrative demo data.</p>
+                            </div>
+                            <span class="rpt-demo-chip">Demo analysis</span>
+                        </div>
+                        <div class="rpt-pendency-grid">
+                            <div>
+                                <h3 class="rpt-subtitle">Applications Pending by Workflow Stage</h3>
+                                <div id="rptPendencyList"></div>
+                            </div>
+                            <div>
+                                <h3 class="rpt-subtitle">Illustrative Processing Time by Stage</h3>
+                                <div id="rptTimeList"></div>
+                            </div>
+                            <div>
+                                <h3 class="rpt-subtitle">Pending Age Categories</h3>
+                                <div id="rptAgeList"></div>
+                            </div>
+                        </div>
+                        <p class="rpt-note">Bottleneck summary (illustrative): Initial Scrutiny and Document Review show comparatively high demo pendency. This helps administrators focus review capacity without assigning blame.</p>
+                    </section>
+
+                    <!-- Compliance & Deadline -->
+                    <section class="rpt-panel rpt-compliance" aria-labelledby="rptComplianceTitle">
+                        <div class="rpt-section-head">
+                            <div>
+                                <h2 class="rpt-section-title" id="rptComplianceTitle">Compliance &amp; Deadline Overview</h2>
+                                <p class="rpt-section-subtitle">Illustrative figures from local mock data — not a legal compliance determination.</p>
+                            </div>
+                            <div class="rpt-compliance-actions">
+                                <button type="button" id="rptViewCompliance" class="rpt-btn rpt-btn--secondary">View Compliance Centre</button>
+                                <button type="button" id="rptViewDeadline" class="rpt-btn rpt-btn--secondary">View Deadline Centre</button>
+                            </div>
+                        </div>
+                        <div class="rpt-compliance-grid">
+                            <div>
+                                <h3 class="rpt-subtitle">Compliance &amp; Action Summary</h3>
+                                <div id="rptComplianceList"></div>
+                            </div>
+                            <div>
+                                <div class="rpt-trend-card__head">
+                                    <h3 class="rpt-subtitle">Monthly Deadline Trend</h3>
+                                    <div class="rpt-trend-legend" id="rptDeadlineLegend"></div>
+                                </div>
+                                <div id="rptDeadlineTrend"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Institution-wise Summary -->
+                    <section class="rpt-panel rpt-institutions" aria-labelledby="rptInstTitle">
+                        <div class="rpt-section-head">
+                            <div>
+                                <h2 class="rpt-section-title" id="rptInstTitle">Institution-wise Application Summary</h2>
+                                <p class="rpt-section-subtitle">Fictional Sample Institutions — realistic but internally consistent.</p>
+                            </div>
+                            <span class="rpt-demo-chip">Fictional Sample Institutions</span>
+                        </div>
+                        <div class="rpt-inst-toolbar">
+                            <select id="rptInstSort" class="rpt-select rpt-select--sm">
+                                <option value="name-asc">Institution A–Z</option>
+                                <option value="name-desc">Institution Z–A</option>
+                                <option value="total-desc">Total Applications (High)</option>
+                                <option value="pending-desc">Pending (High)</option>
+                                <option value="completed-desc">Completed (High)</option>
+                                <option value="compliance-desc">Compliance Items (High)</option>
+                                <option value="oldest-asc">Oldest Pending First</option>
+                            </select>
+                            <select id="rptInstPerPage" class="rpt-select rpt-select--sm">
+                                <option value="5" selected>5 per page</option>
+                                <option value="8">8 per page</option>
+                                <option value="10">10 per page</option>
+                            </select>
+                        </div>
+                        <div class="rpt-table-wrap">
+                            <table class="rpt-table">
+                                <thead>
+                                    <tr>
+                                        <th>Institution</th>
+                                        <th>Total Applications</th>
+                                        <th>Pending</th>
+                                        <th>Completed</th>
+                                        <th>Compliance Items Requiring Review</th>
+                                        <th>Oldest Pending Application</th>
+                                        <th>Demo Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rptInstBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="rpt-pagination">
+                            <span id="rptInstPageInfo">Page 1</span>
+                            <div class="rpt-pagination__controls">
+                                <button type="button" id="rptInstPrev" class="rpt-pagination__btn">Previous</button>
+                                <button type="button" id="rptInstNext" class="rpt-pagination__btn">Next</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Report Library -->
+                    <section class="rpt-panel rpt-library" aria-labelledby="rptLibTitle">
+                        <div class="rpt-section-head">
+                            <div>
+                                <h2 class="rpt-section-title" id="rptLibTitle">Report Library</h2>
+                                <p class="rpt-section-subtitle">Preview and export illustrative demo reports locally.</p>
+                            </div>
+                            <span class="rpt-demo-chip">Demo exports</span>
+                        </div>
+                        <div class="rpt-lib-grid" id="rptLibraryGrid"></div>
+                        <p class="rpt-footnote">CSV export is available in this demo. PDF export not implemented; no external services used.</p>
+                    </section>
+
+                    <!-- Institution Drawer -->
+                    <div id="rptInstDrawer" class="rpt-drawer" aria-hidden="true" role="dialog" aria-modal="true">
+                        <div class="rpt-drawer__backdrop"></div>
+                        <div class="rpt-drawer__content" role="document">
+                            <div class="rpt-drawer__header">
+                                <div>
+                                    <div class="rpt-drawer__eyebrow">Institution summary (illustrative)</div>
+                                    <div class="rpt-drawer__title" id="rptInstDrawerTitle">-</div>
+                                    <div class="rpt-drawer__sub" id="rptInstDrawerId">-</div>
+                                </div>
+                                <button type="button" class="rpt-drawer__close" id="rptInstDrawerClose" aria-label="Close">&times;</button>
+                            </div>
+                            <div class="rpt-drawer__body">
+                                <div class="rpt-drawer-grid">
+                                    <div class="rpt-drawer-item"><span class="rpt-drawer-label">Total Applications</span><span class="rpt-drawer-value" id="rptInstDrawerTotal">-</span></div>
+                                    <div class="rpt-drawer-item"><span class="rpt-drawer-label">Pending</span><span class="rpt-drawer-value" id="rptInstDrawerPending">-</span></div>
+                                    <div class="rpt-drawer-item"><span class="rpt-drawer-label">Completed</span><span class="rpt-drawer-value" id="rptInstDrawerCompleted">-</span></div>
+                                    <div class="rpt-drawer-item"><span class="rpt-drawer-label">Compliance Items Requiring Review</span><span class="rpt-drawer-value" id="rptInstDrawerCompliance">-</span></div>
+                                    <div class="rpt-drawer-item"><span class="rpt-drawer-label">Oldest Pending Application</span><span class="rpt-drawer-value" id="rptInstDrawerOldest">-</span></div>
+                                    <div class="rpt-drawer-item"><span class="rpt-drawer-label">Demo Status</span><span class="rpt-drawer-value" id="rptInstDrawerStatus">-</span></div>
+                                </div>
+                                <p class="rpt-footnote">Fictional sample institution; no personal information displayed.</p>
+                                <button type="button" class="rpt-btn rpt-btn--secondary" id="rptInstDrawerCloseBtn">Close</button>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Preview Modal -->
+                    <div id="rptPreviewModal" class="rpt-modal" aria-hidden="true" role="dialog" aria-modal="true">
+                        <div class="rpt-modal__backdrop"></div>
+                        <div class="rpt-modal__content" role="document">
+                            <div class="rpt-modal__header">
+                                <div>
+                                    <div class="rpt-modal__eyebrow">Illustrative Demo Report</div>
+                                    <h3 class="rpt-modal__title" id="rptModalTitle">-</h3>
+                                </div>
+                                <button type="button" class="rpt-modal__close" id="rptModalClose" aria-label="Close">&times;</button>
+                            </div>
+                            <div class="rpt-modal__body">
+                                <div class="rpt-modal-meta">
+                                    <div><span class="rpt-modal-label">Date range</span><span id="rptModalRange">-</span></div>
+                                    <div><span class="rpt-modal-label">Filters</span><span id="rptModalFilters">-</span></div>
+                                    <div><span class="rpt-modal-label">Generated</span><span id="rptModalGen" class="rpt-illust">-</span></div>
+                                </div>
+                                <h4 class="rpt-modal-subtitle">Summary Metrics (Illustrative)</h4>
+                                <div class="rpt-table-wrap">
+                                    <table class="rpt-table">
+                                        <thead><tr><th>Metric</th><th>Value</th><th>Note</th></tr></thead>
+                                        <tbody id="rptModalTableBody"></tbody>
+                                    </table>
+                                </div>
+                                <div class="rpt-modal-actions">
+                                    <button type="button" class="rpt-btn rpt-btn--primary" id="rptModalDownload">Download CSV</button>
+                                    <button type="button" class="rpt-btn rpt-btn--secondary" id="rptModalCloseBtn">Close</button>
+                                </div>
+                                <p class="rpt-footnote">This is a structured preview from local mock data. Never treated as an official AICTE report.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rpt-toast" id="rptToast" role="status" aria-live="polite"></div>
                 </section>
 
                 <section class="page" id="page-approval-stages">
@@ -1854,5 +2490,7 @@
     <script src="applications.js"></script>
     <script src="workflow.js"></script>
     <script src="compliance.js"></script>
+    <script src="deadline-alerts.js"></script>
+    <script src="reports-analytics.js"></script>
 </body>
 </html>

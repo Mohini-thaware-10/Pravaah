@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head><body>
+<iframe id="f" src="app.html" style="width:1400px;height:1200px"></iframe>
+<pre id="out"></pre>
+<script>
+const f = document.getElementById('f');
+const out = document.getElementById('out');
+const log = (k, v) => { out.textContent += k + ': ' + v + '\n'; };
+f.addEventListener('load', function() {
+  const w = f.contentWindow, d = f.contentDocument;
+  const q = s => d.querySelector(s), qa = s => Array.from(d.querySelectorAll(s));
+  const click = el => el && el.dispatchEvent(new w.MouseEvent('click', {bubbles:true}));
+  const setVal = (el, v, type) => { if(!el) return; el.value = v; el.dispatchEvent(new w.Event(type || 'change', {bubbles:true})); };
+  try {
+    click(q('.nav__item[data-page="reports-analytics"]'));
+    log('page', q('#page-reports-analytics').classList.contains('active'));
+    log('kpi count', qa('.rpt-kpi').length);
+    log('trend rows', qa('.rpt-trend-row').length);
+    log('stage rows', qa('#rptStageList .rpt-bar-row').length);
+    log('pend rows', qa('#rptPendencyList .rpt-bar-row').length);
+    log('age rows', qa('#rptAgeList .rpt-bar-row').length);
+    log('comp rows', qa('#rptComplianceList .rpt-bar-row').length);
+    log('dead rows', qa('#rptDeadlineTrend .rpt-bar-row').length);
+    log('inst rows', qa('#rptInstBody tr').length);
+
+    click(q('.rpt-trend-btn[data-period="Week"]'));
+    log('week trend rows', qa('.rpt-trend-row').length);
+    click(q('.rpt-trend-btn[data-period="Month"]'));
+    log('month trend rows', qa('.rpt-trend-row').length);
+    click(q('.rpt-trend-btn[data-period="Day"]'));
+
+    setVal(q('#rptInstSort'), 'pending-desc');
+    log('inst sort applied', qa('#rptInstBody tr')[0].querySelectorAll('td')[2].textContent);
+    setVal(q('#rptInstPerPage'), '8');
+    log('inst per page', qa('#rptInstBody tr').length);
+    setVal(q('#rptInstPerPage'), '5');
+
+    setVal(q('#rptInstSearch'), 'Sahyadri');
+    log('inst search', qa('#rptInstBody tr').length);
+    setVal(q('#rptInstSearch'), '');
+
+    click(qa('#rptInstBody .rpt-inst-btn')[0]);
+    log('inst drawer', q('#rptInstDrawer').classList.contains('active'));
+    click(q('#rptInstDrawerCloseBtn'));
+    log('inst drawer closed', !q('#rptInstDrawer').classList.contains('active'));
+
+    click(qa('#rptLibraryGrid [data-lib-preview]')[0]);
+    log('modal open', q('#rptPreviewModal').classList.contains('active'));
+    log('modal title', q('#rptModalTitle').textContent.length > 10);
+    click(q('#rptModalCloseBtn'));
+    log('modal closed', !q('#rptPreviewModal').classList.contains('active'));
+
+    click(qa('#rptLibraryGrid [data-lib-export]')[0]);
+    log('toast after export', q('#rptToast').classList.contains('active'));
+
+    click(q('#rptViewCompliance'));
+    log('nav compliance', q('#page-compliance-monitoring').classList.contains('active'));
+    click(q('.nav__item[data-page="reports-analytics"]'));
+    click(q('#rptViewDeadline'));
+    log('nav deadline', q('#page-deadline-alerts').classList.contains('active'));
+    click(q('.nav__item[data-page="reports-analytics"]'));
+
+    click(q('#rptGenerate'));
+    setTimeout(() => {
+      log('toast after generate', q('#rptToast').classList.contains('active'));
+      log('DONE', 'true');
+    }, 800);
+  } catch (e) { log('ERROR', e.message); }
+});
+</script></body></html>
