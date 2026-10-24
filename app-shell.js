@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'compliance-monitoring': 'Compliance Monitoring',
         'deadline-alerts': 'Deadline & Alerts',
         'reports-analytics': 'Reports & Analytics',
+        'approval-to-compliance': 'Approval-to-Compliance Continuity',
         'approval-stages': 'Approval Stages',
         'audit-trail': 'Audit Trail',
         'user-role-management': 'User & Role Management',

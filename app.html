@@ -128,6 +128,15 @@
                         </span>
                         <span class="nav__text">Reports & Analytics</span>
                     </button>
+                    <button class="nav__item" data-page="approval-to-compliance" title="Approval-to-Compliance">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 2l6 3v5c0 3.5-2.5 6-6 7-3.5-1-6-3.5-6-7V5l6-3z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <path d="M6 9l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Approval-to-Compliance</span>
+                    </button>
                 </div>
 
                 <div class="nav__divider"></div>
@@ -2090,6 +2099,118 @@
                     <div class="da-toast" id="daToast" role="status" aria-live="polite"></div>
                 </section>
 
+                <section class="page" id="page-approval-to-compliance">
+                    <div class="page__header atc-header">
+                        <div class="atc-header__left">
+                            <div class="atc-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="atc-breadcrumb__sep">/</span>
+                                <span>Approval-to-Compliance Continuity</span>
+                            </div>
+                            <h1 class="atc-title">Approval-to-Compliance Continuity</h1>
+                            <p class="atc-subtitle">Connect application decisions, obligations, supporting evidence, and deadlines in one traceable lifecycle.</p>
+                            <div class="atc-demo-badge">Illustrative Demo Data</div>
+                        </div>
+                        <div class="atc-header__right">
+                            <div class="atc-app-select-wrap">
+                                <label class="atc-label" for="atcAppSelect">Application</label>
+                                <select id="atcAppSelect" class="atc-select"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="atc-summary-grid" id="atcSummaryGrid"></div>
+
+                    <section class="atc-section">
+                        <div class="atc-section__header">
+                            <h2 class="atc-section__title">Connected Lifecycle</h2>
+                            <p class="atc-section__sub">Application Received ? Scrutiny ? Review & Decision ? Conditions & Obligations ? Evidence Submission ? Compliance Review ? Closure</p>
+                        </div>
+                        <div class="atc-lifecycle" id="atcLifecycle"></div>
+                    </section>
+
+                    <div class="atc-grid-2">
+                        <section class="atc-section">
+                            <div class="atc-section__header">
+                                <h2 class="atc-section__title">Obligations</h2>
+                                <p class="atc-section__sub">Sample obligations linked to the selected application</p>
+                            </div>
+                            <div class="atc-obligations" id="atcObligations"></div>
+                        </section>
+                        <section class="atc-section">
+                            <div class="atc-section__header">
+                                <h2 class="atc-section__title">Upcoming Deadlines</h2>
+                                <p class="atc-section__sub">Demo deadlines and proposed next actions</p>
+                            </div>
+                            <div class="atc-deadlines" id="atcDeadlines"></div>
+                        </section>
+                    </div>
+
+                    <section class="atc-section">
+                        <div class="atc-section__header">
+                            <h2 class="atc-section__title">Supporting Evidence</h2>
+                            <p class="atc-section__sub">Evidence linked to obligations with demo review actions</p>
+                        </div>
+                        <div class="atc-evidence" id="atcEvidence"></div>
+                    </section>
+
+                    <div class="atc-grid-2">
+                        <section class="atc-section">
+                            <div class="atc-section__header">
+                                <h2 class="atc-section__title">Activity Timeline</h2>
+                                <p class="atc-section__sub">Simulated review events for traceability</p>
+                            </div>
+                            <div class="atc-history" id="atcHistory"></div>
+                        </section>
+                        <section class="atc-section">
+                            <div class="atc-section__header">
+                                <h2 class="atc-section__title">Demo Review Coordination</h2>
+                                <p class="atc-section__sub">Local demo interactions only</p>
+                            </div>
+                            <div class="atc-review" id="atcReview"></div>
+                        </section>
+                    </div>
+
+                    <div id="atcOblDrawer" class="atc-drawer" aria-hidden="true">
+                        <div class="atc-drawer__backdrop" id="atcOblDrawerBackdrop"></div>
+                        <div class="atc-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="atcOblDrawerTitle">
+                            <div class="atc-drawer__header">
+                                <div>
+                                    <div class="atc-drawer__eyebrow">Obligation Detail</div>
+                                    <h3 class="atc-drawer__title" id="atcOblDrawerTitle">Obligation</h3>
+                                </div>
+                                <button type="button" class="atc-drawer__close" id="atcOblDrawerClose" aria-label="Close">×</button>
+                            </div>
+                            <div class="atc-drawer__body" id="atcOblDrawerBody"></div>
+                            <div class="atc-drawer__footer">
+                                <p class="atc-footnote">Illustrative data only. No external actions performed.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="atcEvidenceModal" class="atc-modal" aria-hidden="true" role="dialog" aria-modal="true">
+                        <div class="atc-modal__backdrop" id="atcEvidenceModalBackdrop"></div>
+                        <div class="atc-modal__content" role="document">
+                            <div class="atc-modal__header">
+                                <div>
+                                    <div class="atc-modal__eyebrow">Sample Evidence</div>
+                                    <h3 class="atc-modal__title">Evidence Preview (Demo)</h3>
+                                </div>
+                                <button type="button" class="atc-modal__close" id="atcEvidenceModalClose" aria-label="Close">×</button>
+                            </div>
+                            <div class="atc-modal__body">
+                                <div class="atc-modal__note">This is a local demo preview. No files uploaded to external services.</div>
+                                <div class="atc-modal__placeholder">
+                                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="8" y="10" width="32" height="28" rx="4" stroke="currentColor" stroke-width="2"/><path d="M16 18h16M16 24h10M16 30h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                                    <div>Illustrative document preview</div>
+                                </div>
+                            </div>
+                            <div class="atc-modal__footer">
+                                <button type="button" class="atc-btn" id="atcEvidenceModalClose2">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <section class="page" id="page-reports-analytics">
                     <div class="page__header rpt-header">
                         <div class="rpt-header__left">
@@ -3301,6 +3422,9 @@
     <script src="audit-trail.js"></script>
     <script src="user-roles.js"></script>
     <script src="settings-profile.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+    <script src="approval-compliance.js"></script>
     <script src="copilot.js"></script>
 </body>
 </html>
