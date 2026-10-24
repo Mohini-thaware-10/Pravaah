@@ -120,7 +120,7 @@ function rptRenderKpi(){
             : k.icon==="shield" ? '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2.5L3 4v4.5c0 3 2.1 5.8 5 6.5 2.9-.7 5-3.5 5-6.5V4L8 2.5z" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 8l1.2 1.2L10 6.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
             : '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5M8 10.8v.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
         const trendClass = k.trend==="up"?"up":k.trend==="down"?"down":"neutral";
-        const arrow = k.trend==="up"?"?":k.trend==="down"?"?":"–";
+        const arrow = k.trend==="up"?"?":k.trend==="down"?"?":"ï¿½";
         return `<article class="rpt-kpi"><div class="rpt-kpi__head"><span class="rpt-kpi__icon">${icon}</span><span class="rpt-kpi__demo">Illustrative</span></div><div class="rpt-kpi__value">${rptFormatNum(k.value)}</div><div class="rpt-kpi__label">${rptEsc(k.label)}</div><div class="rpt-kpi__footer"><span class="rpt-kpi__delta rpt-kpi__delta--${trendClass}">${arrow} ${rptEsc(k.delta)}</span><span class="rpt-kpi__note">${rptEsc(k.note)}</span></div></article>`;
     }).join("");
 }
@@ -211,7 +211,7 @@ function rptDownloadPDF(lib){
         doc.text(lib.name, margin, y);
         y += 16;
         doc.setFontSize(10);
-        doc.text("DEMONSTRATION REPORT — ILLUSTRATIVE DATA", margin, y);
+        doc.text("DEMONSTRATION REPORT ï¿½ ILLUSTRATIVE DATA", margin, y);
         y += 12;
         doc.text("Not an official AICTE report. All figures are from local demo data.", margin, y);
         y += 16;
@@ -293,7 +293,7 @@ function rptDownloadPPTX(lib){
         let slide1 = pptx.addSlide();
         slide1.addText("PRAVAAH", { x:0.5, y:0.5, w:9, h:0.6, fontSize:32, bold:true, color:"0B1F44" });
         slide1.addText(lib.name, { x:0.5, y:1.2, w:9, h:0.8, fontSize:28, bold:true });
-        slide1.addText("DEMONSTRATION REPORT — ILLUSTRATIVE DATA", { x:0.5, y:2.1, w:9, h:0.4, fontSize:14, color:"B45309" });
+        slide1.addText("DEMONSTRATION REPORT ï¿½ ILLUSTRATIVE DATA", { x:0.5, y:2.1, w:9, h:0.4, fontSize:14, color:"B45309" });
         slide1.addText("Reporting Period: " + (document.getElementById("rptPeriodSel")?.value || "Last 30 Days (Demo)"), { x:0.5, y:2.7, w:9, h:0.3, fontSize:12 });
         slide1.addText("All data is fictional/demo. Not an official AICTE report.", { x:0.5, y:4.8, w:9, h:0.3, fontSize:10, color:"64748B" });
 
@@ -431,4 +431,7 @@ document.addEventListener("DOMContentLoaded", function(){
             rptRenderLibrary();
         });
     }
+    // Filter change handlers - update filter text and re-render library
+    const filterSelects = document.querySelectorAll("#page-reports-analytics .rpt-filter-select");
+    filterSelects.forEach(s=>{ s.onchange=()=>{ rptShowToast("Filter updated (demo)."); rptRenderLibrary(); }; });
 });

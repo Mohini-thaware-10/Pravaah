@@ -213,3 +213,15 @@ document.addEventListener('DOMContentLoaded', function(){
         atcRender();
     }
 });
+
+// Re-render when the approval-to-compliance page becomes active
+const atcPage = document.getElementById('page-approval-to-compliance');
+if (atcPage) {
+    const rerenderIfActive = () => {
+        if (atcPage.classList.contains('active')) {
+            atcRender();
+        }
+    };
+    const observer = new MutationObserver(rerenderIfActive);
+    observer.observe(atcPage, { attributes: true, attributeFilter: ['class'] });
+}
