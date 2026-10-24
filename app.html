@@ -1747,9 +1747,9 @@
                             <div class="da-breadcrumb">
                                 <span>PRAVAAH</span>
                                 <span class="da-breadcrumb__sep">/</span>
-                                <span>Deadline &amp; Alerts</span>
+                                <span>Deadline & Alerts</span>
                             </div>
-                            <h1 class="da-title">Deadline &amp; Alerts Centre</h1>
+                            <h1 class="da-title">Deadline & Alerts Centre</h1><p class="da-header-desc">A concise description of upcoming obligations and pending actions. <span class="da-local-badge">Local demo data</span></p>
                             <p class="da-description">Monitor approaching deadlines, identify overdue actions and prioritize follow-ups across approval workflows.</p>
                             <div class="da-header__tags">
                                 <span class="da-banner">Demonstration environment — all alerts and records are illustrative.</span>
@@ -1760,7 +1760,7 @@
                             <div class="da-controls">
                                 <div class="da-search">
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="6" cy="6" r="4.25" stroke="currentColor" stroke-width="1.5"/><path d="M9.2 9.2L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                                    <input type="search" id="daSearchInput" placeholder="Search alerts, application IDs or institutions..." aria-label="Search alerts">
+                                    <input type="search" id="daSearchInput" class="da-input" placeholder="Search alerts, application IDs or institutions..." aria-label="Search alerts">
                                 </div>
                                 <select id="daDateRange" class="da-select" aria-label="Filter by date range">
                                     <option value="all">All Dates</option>
@@ -1769,33 +1769,31 @@
                                     <option value="30days">Next 30 Days</option>
                                     <option value="overdue">Overdue</option>
                                 </select>
-                                <select id="daCategoryFilter" class="da-select" aria-label="Filter by alert category">
+                                <select id="daCategorySel" class="da-select" aria-label="Filter by alert category">
                                     <option value="all">All Categories</option>
-                                    <option value="Deadlines">Deadlines</option>
                                     <option value="Compliance">Compliance</option>
-                                    <option value="Documents">Documents</option>
                                     <option value="Workflow">Workflow</option>
-                                    <option value="Follow-up">Follow-up</option>
+                                    <option value="Review">Review</option>
                                 </select>
-                                <select id="daPriorityFilter" class="da-select" aria-label="Filter by priority">
+                                <select id="daPrioritySel" class="da-select" aria-label="Filter by priority"><option value="all">All Priorities</option><option value="High">High</option><option value="Normal">Normal</option><option value="Critical">Critical</option>
                                     <option value="all">All Priorities</option>
                                     <option value="High">High</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Routine">Routine</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Critical">Critical</option>
                                 </select>
-                                <button type="button" id="daResetFilters" class="da-btn da-btn--secondary">Reset Filters</button>
+                                <button type="button" id="daResetFilters" class="da-btn da-btn--secondary">Reset Filters</button><button type="button" id="daReviewPriority" class="da-btn da-btn--primary">Review Priority Alerts</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Alert Overview -->
                     <div class="da-kpi-grid" role="group" aria-label="Alert overview">
-                        <button type="button" class="da-kpi da-kpi--total" data-da-kpi="all">
+                        <button type="button" class="da-kpi da-kpi--total" data-da-kpi="all" id="daKpiCardTotal">
                             <div class="da-kpi__head">
                                 <span class="da-kpi__icon da-kpi__icon--navy" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h8v8H4z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M6 7h4M6 10h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
                                 <span class="da-kpi__demo">Demo data</span>
                             </div>
-                            <div class="da-kpi__value">48</div>
+                            <div class="da-kpi__value" id="daKpiTotal">0</div>
                             <div class="da-kpi__label">Total Alerts</div>
                             <div class="da-kpi__text">Sample alerts across all categories.</div>
                         </button>
@@ -1804,7 +1802,7 @@
                                 <span class="da-kpi__icon da-kpi__icon--red" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5M8 10.8v.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
                                 <span class="da-kpi__demo">Demo data</span>
                             </div>
-                            <div class="da-kpi__value">8</div>
+                            <div class="da-kpi__value" id="daKpiHigh">0</div>
                             <div class="da-kpi__label">High Priority</div>
                             <div class="da-kpi__text">Illustrative high-attention alerts.</div>
                         </button>
@@ -1813,7 +1811,7 @@
                                 <span class="da-kpi__icon da-kpi__icon--amber" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2.5" y="3.5" width="11" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 6.5h11M5.5 2.5v2M10.5 2.5v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
                                 <span class="da-kpi__demo">Demo data</span>
                             </div>
-                            <div class="da-kpi__value">19</div>
+                            <div class="da-kpi__value" id="daKpi7">0</div>
                             <div class="da-kpi__label">Due Within 7 Days</div>
                             <div class="da-kpi__text">Sample items approaching due dates.</div>
                         </button>
@@ -1822,7 +1820,7 @@
                                 <span class="da-kpi__icon da-kpi__icon--red" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.5v3.8l2.2 1.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
                                 <span class="da-kpi__demo">Demo data</span>
                             </div>
-                            <div class="da-kpi__value">12</div>
+                            <div class="da-kpi__value" id="daKpiOverdue">0</div>
                             <div class="da-kpi__label">Overdue Actions</div>
                             <div class="da-kpi__text">Illustrative past-due actions.</div>
                         </button>
@@ -1831,7 +1829,7 @@
                                 <span class="da-kpi__icon da-kpi__icon--green" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 8l1.8 1.8L11 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                                 <span class="da-kpi__demo">Demo data</span>
                             </div>
-                            <div class="da-kpi__value">9</div>
+                            <div class="da-kpi__value" id="daKpiResolved">0</div>
                             <div class="da-kpi__label">Recently Resolved</div>
                             <div class="da-kpi__text">Sample resolved alerts (demo).</div>
                         </button>
@@ -1850,16 +1848,15 @@
                                     </div>
                                     <span class="da-demo-chip">Demo feed</span>
                                 </div>
-                                <div class="da-tabs" role="tablist" aria-label="Filter alerts by category">
-                                    <button type="button" class="da-tab active" data-da-tab="all" role="tab" aria-selected="true">All</button>
-                                    <button type="button" class="da-tab" data-da-tab="Deadlines" role="tab" aria-selected="false">Deadlines</button>
-                                    <button type="button" class="da-tab" data-da-tab="Compliance" role="tab" aria-selected="false">Compliance</button>
-                                    <button type="button" class="da-tab" data-da-tab="Documents" role="tab" aria-selected="false">Documents</button>
-                                    <button type="button" class="da-tab" data-da-tab="Workflow" role="tab" aria-selected="false">Workflow</button>
-                                    <button type="button" class="da-tab" data-da-tab="Follow-up" role="tab" aria-selected="false">Follow-up</button>
+                                <div class="da-tabs" role="tablist" aria-label="Filter alerts">
+                                    <button type="button" class="da-tab active" data-tab="all" role="tab" aria-selected="true">All</button>
+                                    <button type="button" class="da-tab" data-tab="open" role="tab" aria-selected="false">Open</button>
+                                    <button type="button" class="da-tab" data-tab="unread" role="tab" aria-selected="false">Unread</button>
+                                    <button type="button" class="da-tab" data-tab="high" role="tab" aria-selected="false">High Priority</button>
+                                    <button type="button" class="da-tab" data-tab="resolved" role="tab" aria-selected="false">Resolved</button>
                                 </div>
                                 <div class="da-feed-meta">
-                                    <span id="daFeedCount">Showing 0 alerts</span>
+                                    <span id="daAlertCount">0 alerts</span>
                                     <span class="da-feed-note">Unread items are highlighted</span>
                                 </div>
                                 <div class="da-alert-list" id="daAlertList" aria-live="polite"></div>
@@ -2109,7 +2106,7 @@
                             </div>
                             <h1 class="atc-title">Approval-to-Compliance Continuity</h1>
                             <p class="atc-subtitle">Connect application decisions, obligations, supporting evidence, and deadlines in one traceable lifecycle.</p>
-                            <div class="atc-demo-badge">Illustrative Demo Data</div>
+                            <div class="atc-demo-badge">Local Demo Data</div>
                         </div>
                         <div class="atc-header__right">
                             <div class="atc-app-select-wrap">
@@ -2232,41 +2229,35 @@
                     <section class="rpt-panel rpt-filter" aria-labelledby="rptFilterTitle">
                         <div class="rpt-section-head">
                             <div>
-                                <h2 class="rpt-section-title" id="rptFilterTitle">Report Filter Bar</h2>
-                                <p class="rpt-section-subtitle">Apply filters to update the visible analytics from local mock data.</p>
+                                <h2 class="rpt-section-title" id="rptFilterTitle">Report Centre Filters</h2>
+                                <p class="rpt-section-subtitle">Apply filters to update the generated reports from local mock data.</p>
                             </div>
                             <span class="rpt-demo-chip">Local filters</span>
                         </div>
                         <div class="rpt-filter-grid">
                             <div class="rpt-filter-item">
-                                <label class="rpt-label" for="rptDateRange">Date range</label>
-                                <select id="rptDateRange" class="rpt-select">
-                                    <option value="Last 7 Days">Last 7 Days</option>
-                                    <option value="Last 30 Days" selected>Last 30 Days</option>
-                                    <option value="Last 90 Days">Last 90 Days</option>
-                                    <option value="custom">Custom Range</option>
-                                </select>
-                            </div>
-                            <div class="rpt-filter-item" id="rptCustomRange" hidden>
-                                <label class="rpt-label">Custom range</label>
-                                <div class="rpt-filter-row">
-                                    <input type="date" id="rptDateStart" class="rpt-input" aria-label="Start date">
-                                    <input type="date" id="rptDateEnd" class="rpt-input" aria-label="End date">
-                                </div>
-                            </div>
-                            <div class="rpt-filter-item">
-                                <label class="rpt-label" for="rptAppType">Application type</label>
-                                <select id="rptAppType" class="rpt-select">
-                                    <option value="all">All Types</option>
-                                    <option value="Engineering College">Engineering College</option>
-                                    <option value="Technical Institution">Technical Institution</option>
-                                    <option value="Polytechnic">Polytechnic</option>
+                                <label class="rpt-label" for="rptPeriodSel">Reporting period</label>
+                                <select id="rptPeriodSel" class="rpt-filter-select rpt-select">
+                                    <option value="Last 30 Days (Demo)">Last 30 Days (Demo)</option>
+                                    <option value="Last 90 Days (Demo)">Last 90 Days (Demo)</option>
+                                    <option value="Year to Date (Demo)">Year to Date (Demo)</option>
+                                    <option value="Custom Range (Demo)">Custom Range (Demo)</option>
                                 </select>
                             </div>
                             <div class="rpt-filter-item">
-                                <label class="rpt-label" for="rptStageFilter">Workflow stage</label>
-                                <select id="rptStageFilter" class="rpt-select">
-                                    <option value="all">All Stages</option>
+                                <label class="rpt-label" for="rptTypeSel">Application type</label>
+                                <select id="rptTypeSel" class="rpt-filter-select rpt-select">
+                                    <option value="All Types">All Types</option>
+                                    <option value="New Approval">New Approval</option>
+                                    <option value="Extension of Approval">Extension of Approval</option>
+                                    <option value="Increase in Intake">Increase in Intake</option>
+                                    <option value="Closure">Closure</option>
+                                </select>
+                            </div>
+                            <div class="rpt-filter-item">
+                                <label class="rpt-label" for="rptStageSel">Workflow stage</label>
+                                <select id="rptStageSel" class="rpt-filter-select rpt-select">
+                                    <option value="All Stages">All Stages</option>
                                     <option value="Application Submitted">Application Submitted</option>
                                     <option value="Initial Scrutiny">Initial Scrutiny</option>
                                     <option value="Document Review">Document Review</option>
@@ -2276,23 +2267,35 @@
                                 </select>
                             </div>
                             <div class="rpt-filter-item">
-                                <label class="rpt-label" for="rptInstSearch">Institution search</label>
-                                <input type="search" id="rptInstSearch" class="rpt-input" placeholder="Search institutions...">
+                                <label class="rpt-label" for="rptInstSel">Institution</label>
+                                <select id="rptInstSel" class="rpt-filter-select rpt-select">
+                                    <option value="All Institutions">All Institutions</option>
+                                    <option value="Western Institute of Technology">Western Institute of Technology</option>
+                                    <option value="Deccan College of Engineering">Deccan College of Engineering</option>
+                                    <option value="National Technical Institute">National Technical Institute</option>
+                                    <option value="Sahyadri Institute of Technology">Sahyadri Institute of Technology</option>
+                                    <option value="Central Institute of Engineering">Central Institute of Engineering</option>
+                                    <option value="Eastern Polytechnic College">Eastern Polytechnic College</option>
+                                    <option value="Western Technical Campus">Western Technical Campus</option>
+                                    <option value="Coastal Institute of Technology">Coastal Institute of Technology</option>
+                                </select>
                             </div>
                             <div class="rpt-filter-item">
-                                <label class="rpt-label" for="rptStatusFilter">Status</label>
-                                <select id="rptStatusFilter" class="rpt-select">
-                                    <option value="all">All Status</option>
+                                <label class="rpt-label" for="rptStatusSel">Status</label>
+                                <select id="rptStatusSel" class="rpt-filter-select rpt-select">
+                                    <option value="All Status">All Status</option>
                                     <option value="Pending">Pending</option>
                                     <option value="In Review">In Review</option>
+                                    <option value="Due Soon">Due Soon</option>
+                                    <option value="Action Required">Action Required</option>
                                     <option value="Completed">Completed</option>
                                     <option value="Overdue">Overdue</option>
                                 </select>
                             </div>
                         </div>
                         <div class="rpt-filter-actions">
-                            <button type="button" id="rptResetFilters" class="rpt-btn rpt-btn--secondary">Reset Filters</button>
-                            <button type="button" id="rptGenerate" class="rpt-btn rpt-btn--primary">Generate Report</button>
+                            <button type="button" id="rptClearFilters" class="rpt-btn rpt-btn--secondary">Clear Filters</button>
+                            <button type="button" id="rptGenerateBtn" class="rpt-btn rpt-btn--primary">Generate Report</button>
                         </div>
                     </section>
 
@@ -2436,12 +2439,12 @@
                         <div class="rpt-section-head">
                             <div>
                                 <h2 class="rpt-section-title" id="rptLibTitle">Report Library</h2>
-                                <p class="rpt-section-subtitle">Preview and export illustrative demo reports locally.</p>
+                                <p class="rpt-section-subtitle">Preview and export illustrative demo reports locally as PDF and PPTX.</p>
                             </div>
                             <span class="rpt-demo-chip">Demo exports</span>
                         </div>
                         <div class="rpt-lib-grid" id="rptLibraryGrid"></div>
-                        <p class="rpt-footnote">CSV export is available in this demo. PDF export not implemented; no external services used.</p>
+                        <p class="rpt-footnote">All downloads use local demo data only. Files are labelled DEMONSTRATION REPORT � ILLUSTRATIVE DATA. No backend services used.</p>
                     </section>
 
                     <!-- Institution Drawer -->
@@ -2472,23 +2475,24 @@
                     </div>
 
                     <!-- Preview Modal -->
-                    <div id="rptPreviewModal" class="rpt-modal" aria-hidden="true" role="dialog" aria-modal="true">
+                    <div id="rptModal" class="rpt-modal" aria-hidden="true" role="dialog" aria-modal="true">
                         <div class="rpt-modal__backdrop"></div>
                         <div class="rpt-modal__content" role="document">
                             <div class="rpt-modal__header">
                                 <div>
-                                    <div class="rpt-modal__eyebrow">Illustrative Demo Report</div>
+                                    <div class="rpt-modal__eyebrow">Illustrative Demo Report - Preview</div>
                                     <h3 class="rpt-modal__title" id="rptModalTitle">-</h3>
                                 </div>
                                 <button type="button" class="rpt-modal__close" id="rptModalClose" aria-label="Close">&times;</button>
                             </div>
                             <div class="rpt-modal__body">
                                 <div class="rpt-modal-meta">
-                                    <div><span class="rpt-modal-label">Date range</span><span id="rptModalRange">-</span></div>
+                                    <div><span class="rpt-modal-label">Reporting period</span><span id="rptModalRange">-</span></div>
                                     <div><span class="rpt-modal-label">Filters</span><span id="rptModalFilters">-</span></div>
                                     <div><span class="rpt-modal-label">Generated</span><span id="rptModalGen" class="rpt-illust">-</span></div>
                                 </div>
-                                <h4 class="rpt-modal-subtitle">Summary Metrics (Illustrative)</h4>
+                                <div class="rpt-modal-disclaimer">DEMONSTRATION REPORT � ILLUSTRATIVE DATA. Not an official AICTE report.</div>
+                                <h4 class="rpt-modal-subtitle">KPI Summary (Illustrative)</h4>
                                 <div class="rpt-table-wrap">
                                     <table class="rpt-table">
                                         <thead><tr><th>Metric</th><th>Value</th><th>Note</th></tr></thead>
@@ -2496,10 +2500,10 @@
                                     </table>
                                 </div>
                                 <div class="rpt-modal-actions">
-                                    <button type="button" class="rpt-btn rpt-btn--primary" id="rptModalDownload">Download CSV</button>
+                                    <button type="button" class="rpt-btn rpt-btn--primary" id="rptModalDownload">Download PDF</button>
                                     <button type="button" class="rpt-btn rpt-btn--secondary" id="rptModalCloseBtn">Close</button>
                                 </div>
-                                <p class="rpt-footnote">This is a structured preview from local mock data. Never treated as an official AICTE report.</p>
+                                <p class="rpt-footnote">Preview uses local mock data. Downloads generate files in your browser.</p>
                             </div>
                         </div>
                     </div>
@@ -2840,8 +2844,8 @@
                             <li><strong>Workflow Tracking</strong> — Pipeline visualization, stage details and bottlenecks.</li>
                             <li><strong>Document Verification</strong> — Sample checklist and document preview.</li>
                             <li><strong>Compliance Monitoring</strong> — Demo compliance register and review workspace.</li>
-                            <li><strong>Deadline &amp; Alerts</strong> — Alerts, calendar and notification preferences.</li>
-                            <li><strong>Reports &amp; Analytics</strong> — Charts, institution summary and report library with CSV export.</li>
+                            <li><strong>Deadline & Alerts</strong> — Alerts, calendar and notification preferences.</li>
+                            <li><strong>Reports &amp; Analytics</strong> — Report Centre with filters, library, PDF and PPTX exports from local demo data.</li>
                             <li><strong>Approval Stages</strong> — Configure demo stages, reorder, preview workflow.</li>
                             <li><strong>Audit Trail</strong> — Illustrative activity log with filters, details and CSV export.</li>
                             <li><strong>User &amp; Role Management</strong> — Demo users/roles and capability matrix.</li>
@@ -3428,3 +3432,32 @@
     <script src="copilot.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
