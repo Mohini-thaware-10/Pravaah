@@ -2244,6 +2244,8 @@ body {
     color: var(--text-muted);
     margin-top: 0.125rem;
 }
+
+.appmgr-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
