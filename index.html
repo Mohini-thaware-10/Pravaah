@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRAVAAH - AICTE Approval Workflow Automation</title>
+    <title>PRAVAAH - AICTE Approval Workflow Platform</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,15 +11,17 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%230b1f44'/><path d='M16 20h32M16 32h20M16 44h28' stroke='%23ff6b1c' stroke-width='4' stroke-linecap='round'/></svg>">
 </head>
 <body>
-    <!-- Header -->
+
+    <!-- Header / Navigation -->
     <header class="header">
         <nav class="nav container">
+            <!-- Logo group: stays together on left -->
             <div class="nav__brand">
                 <div class="brand__logo" aria-label="PRAVAAH logo">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <rect width="40" height="40" rx="6" fill="#0b1f44"/>
-                        <path d="M10 12h20M10 20h12M10 28h16" stroke="#ff6b1c" stroke-width="3" stroke-linecap="round"/>
-                        <circle cx="28" cy="20" r="2" fill="#ff6b1c"/>
+                        <rect width="40" height="40" rx="6" fill="#17365D"/>
+                        <path d="M10 12h20M10 20h12M10 28h16" stroke="#2563EB" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="28" cy="20" r="2" fill="#2563EB"/>
                     </svg>
                 </div>
                 <div class="brand__text">
@@ -27,151 +29,158 @@
                     <div class="brand__tagline">AICTE Approval Workflow Platform</div>
                 </div>
             </div>
-            <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav__menu" id="navMenu">
+
+            <!-- Navigation: single row, centered -->
+            <ul class="nav__menu">
                 <li class="nav__item">
                     <a href="#overview" class="nav__link">Overview</a>
                 </li>
                 <li class="nav__item">
-                    <a href="#capabilities" class="nav__link">Key Capabilities</a>
+                    <a href="#capabilities" class="nav__link">Capabilities</a>
                 </li>
                 <li class="nav__item">
                     <a href="#workflow" class="nav__link">Workflow</a>
                 </li>
                 <li class="nav__item">
-                    <a href="#about" class="nav__link">About</a>
-                </li>
-                <li class="nav__item nav__item--cta">
-                    <a href="app.html" class="nav__cta" id="navSignIn">Sign In</a>
+                    <a href="#why" class="nav__link">Why PRAVAAH</a>
                 </li>
             </ul>
+
+            <!-- Sign In: aligned to right, never overlaps content -->
+            <li class="nav__item nav__item--cta">
+                <a href="app.html" class="nav__cta" id="navSignIn">Sign In</a>
+            </li>
         </nav>
     </header>
 
     <!-- Main -->
     <main>
+
         <!-- Hero Section -->
         <section class="hero" id="overview">
-            <div class="container hero__container">
-                <div class="hero__content">
-                    <div class="hero__eyebrow">
-                        DIGITAL GOVERNANCE • APPROVAL INTELLIGENCE
+            <div class="hero__bg">
+                <div class="hero__overlay"></div>
+                <div class="hero__container container">
+                    <div class="hero__left">
+                        <span class="hero__eyebrow">DIGITAL GOVERNANCE FOR TECHNICAL EDUCATION</span>
+                        <h1 class="hero__title">
+                            Every Approval. Every Deadline. One Connected Workflow.
+                        </h1>
+                        <p class="hero__supporting">
+                            PRAVAAH brings application tracking, document review, compliance obligations, and deadline visibility into one structured administrative platform.
+                        </p>
+                        <div class="hero__actions">
+                            <a href="#capabilities" class="btn btn--primary">Explore the Platform</a>
+                            <a href="#workflow" class="btn btn--secondary">View Workflow</a>
+                        </div>
+                        <p class="hero__sub-line">
+                            Designed for transparent tracking and accountable administrative review.
+                        </p>
                     </div>
-                    <h1 class="hero__title">
-                        Making Every Approval Process More <span class="hero__title--accent">Transparent</span>.
-                    </h1>
-                    <p class="hero__description">
-                        PRAVAAH brings approval workflows, compliance monitoring and deadline visibility into one unified digital experience—helping authorized officials track applications, identify pending actions and maintain a clear record of progress.
-                    </p>
-                    <p class="hero__tagline">
-                        Every Approval. Every Deadline. One Unified Flow.
-                    </p>
-                    <div class="hero__actions">
-                        <a href="#capabilities" class="btn btn--primary" id="btnExplore">Explore PRAVAAH</a>
-                        <a href="app.html" class="btn btn--secondary" id="btnSignIn">Sign In to Portal</a>
-                    </div>
-                    <div class="hero__trust">
-                        <div class="trust__item">
-                            <div class="trust__icon">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="10" cy="10" r="9" stroke="#0b1f44" stroke-width="1.5" fill="none"/>
-                                    <path d="M6 10l3 3 5-5" stroke="#ff6b1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+
+                    <!-- Product visual: right column with real UI elements -->
+                    <div class="hero__right">
+                        <div class="product-visual">
+                            <div class="product-header">
+                                <div class="product-title">Application Dashboard</div>
+                                <span class="product-status">32 pending • 14 approved</span>
                             </div>
-                            <span class="trust__text">Workflow Visibility</span>
-                        </div>
-                        <div class="trust__item">
-                            <div class="trust__icon">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="10" cy="10" r="9" stroke="#0b1f44" stroke-width="1.5" fill="none"/>
-                                    <path d="M6 10l3 3 5-5" stroke="#ff6b1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                            <div class="product-grid">
+                                <div class="product-panel">
+                                    <div class="panel-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M3 3h18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <div class="panel-stats">
+                                        <div class="stat">87%</div>
+                                        <div class="stat-label">Approval Rate</div>
+                                    </div>
+                                </div>
+                                <div class="product-panel">
+                                    <div class="panel-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 14l2-2 2 2M16 14l-2-2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <div class="panel-stats">
+                                        <div class="stat">23</div>
+                                        <div class="stat-label">Pending Reviews</div>
+                                    </div>
+                                </div>
+                                <div class="product-panel">
+                                    <div class="panel-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5L12 2z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <div class="panel-stats">
+                                        <div class="stat">12</div>
+                                        <div class="stat-label">Deadlines This Week</div>
+                                    </div>
+                                </div>
+                                <div class="product-panel">
+                                    <div class="panel-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 10h8M8 14h4M6 9h4v2h2v2h-4v4H6v-4H2v-2h4V9H6V7h2v2H6z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                                    </div>
+                                    <div class="panel-stats">
+                                        <div class="stat">5</div>
+                                        <div class="stat-label">Escalations</div>
+                                    </div>
+                                </div>
                             </div>
-                            <span class="trust__text">Compliance Monitoring</span>
-                        </div>
-                        <div class="trust__item">
-                            <div class="trust__icon">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="10" cy="10" r="9" stroke="#0b1f44" stroke-width="1.5" fill="none"/>
-                                    <path d="M6 10l3 3 5-5" stroke="#ff6b1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                            <div class="product-timeline">
+                                <div class="timeline-label">Workflow</div>
+                                <div class="timeline-line"></div>
+                                <div class="timeline-step">
+                                    <div class="step-dot"></div>
+                                    <span>Submitted</span>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="step-dot"></div>
+                                    <span>Scrutiny</span>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="step-dot"></div>
+                                    <span>Review</span>
+                                </div>
+                                <div class="timeline-step">
+                                    <div class="step-dot"></div>
+                                    <span>Decision</span>
+                                </div>
                             </div>
-                            <span class="trust__text">Timely Alerts</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero__visual">
-                    <div class="visual__container">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                             alt="Modern Indian technical education institution with official reviewing digital approval documents in a professional government-office environment" 
-                             class="visual__image"
-                             loading="lazy">
-                        <div class="visual__overlay visual__overlay--1">
-                            <div class="overlay__label">Application Status</div>
-                            <div class="overlay__value overlay__value--review">In Review</div>
-                        </div>
-                        <div class="visual__overlay visual__overlay--2">
-                            <div class="overlay__label">Compliance</div>
-                            <div class="overlay__value">Monitoring</div>
-                        </div>
-                        <div class="visual__overlay visual__overlay--3">
-                            <div class="overlay__label">Workflow</div>
-                            <div class="overlay__value">Active</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Capabilities Section -->
-        <section class="capabilities" id="capabilities">
+        <!-- Visual Capabilities Strip -->
+        <section class="capabilities-strip">
             <div class="container">
-                <h2 class="section__title">Clarity Across the Approval Lifecycle</h2>
                 <div class="capabilities__grid">
-                    <article class="capability__card">
+                    <div class="capability__item">
                         <div class="capability__icon">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="32" height="32" rx="6" fill="rgba(255, 107, 28, 0.1)"/>
-                                <path d="M10 16h12M16 10v12" stroke="#ff6b1c" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1H5c-.55 0-1-.45-1-1V5c0-.55.45-1 1-1z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M14 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
                         </div>
-                        <h3 class="capability__title">Workflow Management</h3>
-                        <p class="capability__description">
-                            Track application progress across relevant approval stages.
-                        </p>
-                    </article>
-                    <article class="capability__card">
+                        <h4 class="capability__title">Application Tracking</h4>
+                        <p class="capability__desc">Monitor application progress across all approval stages from submission through final decision.</p>
+                    </div>
+                    <div class="capability__item">
                         <div class="capability__icon">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="32" height="32" rx="6" fill="rgba(11, 31, 68, 0.08)"/>
-                                <path d="M16 10v6l4 2" stroke="#0b1f44" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="16" cy="16" r="8" stroke="#0b1f44" stroke-width="2" fill="none"/>
-                            </svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 14l2-2 2 2M16 14l-2-2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                         </div>
-                        <h3 class="capability__title">Compliance Visibility</h3>
-                        <p class="capability__description">
-                            Monitor required documents, compliance status and upcoming deadlines.
-                        </p>
-                    </article>
-                    <article class="capability__card">
+                        <h4 class="capability__title">Workflow Visibility</h4>
+                        <p class="capability__desc">See the full approval pipeline at a glance, with each stage's status, owner, and pending actions.</p>
+                    </div>
+                    <div class="capability__item">
                         <div class="capability__icon">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="32" height="32" rx="6" fill="rgba(255, 107, 28, 0.1)"/>
-                                <path d="M12 14h8M12 18h6" stroke="#ff6b1c" stroke-width="2" stroke-linecap="round"/>
-                                <circle cx="16" cy="16" r="8" stroke="#ff6b1c" stroke-width="2" fill="none"/>
-                                <path d="M16 12v4" stroke="#ff6b1c" stroke-width="2" stroke-linecap="round"/>
-                                <circle cx="16" cy="20" r="1" fill="#ff6b1c"/>
-                            </svg>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 14l2-2 2 2M16 14l-2-2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12 2L2 7l10 5 10-5L12 2z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                         </div>
-                        <h3 class="capability__title">Actionable Alerts</h3>
-                        <p class="capability__description">
-                            Highlight pending tasks, approaching deadlines and workflow delays.
-                        </p>
-                    </article>
+                        <h4 class="capability__title">Compliance Monitoring</h4>
+                        <p class="capability__desc">Track regulatory deadlines, documentation requirements, and audit obligations associated with each approval.</p>
+                    </div>
+                    <div class="capability__item">
+                        <div class="capability__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M3 3h18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                        </div>
+                        <h4 class="capability__title">Deadline & Alert Management</h4>
+                        <p class="capability__desc">Receive notifications for approaching deadlines, overdue actions, and required follow-ups across all active workflows.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -179,66 +188,194 @@
         <!-- Workflow Section -->
         <section class="workflow" id="workflow">
             <div class="container">
-                <h2 class="section__title">Illustrative Approval Workflow</h2>
-                <p class="section__subtitle">Application Submitted → Scrutiny → Compliance Review → Decision by Authorized Authority</p>
-                <p class="section__note">Labelled as illustrative; actual stages depend on applicable AICTE regulations and processes.</p>
-                <div class="workflow__diagram">
-                    <div class="workflow__step">
-                        <div class="step__number">1</div>
-                        <div class="step__label">Application Submitted</div>
+                <div class="workflow__header">
+                    <h2 class="section__title">From Application Submission to Accountable Review</h2>
+                    <p class="section__subtitle">Understand the progression of an application through a structured sequence of administrative stages.</p>
+                </div>
+                <div class="workflow__timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-number">1</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-stage">Application Submitted</h3>
+                            <p class="timeline-desc">Institutional submits application with required documentation and complete forms.</p>
+                        </div>
                     </div>
-                    <div class="workflow__arrow">→</div>
-                    <div class="workflow__step">
-                        <div class="step__number">2</div>
-                        <div class="step__label">Scrutiny</div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">2</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-stage">Initial Scrutiny</h3>
+                            <p class="timeline-desc">Administrative review verifies completeness, eligibility, and compliance with submission requirements.</p>
+                        </div>
                     </div>
-                    <div class="workflow__arrow">→</div>
-                    <div class="workflow__step">
-                        <div class="step__number">3</div>
-                        <div class="step__label">Compliance Review</div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">3</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-stage">Document Review</h3>
+                            <p class="timeline-desc">Subject-matter experts review supporting documents, certifications, and eligibility evidence.</p>
+                        </div>
                     </div>
-                    <div class="workflow__arrow">→</div>
-                    <div class="workflow__step">
-                        <div class="step__number">4</div>
-                        <div class="step__label">Decision by Authorized Authority</div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">4</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-stage">Compliance Review</h3>
+                            <p class="timeline-desc">Authorized body validates regulatory adherence, statutory requirements, and policy compliance.</p>
+                        </div>
                     </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-item">
+                        <div class="timeline-number">5</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-stage">Final Decision</h3>
+                            <p class="timeline-desc">Authorized authority communicates decision with conditions, next steps, and compliance obligations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="workflow__cta">
+                    <a href="#capabilities" class="btn btn--secondary">Explore Workflow</a>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section class="about" id="about">
+        <!-- Feature Showcase: four compact capabilities -->
+        <section class="feature-showcase">
             <div class="container">
-                <h2 class="section__title">About PRAVAAH</h2>
-                <p class="about__description">
-                    PRAVAAH is a proposed digital platform designed to help authorized officials monitor approval workflows, application progress, document validity, compliance deadlines and pending actions. 
-                    Built with a focus on clarity, traceability and timely awareness across institutional approvals.
-                </p>
+                <div class="feature-showcase__grid">
+                    <!-- Application Management -->
+                    <div class="feature__group">
+                        <div class="feature__header">
+                            <svg class="feature__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1H5c-.55 0-1-.45-1-1V5c0-.55.45-1 1-1z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M14 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                            <h3 class="feature__title">Application Management</h3>
+                        </div>
+                        <p class="feature__desc">Organize, search, and track applications across all approval stages. Filter by status, department, submission date, and compliance status. Associate supporting documents and monitor progress in real time.</p>
+                    </div>
+                    <!-- Document Review -->
+                    <div class="feature__group">
+                        <div class="feature__header">
+                            <svg class="feature__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M19 15v4a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M10 11L8 14l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                            <h3 class="feature__title">Document Review</h3>
+                        </div>
+                        <p class="feature__desc">Upload, organize, and review supporting documents alongside their associated application. Track review status, reviewer assignments, and evidence validity. Maintain a complete audit trail.</p>
+                    </div>
+                    <!-- Approval-to-Compliance Continuity -->
+                    <div class="feature__group">
+                        <div class="feature__header">
+                            <svg class="feature__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 14l2-2 2 2M16 14l-2-2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                            <h3 class="feature__title">Approval-to-Compliance Continuity</h3>
+                        </div>
+                        <p class="feature__desc">Connect an approval decision to related obligations, supporting evidence, and deadlines. View the full chain from initial application through all post-approval requirements in one structured view.</p>
+                    </div>
+                    <!-- Deadline & Reporting -->
+                    <div class="feature__group">
+                        <div class="feature__header">
+                            <svg class="feature__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M3 3h18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                            <h3 class="feature__title">Deadline & Reporting</h3>
+                        </div>
+                        <p class="feature__desc">Generate downloadable reports on application status, compliance obligations, and workflow summaries. View upcoming deadlines, overdue items, and required actions in a centralized dashboard.</p>
+                    </div>
+                </div>
             </div>
         </section>
-    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer__container">
-            <div class="footer__brand">
-                <div class="brand__logo" aria-label="PRAVAAH logo">
-                    <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <rect width="40" height="40" rx="6" fill="#0b1f44"/>
-                        <path d="M10 12h20M10 20h12M10 28h16" stroke="#ff6b1c" stroke-width="3" stroke-linecap="round"/>
-                        <circle cx="28" cy="20" r="2" fill="#ff6b1c"/>
-                    </svg>
-                </div>
-                <div class="footer__brand-text">
-                    <div class="footer__name">PRAVAAH</div>
-                    <div class="footer__subtitle">A proposed digital workflow and compliance management platform.</div>
+        <!-- Benefits Section -->
+        <section class="benefits-section">
+            <div class="container">
+                <div class="benefits__grid">
+                    <div class="benefit__card">
+                        <div class="benefit__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M3 3h18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                        </div>
+                        <h4 class="benefit__title">Greater Visibility</h4>
+                        <p class="benefit__desc">Understand application progress and pending actions in one place. No more scattered emails, spreadsheets, or manual follow-ups.</p>
+                    </div>
+                    <div class="benefit__card">
+                        <div class="benefit__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="11" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M15 11l2 2L4 22l2-2" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+                        </div>
+                        <h4 class="benefit__title">Better Traceability</h4>
+                        <p class="benefit__desc">Connect review activity, evidence, and obligations across the full workflow. Every action is recorded, every decision is traceable.</p>
+                    </div>
+                    <div class="benefit__card">
+                        <div class="benefit__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M3 3h18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+                        </div>
+                        <h4 class="benefit__title">Structured Follow-up</h4>
+                        <p class="benefit__desc">Identify approaching deadlines and actions requiring attention. Set priorities and ensure nothing falls through the cracks.</p>
+                    </div>
                 </div>
             </div>
-            <div class="footer__bottom">
-                <p class="footer__text">© 2026 PRAVAAH. All rights reserved.</p>
+        </section>
+
+        <!-- Platform Scope Section -->
+        <section class="scope-section">
+            <div class="container">
+                <div class="scope__content">
+                    <h3 class="scope__title">Platform Scope</h3>
+                    <p class="scope__description">
+                        PRAVAAH is a proposed demonstration platform for approval workflow coordination, document review, compliance tracking, and reporting. The sample data and interface interactions are illustrative. Official requirements, scrutiny, and approval decisions remain subject to the applicable process and authorized authorities.
+                    </p>
+                </div>
             </div>
-        </div>
-    </footer>
+        </section>
+
+        <!-- Closing CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta__content">
+                    <h2 class="cta__title">Bring Every Stage Into Clear View</h2>
+                    <p class="cta__desc">Explore how PRAVAAH organizes application workflows, supporting evidence, compliance obligations, and deadline visibility.</p>
+                    <div class="cta__actions">
+                        <a href="#capabilities" class="btn btn--primary">Explore the Platform</a>
+                        <a href="app.html" class="btn btn--secondary">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer__container">
+                <div class="footer__brand">
+                    <div class="brand__logo" aria-label="PRAVAAH logo">
+                        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <rect width="40" height="40" rx="6" fill="#17365D"/>
+                            <path d="M10 12h20M10 20h12M10 28h16" stroke="#2563EB" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="28" cy="20" r="2" fill="#2563EB"/>
+                        </svg>
+                    </div>
+                    <div class="footer__brand-text">
+                        <div class="footer__name">PRAVAAH</div>
+                        <div class="footer__subtitle">AICTE Approval Workflow Platform</div>
+                    </div>
+                </div>
+                <nav class="footer__nav">
+                    <ul class="footer__nav-list">
+                        <li class="footer__nav-item">
+                            <a href="#overview" class="footer__nav-link">Overview</a>
+                        </li>
+                        <li class="footer__nav-item">
+                            <a href="#capabilities" class="footer__nav-link">Capabilities</a>
+                        </li>
+                        <li class="footer__nav-item">
+                            <a href="#workflow" class="footer__nav-link">Workflow</a>
+                        </li>
+                        <li class="footer__nav-item">
+                            <a href="#why" class="footer__nav-link">Why PRAVAAH</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="footer__copyright">
+                    <p class="footer__copyright-text">© 2026 PRAVAAH. All rights reserved.</p>
+                    <p class="footer__scope-disclaimer">
+                        PRAVAAH is a proposed platform. Sample data is illustrative. Official approval processes and compliance requirements remain subject to applicable regulations and authorized authorities.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
 
     <script src="app.js"></script>
 </body>
