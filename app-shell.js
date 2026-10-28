@@ -237,7 +237,9 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', function() {
             profileDropdown.classList.remove('active');
             if (this.classList.contains('profile-dropdown__item--signout')) {
-                alert('Sign out - UI only placeholder. No actual sign out implemented.');
+                // No authentication provider is configured in this demo, so there is
+                // no session to destroy. Return the user to the sign-in screen.
+                window.location.assign('signin.html');
             } else {
                 alert(this.textContent + ' - UI only placeholder.');
             }
