@@ -296,6 +296,164 @@
         }
 
         dvApplyFilters();
+
+        // -------------------------------------------------------------------------
+        // RAG Document Assistant (frontend demo)
+        // -------------------------------------------------------------------------
+        dvInitChatbot();
+    }
+
+    function dvInitChatbot() {
+        // Chatbot state
+        let chatHistory = [];
+
+        // DOM elements (created once)
+        const chatbox = document.createElement('div');
+        chatbox.id = 'dv-chatbot';
+        chatbox.style.position = 'fixed';
+        chatbox.style.right = '20px';
+        chatbox.style.top = '200px';
+        chatbox.style.width = '360px';
+        chatbox.style.maxHeight = '500px';
+        chatbox.style.background = '#ffffff';
+        chatbox.style.border = '1px solid #e1e8f0';
+        chatbox.style.borderRadius = '8px';
+        chatbox.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+        chatbox.style.zIndex = '1000';
+        chatbox.style.overflow = 'hidden';
+        chatbox.style.fontFamily = 'inherit';
+
+        const header = document.createElement('div');
+        header.style.background = '#f5f8fc';
+        header.style.padding = '12px 16px';
+        header.style.borderBottom = '1px solid #e1e8f0';
+        header.style.display = 'flex';
+        header.style.alignItems = 'center';
+        header.style.justifyContent = 'space-between';
+
+        const title = document.createElement('div');
+        title.style.fontWeight = '600';
+        title.style.fontSize = '13px';
+        title.textContent = 'PRAVAAH Document Assistant';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.style.background = 'none';
+        closeBtn.style.border = 'none';
+        closeBtn.style.cursor = 'pointer';
+        closeBtn.innerHTML = '&times;';
+
+        const inputWrapper = document.createElement('div');
+        inputWrapper.style.padding = '12px';
+        inputWrapper.style.display = 'flex';
+        inputWrapper.style.gap = '8px';
+
+        const messageInput = document.createElement('input');
+        messageInput.type = 'text';
+        messageInput.placeholder = 'Type a question…';
+        messageInput.style.flex = '1';
+        messageInput.style.padding = '6px 8px';
+        messageInput.style.border = '1px solid #d1d9e1';
+        messageInput.style.borderRadius = '6px';
+
+        const sendBtn = document.createElement('button');
+        sendBtn.style.padding = '0 12px';
+        sendBtn.style.border = '1px solid #315f91';
+        sendBtn.style.borderRadius = '6px';
+        sendBtn.style.background = '#315f91';
+        sendBtn.style.color = '#ffffff';
+        sendBtn.style.fontSize = '12px';
+        sendBtn.style.fontWeight = '600';
+        sendBtn.textContent = 'Send';
+
+        const suggestions = document.createElement('div');
+        suggestions.style.padding = '8px 12px';
+        suggestions.style.fontSize = '12px';
+        suggestions.style.color = '#64748b';
+        suggestions.style.borderTop = '1px solid #e1e8f0';
+        suggestions.style.display = 'none';
+        suggestions.innerHTML = '<strong>Suggested questions:</strong>' +
+            '<br>' +
+            '<span class="suggestion" data-q="What information is present in this document?">What information is present in this document?</span>' +
+            '&nbsp;' +
+            '<span class="suggestion" data-q="Are any required fields missing?">Are any required fields missing?</span>' +
+            '&nbsp;' +
+            '<span class="suggestion" data-q="Does this document satisfy the selected requirement?">Does this document satisfy the selected requirement?</span>';
+
+        // Append components
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        chatbox.appendChild(header);
+        chatbox.appendChild(suggestions);
+        chatbox.appendChild(inputWrapper);
+        inputWrapper.appendChild(messageInput);
+        inputWrapper.appendChild(sendBtn);
+        document.body.appendChild(chatbox);
+
+        // Close button
+        closeBtn.addEventListener('click', () => chatbox.style.display = 'none');
+
+        // Send logic
+        function dispatchMessage(text) {
+            if (!text.trim()) return;
+            // add user message
+            const userMsg = document.createElement('div');
+            userMsg.style.padding = '8px 12px';
+            userMsg.style.marginBottom = '4px';
+            userMsg.style.background = '#eaf2fb';
+            userMsg.style.borderRadius = '6px';
+            userMsg.style.maxWidth = '80%';
+            userMsg.style.wordBreak = 'break-word';
+            userMsg.textContent = 'You: ' + text;
+            chatbox.insertBefore(userMsg, suggestions.nextSibling);
+
+            // simple rule‑based response (demo)
+            let response = '';
+            const lower = text.toLowerCase();
+            if (lower.includes('institution')) {
+                response = 'The institution name was detected in the uploaded document.<br><br>' +
+                    'Source: institution_certificate.pdf<br>Page: 1';
+            } else if (lower.includes('missing')) {
+                response = 'Some required fields are currently marked as missing.<br><br>' +
+                    'Source: application_review_report.pdf<br>Page: 2';
+            } else if (lower.includes('expiry') || lower.includes('valid')) {
+                response = 'The document\'s expiry date is 2027‑03‑15.<br><br>' +
+                    'Source: license_document.pdf<br>Page: 1';
+            } else {
+                response = 'I’m sorry, I could not find specific evidence for that question in the current documents.<br><br>' +
+                    'Please upload additional documents or re‑phrase your question.';
+            }
+
+            const botMsg = document.createElement('div');
+            botMsg.style.padding = '8px 12px';
+            botMsg.style.marginBottom = '4px';
+            botMsg.style.background = '#f0f4f8';
+            botMsg.style.borderRadius = '6px';
+            botMsg.style.maxWidth = '80%';
+            botMsg.style.wordBreak = 'break-word';
+            botMsg.innerHTML = 'Assistant: ' + response;
+
+            chatbox.insertBefore(botMsg, suggestions.nextSibling);
+
+            // auto‑scroll
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        sendBtn.addEventListener('click', () => dispatchMessage(messageInput.value));
+        messageInput.addEventListener('keypress', e => {
+            if (e.key === 'Enter') {
+                dispatchMessage(messageInput.value);
+                messageInput.value = '';
+            }
+        });
+
+        // suggestion chips
+        suggestions.querySelectorAll('.suggestion').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const q = btn.getAttribute('data-q');
+                messageInput.value = q;
+                dispatchMessage(q);
+            });
+        });
     }
 
     if (document.readyState === 'loading') {

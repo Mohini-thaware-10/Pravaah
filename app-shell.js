@@ -133,6 +133,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Default to Dashboard on load
+    if (document.querySelector('.nav__item[data-page="approval-dashboard"]')) {
+        navigateToPage('approval-dashboard');
+    }
+     
     // Welcome panel links
     const welcomeLinks = document.querySelectorAll('.welcome-link[data-page]');
     welcomeLinks.forEach(link => {

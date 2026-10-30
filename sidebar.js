@@ -16,17 +16,16 @@
 
     var NAV_GROUPS = [
         {
-            key: 'overview',
-            label: 'Overview',
-            icon: 'overview',
+            key: 'dashboard',
+            label: 'Dashboard',
+            icon: 'dashboard',
             items: [
-                { page: 'overview', label: 'Overview' },
-                { page: 'approval-dashboard', label: 'Approval Dashboard' }
+                { page: 'approval-dashboard', label: 'Dashboard' }
             ]
         },
         {
             key: 'applications',
-            label: 'Applications',
+            label: 'Application Management',
             icon: 'applications',
             items: [
                 { page: 'applications', label: 'Applications' },
@@ -35,38 +34,37 @@
             ]
         },
         {
-            key: 'documents',
-            label: 'Documents & Compliance',
+            key: 'document-intelligence',
+            label: 'Document Intelligence',
             icon: 'shield',
             items: [
                 { page: 'document-verification', label: 'Document Verification' },
+                { page: 'pre-submission-simulator', label: 'Pre-Submission Failure Simulator' }
+            ]
+        },
+        {
+            key: 'compliance-center',
+            label: 'Compliance Center',
+            icon: 'users',
+            items: [
                 { page: 'compliance-monitoring', label: 'Compliance Monitoring' },
                 { page: 'approval-to-compliance', label: 'Approval-to-Compliance' },
-                { page: 'pre-submission-simulator', label: 'Pre-Submission Simulator' }
-            ]
-        },
-        {
-            key: 'intelligence',
-            label: 'Intelligence',
-            icon: 'network',
-            items: [
                 { page: 'trace-graph', label: 'Evidence-to-Decision Trace Graph' },
-                { page: 'impact-map', label: 'Regulatory Change Impact' }
+                { page: 'impact-map', label: 'Regulatory Change Impact Map' }
             ]
         },
         {
-            key: 'tasks',
-            label: 'Tasks & Alerts',
+            key: 'tasks-deadlines',
+            label: 'Tasks & Deadlines',
             icon: 'clock',
             items: [
                 { page: 'deadline-alerts', label: 'Deadline & Alerts' },
-                { page: 'notifications', label: 'Notifications' },
                 { page: 'my-tasks', label: 'My Tasks' }
             ]
         },
         {
-            key: 'analytics',
-            label: 'Analytics',
+            key: 'reports-analytics',
+            label: 'Reports & Analytics',
             icon: 'chart',
             items: [
                 { page: 'reports-analytics', label: 'Reports & Analytics' },
@@ -82,12 +80,18 @@
             ]
         },
         {
-            key: 'support',
-            label: 'Support & Preferences',
-            icon: 'support',
+            key: 'settings',
+            label: 'Settings',
+            icon: 'settings',
             items: [
-                { page: 'help', label: 'Help & Guidelines' },
-                { page: 'settings', label: 'Settings' }
+                { page: 'settings', label: 'General Settings' },
+                { page: 'settings', label: 'Account Settings' },
+                { page: 'settings', label: 'Security' },
+                { page: 'settings', label: 'Notification Preferences' },
+                { page: 'settings', label: 'Appearance' },
+                { page: 'settings', label: 'Language' },
+                { page: 'settings', label: 'Privacy' },
+                { page: 'settings', label: 'Help & Guidelines' }
             ]
         }
     ];
