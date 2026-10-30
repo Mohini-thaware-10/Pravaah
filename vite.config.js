@@ -37,6 +37,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
+        index: 'index.html',
+        signin: 'signin.html',
+        signup: 'signup.html',
         app: 'app.html'
       }
     },

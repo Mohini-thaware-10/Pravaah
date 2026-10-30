@@ -138,7 +138,7 @@ function analyzeChangeImpact(changeId) {
         directlyAffectedApps.forEach(appId => {
             const app = applicationsData.find(a => a.id === appId);
             if (app) {
-                analysis.impactClassification('directlyAffected', {
+                analysis.impactClassifications.directlyAffected.push({
                                     id: app.id,
                                     institution: app.institution,
                                     stage: app.stage,
@@ -205,7 +205,7 @@ function analyzeChangeImpact(changeId) {
                         relationship: 'New checklist item added for engineering colleges'
                     });
                 }
-                analysis.impactClassification('potentiallyAffected', {
+                analysis.impactClassifications.potentiallyAffected.push({
                     id: app.id,
                     institution: app.institution,
                     type: app.type,
@@ -246,7 +246,7 @@ function analyzeChangeImpact(changeId) {
                     const diffDays = Math.round((appDeadline - changedDeadline) / 86400000);
                     if (Math.abs(diffDays) <= 10) {
                         // Applications with deadlines within 10 days of the changed deadline are directly affected
-                        analysis.impactClassification('directlyAffected', {
+                        analysis.impactClassifications.directlyAffected.push({
                             id: app.id,
                             institution: app.institution,
                             originalDeadline: app.deadline,
@@ -438,101 +438,88 @@ function renderImpactAnalysis(analysis) {
         `;
 
     // Affected requirements
-    html += `
-        ${affectedRequirements.length > 0 ? `
+    if (affectedRequirements.length > 0) {
+        html += `
         <div class="im-requirements-section">
             <h3>Affected Requirements</h3>
             <div class="im-requirements-list">
-        ` : ''}
-
-    ${affectedRequirements.slice(0, 10).map(req => `
-        <div class="im-requirement-item">
-            <div class="im-req-info">
-                <span class="im-req-id">${req.id}</span>
-                <span class="im-req-title">${escapeHtml(req.title)}</span>
-                <span class="im-req-app">${req.application}</span>
+                ${affectedRequirements.slice(0, 10).map(req => `
+                    <div class="im-requirement-item">
+                        <div class="im-req-info">
+                            <span class="im-req-id">${req.id}</span>
+                            <span class="im-req-title">${escapeHtml(req.title)}</span>
+                            <span class="im-req-app">${req.application}</span>
+                        </div>
+                        <div class="im-relationship">${req.relationship}</div>
+                    </div>`).join('')}
             </div>
-            <div class="im-relationship">${req.relationship}</div>
-        </div>`).join('')}
-
-    ${affectedRequirements.length > 10 ? `<p class="im-requirement-note">... and ${affectedRequirements.length - 10} more</p>` : ''}
-
-    `}
-
-    html += `
-            </div>
+            ${affectedRequirements.length > 10 ? `<p class="im-requirement-note">... and ${affectedRequirements.length - 10} more</p>` : ''}
         </div>
+        `;
+    }
 
-        ${affectedEvidenceRecords.length > 0 ? `
+    // Affected evidence records
+    if (affectedEvidenceRecords.length > 0) {
+        html += `
         <div class="im-evidence-section">
             <h3>Affected Evidence Records</h3>
             <div class="im-evidence-list">
-        ` : ''}
-
-    ${affectedEvidenceRecords.slice(0, 10).map(ev => `
-        <div class="im-evidence-item">
-            <span class="im-evidence-id">${ev.id}</span>
-            <span class="im-evidence-title">${escapeHtml(ev.title)}</span>
-            <span class="im-evidence-app">${ev.application}</span>
-            <span class="im-evidence-rel">${ev.relationship}</span>
-        </div>`).join('')}
-
-    ${affectedEvidenceRecords.length > 10 ? `<p class="im-evidence-note">... and ${affectedEvidenceRecords.length - 10} more</p>` : ''}
-
-    `}
-
-    html += `
+                ${affectedEvidenceRecords.slice(0, 10).map(ev => `
+                    <div class="im-evidence-item">
+                        <span class="im-evidence-id">${ev.id}</span>
+                        <span class="im-evidence-title">${escapeHtml(ev.title)}</span>
+                        <span class="im-evidence-app">${ev.application}</span>
+                        <span class="im-evidence-rel">${ev.relationship}</span>
+                    </div>`).join('')}
             </div>
+            ${affectedEvidenceRecords.length > 10 ? `<p class="im-evidence-note">... and ${affectedEvidenceRecords.length - 10} more</p>` : ''}
         </div>
+        `;
+    }
 
-        ${potentiallyAffectedApplications.length > 0 ? `
+    // Potentially affected applications
+    if (potentiallyAffectedApplications.length > 0) {
+        html += `
         <div class="im-applications-section">
             <h3>Potentially Affected Applications</h3>
             <div class="im-applications-list">
-        ` : ''}
+                ${potentiallyAffectedApplications.map(app => `
+                    <div class="im-application-item">
+                        <span class="im-app-id">${app.id}</span>
+                        <span class="im-app-institution">${app.institution}</span>
+                        <span class="im-app-stage">${app.stage}</span>
+                        <span class="im-app-status app-status--${getStatusClass(app.status)}">${app.status}</span>
+                    </div>`).join('')}
+            </div>
+        </div>
+        `;
+    }
 
-    ${potentiallyAffectedApplications.map(app => `
-        <div class="im-application-item">
-            <span class="im-app-id">${app.id}</span>
-            <span class="im-app-institution">${app.institution}</span>
-            <span class="im-app-stage">${app.stage}</span>
-            <span class="im-app-status app-status--${getStatusClass(app.status)}">${app.status}</span>
-        </div>`).join('')}
-
-    ${potentiallyAffectedApplications.length > 0 ? `</div>` : ''}
-
-    `}
-
-    ${dependentReviewTasks.length > 0 ? `
+    // Dependent review tasks
+    if (dependentReviewTasks.length > 0) {
+        html += `
         <div class="im-review-tasks-section">
             <h3>Dependent Review Tasks</h3>
             <div class="im-tasks-list">
-        ` : ''}
-
-    ${dependentReviewTasks.slice(0, 7).map(task => `
-        <div class="im-task-item">
-            <div class="im-task-header">
-                <span class="im-task-id">${task.id}</span>
-                <span class="im-task-title">${escapeHtml(task.title)}</span>
-                <span class="im-task-priority im-priority--${task.priority.toLowerCase()}">${task.priority}</span>
+                ${dependentReviewTasks.slice(0, 7).map(task => `
+                    <div class="im-task-item">
+                        <div class="im-task-header">
+                            <span class="im-task-id">${task.id}</span>
+                            <span class="im-task-title">${escapeHtml(task.title)}</span>
+                            <span class="im-task-priority im-priority--${task.priority.toLowerCase()}">${task.priority}</span>
+                        </div>
+                        <div class="im-task-description">${task.description}</div>
+                        <div class="im-task-responsible">Responsible: ${task.responsible}</div>
+                        <div class="im-task-status">${task.status}</div>
+                    </div>`).join('')}
             </div>
-            <div class="im-task-description">${task.description}</div>
-            <div class="im-task-responsible">Responsible: ${task.responsible}</div>
-            <div class="im-task-status">${task.status}</div>
-        </div>`).join('')}
-
-    ${dependentReviewTasks.length > 7 ? `<p class="im-tasks-note">... and ${dependentReviewTasks.length - 7} more</p>` : ''}
-
-    `}
-
-    html += `
-            </div>
+            ${dependentReviewTasks.length > 7 ? `<p class="im-tasks-note">... and ${dependentReviewTasks.length - 7} more</p>` : ''}
         </div>
-    `;
+        `;
+    }
 
     // Reviewer acknowledgment section
     html += `
-        ${`
         <div class="im-acknowledgment-section">
             <h2>Reviewer Acknowledgment</h2>
             <p>Impact analysis is for reviewer consideration. Consequential decisions remain with the authorized human reviewer.</p>
@@ -549,8 +536,6 @@ function renderImpactAnalysis(analysis) {
             </div>
             <p class="im-ack-note">All acknowledgment actions update local demo state only. No backend persistence.</p>
         </div>
-        `}
-
     `;
 
     return html;

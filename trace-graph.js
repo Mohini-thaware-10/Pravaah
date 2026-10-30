@@ -813,7 +813,7 @@ function renderTraceSummary(nodes, edges, containerId) {
     // Proposed decisions with no linked findings
     const decisionWithFinding = decisionNodes.some(dec => {
         const linkedFinding = edges.find(e => e.target === dec.id && 
-            nodes.find(n => n.id === e.source && n.type === 'Reviewer Finding');
+            nodes.find(n => n.id === e.source && n.type === 'Reviewer Finding')
         );
         return !linkedFinding;
     });
@@ -825,7 +825,7 @@ function renderTraceSummary(nodes, edges, containerId) {
     // Follow-up actions with no linked decision
     const followUpWithDec = followUpNodes.some(fu => {
         const linkedDec = edges.find(e => e.target === fu.id && 
-            nodes.find(n => n.id === e.source && n.type === 'Decision');
+            nodes.find(n => n.id === e.source && n.type === 'Decision')
         );
         return !linkedDec;
     });

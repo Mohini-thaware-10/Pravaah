@@ -1,16 +1,288 @@
 // PRAVAAH Applications Management - Frontend only
 
 const applicationsData = [
-    { id: 'APP-2026-0142', institution: 'Western Institute of Technology', type: 'Engineering College', submitted: '18 Oct 2026', stage: 'Document Review', action: 'Supporting document required', deadline: '28 Oct 2026', status: 'Action Required' },
-    { id: 'APP-2026-0187', institution: 'Deccan College of Engineering', type: 'Engineering College', submitted: '19 Oct 2026', stage: 'Compliance Review', action: 'Undertaking submission pending', deadline: '29 Oct 2026', status: 'Due Soon' },
-    { id: 'APP-2026-0214', institution: 'National Technical Institute', type: 'Technical Institution', submitted: '20 Oct 2026', stage: 'Initial Scrutiny', action: 'Reviewer action pending', deadline: '31 Oct 2026', status: 'Under Review' },
-    { id: 'APP-2026-0238', institution: 'Sahyadri Institute of Technology', type: 'Engineering College', submitted: '17 Oct 2026', stage: 'Document Review', action: 'Document validity check', deadline: '26 Oct 2026', status: 'Action Required' },
-    { id: 'APP-2026-0251', institution: 'Central Institute of Engineering', type: 'Engineering College', submitted: '21 Oct 2026', stage: 'Compliance Review', action: 'Compliance response pending', deadline: '30 Oct 2026', status: 'Due Soon' },
-    { id: 'APP-2026-0265', institution: 'Eastern Polytechnic College', type: 'Polytechnic', submitted: '22 Oct 2026', stage: 'Application Submitted', action: 'Pending assignment', deadline: '03 Nov 2026', status: 'Submitted' },
-    { id: 'APP-2026-0278', institution: 'Western Technical Campus', type: 'Engineering College', submitted: '23 Oct 2026', stage: 'Initial Scrutiny', action: 'Checklist review pending', deadline: '01 Nov 2026', status: 'Under Review' },
-    { id: 'APP-2026-0289', institution: 'Coastal Institute of Technology', type: 'Engineering College', submitted: '15 Oct 2026', stage: 'Final Decision', action: 'Awaiting final review', deadline: '25 Oct 2026', status: 'Awaiting Decision' },
-    { id: 'APP-2026-0295', institution: 'Rural Engineering College', type: 'Engineering College', submitted: '12 Oct 2026', stage: 'Final Decision', action: 'Decision recorded', deadline: '20 Oct 2026', status: 'Completed' },
-    { id: 'APP-2026-0302', institution: 'Southern Technical Institute', type: 'Technical Institution', submitted: '16 Oct 2026', stage: 'Compliance Review', action: 'Response review pending', deadline: '27 Oct 2026', status: 'Compliance Pending' }
+    {
+        id: 'APP-2026-0142',
+        institution: 'Western Institute of Technology',
+        type: 'Engineering College',
+        submitted: '18 Oct 2026',
+        stage: 'Document Review',
+        action: 'Supporting document required',
+        deadline: '28 Oct 2026',
+        status: 'Action Required',
+        // --- Pre-submission simulator fields ---
+        documents: [
+            { name: 'Application form', status: 'received', receivedDate: '18 Oct 2026', expiry: '28 Oct 2026' },
+            { name: 'Institutional profile', status: 'received', receivedDate: '18 Oct 2026', expiry: '18 Oct 2027' },
+            { name: 'Curriculum vitae', status: 'received', receivedDate: '18 Oct 2026', expiry: '18 Oct 2027' },
+        ],
+        checklist: [
+            { id: 'CHK-0142-01', label: 'Valid identity proof', status: 'pending', relatedRequirement: 'REQ-0142-01' },
+            { id: 'CHK-0142-02', label: 'Valid fee payment receipt', status: 'pending', relatedRequirement: 'REQ-0142-02' },
+            { id: 'CHK-0142-03', label: 'Curriculum details', status: 'received', relatedRequirement: 'REQ-0142-03' },
+        ],
+        reviewStages: [
+            { stage: 'Application Submitted', completed: true, date: '18 Oct 2026' },
+            { stage: 'Initial Scrutiny', completed: false, date: null },
+            { stage: 'Document Review', completed: false, date: null },
+            { stage: 'Compliance Review', completed: false, date: null },
+            { stage: 'Final Decision', completed: false, date: null }
+        ],
+        prerequisites: [
+            { id: 'PRQ-0142-01', label: 'Fee receipt validity', dependentStage: 'Initial Scrutiny', status: 'pending' },
+            { id: 'PRQ-0142-02', label: 'Document expiry check', dependentStage: 'Document Review', status: 'pending' }
+        ]
+        // end simulator fields
+    },
+    {
+        id: 'APP-2026-0187',
+        institution: 'Deccan College of Engineering',
+        type: 'Engineering College',
+        submitted: '19 Oct 2026',
+        stage: 'Compliance Review',
+        action: 'Undertaking submission pending',
+        deadline: '29 Oct 2026',
+        status: 'Due Soon',
+        documents: [
+            { name: 'Application form', status: 'received', receivedDate: '19 Oct 2026', expiry: '29 Oct 2026' },
+            { name: 'Undertaking letter', status: 'pending', receivedDate: null, expiry: '29 Oct 2026' },
+            { name: 'Financial statements', status: 'received', receivedDate: '19 Oct 2026', expiry: '19 Oct 2027' },
+        ],
+        checklist: [
+            { id: 'CHK-0187-01', label: 'Undertaking submission', status: 'pending', relatedRequirement: 'REQ-0187-01' },
+            { id: 'CHK-0187-02', label: 'Financial compliance', status: 'received', relatedRequirement: 'REQ-0187-02' },
+        ],
+        reviewStages: [
+            { stage: 'Application Submitted', completed: true, date: '19 Oct 2026' },
+            { stage: 'Initial Scrutiny', completed: true, date: '20 Oct 2026' },
+            { stage: 'Document Review', completed: true, date: '21 Oct 2026' },
+            { stage: 'Compliance Review', completed: false, date: null },
+            { stage: 'Final Decision', completed: false, date: null }
+        ],
+        prerequisites: [
+            { id: 'PRQ-0187-01', label: 'Undertaking submission', dependentStage: 'Compliance Review', status: 'pending' }
+        ]
+    },
+    {
+        id: 'APP-2026-0214',
+        institution: 'National Technical Institute',
+        type: 'Technical Institution',
+        submitted: '20 Oct 2026',
+        stage: 'Initial Scrutiny',
+        action: 'Reviewer action pending',
+        deadline: '31 Oct 2026',
+        status: 'Under Review',
+        documents: [
+            { name: 'Application form', status: 'received', receivedDate: '20 Oct 2026', expiry: '31 Oct 2026' },
+            { name: 'Course outline', status: 'received', receivedDate: '20 Oct 2026', expiry: '31 Oct 2027' },
+            { name: 'Accreditation certificates', status: 'received', receivedDate: '20 Oct 2026', expiry: '20 Oct 2027' },
+        ],
+        checklist: [
+            { id: 'CHK-0214-01', label: 'Eligibility verification', status: 'pending', relatedRequirement: 'REQ-0214-01' },
+            { id: 'CHK-0214-02', label: 'Document completeness', status: 'received', relatedRequirement: 'REQ-0214-02' },
+        ],
+        reviewStages: [
+            { stage: 'Application Submitted', completed: true, date: '20 Oct 2026' },
+            { stage: 'Initial Scrutiny', completed: false, date: null },
+            { stage: 'Document Review', completed: false, date: null },
+            { stage: 'Compliance Review', completed: false, date: null },
+            { stage: 'Final Decision', completed: false, date: null }
+        ],
+        prerequisites: [
+            { id: 'PRQ-0214-01', label: 'Eligibility documents', dependentStage: 'Document Review', status: 'pending' }
+        ]
+    },
+    {
+        id: 'APP-2026-0238',
+        institution: 'Sahyadri Institute of Technology',
+        type: 'Engineering College',
+        submitted: '17 Oct 2026',
+        stage: 'Document Review',
+        action: 'Document validity check',
+        deadline: '26 Oct 2026',
+        status: 'Action Required',
+        documents: [
+            { name: 'Application form', status: 'received', receivedDate: '17 Oct 2026', expiry: '17 Oct 2027' },
+            { name: 'Validity certificate', status: 'expired', receivedDate: '15 Sep 2026', expiry: '25 Oct 2026' },
+            { name: 'Lab equipment list', status: 'received', receivedDate: '17 Oct 2026', expiry: '17 Oct 2027' },
+        ],
+        checklist: [
+            { id: 'CHK-0238-01', label: 'Document validity check', status: 'pending', relatedRequirement: 'REQ-0238-01' },
+            { id: 'CHK-0238-02', label: 'Supporting document link', status: 'pending', relatedRequirement: 'REQ-0238-02' },
+        ],
+        reviewStages: [
+            { stage: 'Application Submitted', completed: true, date: '17 Oct 2026' },
+            { stage: 'Initial Scrutiny', completed: true, date: '18 Oct 2026' },
+            { stage: 'Document Review', completed: false, date: null },
+            { stage: 'Compliance Review', completed: false, date: null },
+            { stage: 'Final Decision', completed: false, date: null }
+        ],
+        prerequisites: [
+            { id: 'PRQ-0238-01', label: 'Validity certificate renewal', dependentStage: 'Document Review', status: 'pending' }
+        ]
+    },
+    {
+        id: 'APP-2026-0251',
+        institution: 'Central Institute of Engineering',
+        type: 'Engineering College',
+        submitted: '21 Oct 2026',
+        stage: 'Compliance Review',
+        action: 'Compliance response pending',
+        deadline: '30 Oct 2026',
+        status: 'Due Soon',
+        documents: [
+            { name: 'Application form', status: 'received', receivedDate: '21 Oct 2026', expiry: '30 Oct 2026' },
+            { name: 'Compliance certificate', status: 'received', receivedDate: '21 Oct 2026', expiry: '30 Oct 2027' },
+            { name: 'Site inspection report', status: 'in progress', receivedDate: '20 Oct 2026', expiry: null },
+        ],
+        checklist: [
+            { id: 'CHK-0251-01', label: 'Compliance response', status: 'pending', relatedRequirement: 'REQ-0251-01' },
+            { id: 'CHK-0251-02', label: 'Evidence upload', status: 'pending', relatedRequirement: 'REQ-0251-02' },
+        ],
+        reviewStages: [
+            { stage: 'Application Submitted', completed: true, date: '21 Oct 2026' },
+            { stage: 'Initial Scrutiny', completed: true, date: '22 Oct 2026' },
+            { stage: 'Document Review', completed: true, date: '23 Oct 2026' },
+            { stage: 'Compliance Review', completed: false, date: null },
+            { stage: 'Final Decision', completed: false, date: null }
+        ],
+        prerequisites: [
+            { id: 'PRQ-0251-01', label: 'Site inspection completion', dependentStage: 'Final Decision', status: 'pending' }
+        ]
+    },
+    {
+        id: 'APP-2026-0265',
+        institution: 'Eastern Polytechnic College',
+        type: 'Polytechnic',
+        submitted: '22 Oct 2026',
+        stage: 'Application Submitted',
+        action: 'Pending assignment',
+        deadline: '03 Nov 2026',
+        status: 'Submitted',
+        documents: [
+            { name: 'Application form', status: 'received', receivedDate: '22 Oct 2026', expiry: '03 Nov 2026' },
+            { name: 'Basic particulars', status: 'received', receivedDate: '22 Oct 2026', expiry: '03 Nov 2027' },
+        ],
+        checklist: [
+            { id: 'CHK-0265-01', label: 'Application completeness', status: 'pending', relatedRequirement: 'REQ-0265-01' },
+        ],
+        reviewStages: [
+            { stage: 'Application Submitted', completed: true, date: '22 Oct 2026' },
+            { stage: 'Initial Scrutiny', completed: false, date: null },
+            { stage: 'Document Review', completed: false, date: null },
+            { stage: 'Compliance Review', completed: false, date: null },
+            { stage: 'Final Decision', completed: false, date: null }
+        ],
+        prerequisites: []
+    },
+    {
+        id: 'APP-2026-0278',
+        institution: 'Western Technical Campus',
+        type: 'Engineering College',
+        submitted: '23 Oct 2026',
+        stage: 'Initial Scrutiny',
+        action: 'Checklist review pending',
+        deadline: '01 Nov 2026',
+        status: 'Under Review',
+        documents: [
+            { name: 'Application form', status: 'received', receivedDate: '23 Oct 2026', expiry: '01 Nov 2027' },
+            { name: 'Course curriculum', status: 'received', receivedDate: '23 Oct 2026', expiry: '01 Nov 2027' },
+        ],
+        checklist: [
+            { id: 'CHK-0278-01', label: 'Checklist item 1', status: 'pending', relatedRequirement: 'REQ-0278-01' },
+            { id: 'CHK-0278-02', label: 'Checklist item 2', status: 'pending', relatedRequirement: 'REQ-0278-02' },
+            { id: 'CHK-0278-03', label: 'Checklist item 3', status: 'received', relatedRequirement: 'REQ-0278-03' },
+        ],
+        reviewStages: [
+            { stage: 'Application Submitted', completed: true, date: '23 Oct 2026' },
+            { stage: 'Initial Scrutiny', completed: true, date: '23 Oct 2026' },
+            { stage: 'Document Review', completed: false, date: null },
+            { stage: 'Compliance Review', completed: false, date: null },
+            { stage: 'Final Decision', completed: false, date: null }
+        ],
+        prerequisites: [
+            { id: 'PRQ-0278-01', label: 'Checklist completion', dependentStage: 'Document Review', status: 'pending' }
+        ]
+    },
+    {
+        id: 'APP-2026-0289',
+        institution: 'Coastal Institute of Technology',
+        type: 'Engineering College',
+        submitted: '15 Oct 2026',
+        stage: 'Final Decision',
+        action: 'Awaiting final review',
+        deadline: '25 Oct 2026',
+        status: 'Awaiting Decision',
+        documents: [
+            { name: 'Application form', status: 'received', receivedDate: '15 Oct 2026', expiry: '15 Oct 2027' },
+            { name: 'Final decision memo', status: 'received', receivedDate: '20 Oct 2026', expiry: null },
+        ],
+        checklist: [
+            { id: 'CHK-0289-01', label: 'Decision record', status: 'received', relatedRequirement: 'REQ-0289-01' },
+        ],
+        reviewStages: [
+            { stage: 'Application Submitted', completed: true, date: '15 Oct 2026' },
+            { stage: 'Initial Scrutiny', completed: true, date: '16 Oct 2026' },
+            { stage: 'Document Review', completed: true, date: '17 Oct 2026' },
+            { stage: 'Compliance Review', completed: true, date: '18 Oct 2026' },
+            { stage: 'Final Decision', completed: false, date: null }
+        ],
+        prerequisites: []
+    },
+    {
+        id: 'APP-2026-0295',
+        institution: 'Rural Engineering College',
+        type: 'Engineering College',
+        submitted: '12 Oct 2026',
+        stage: 'Final Decision',
+        action: 'Decision recorded',
+        deadline: '20 Oct 2026',
+        status: 'Completed',
+        documents: [
+            { name: 'Application form', status: 'received', receivedDate: '12 Oct 2026', expiry: '12 Oct 2027' },
+            { name: 'Approval letter', status: 'received', receivedDate: '20 Oct 2026', expiry: null },
+        ],
+        checklist: [
+            { id: 'CHK-0295-01', label: 'Final approval', status: 'received', relatedRequirement: 'REQ-0295-01' },
+        ],
+        reviewStages: [
+            { stage: 'Application Submitted', completed: true, date: '12 Oct 2026' },
+            { stage: 'Initial Scrutiny', completed: true, date: '13 Oct 2026' },
+            { stage: 'Document Review', completed: true, date: '14 Oct 2026' },
+            { stage: 'Compliance Review', completed: true, date: '15 Oct 2026' },
+            { stage: 'Final Decision', completed: true, date: '20 Oct 2026' }
+        ],
+        prerequisites: []
+    },
+    {
+        id: 'APP-2026-0302',
+        institution: 'Southern Technical Institute',
+        type: 'Technical Institution',
+        submitted: '16 Oct 2026',
+        stage: 'Compliance Review',
+        action: 'Response review pending',
+        deadline: '27 Oct 2026',
+        status: 'Compliance Pending',
+        documents: [
+            { name: 'Application form', status: 'received', receivedDate: '16 Oct 2026', expiry: '27 Oct 2026' },
+            { name: 'Compliance response', status: 'pending', receivedDate: null, expiry: '27 Oct 2026' },
+            { name: 'Audit reports', status: 'received', receivedDate: '16 Oct 2026', expiry: '16 Oct 2027' },
+        ],
+        checklist: [
+            { id: 'CHK-0302-01', label: 'Compliance response', status: 'pending', relatedRequirement: 'REQ-0302-01' },
+            { id: 'CHK-0302-02', label: 'Audit compliance', status: 'received', relatedRequirement: 'REQ-0302-02' },
+        ],
+        reviewStages: [
+            { stage: 'Application Submitted', completed: true, date: '16 Oct 2026' },
+            { stage: 'Initial Scrutiny', completed: true, date: '17 Oct 2026' },
+            { stage: 'Document Review', completed: true, date: '18 Oct 2026' },
+            { stage: 'Compliance Review', completed: false, date: null },
+            { stage: 'Final Decision', completed: false, date: null }
+        ],
+        prerequisites: [
+            { id: 'PRQ-0302-01', label: 'Response submission', dependentStage: 'Final Decision', status: 'pending' }
+        ]
+    }
 ];
 
 let currentPage = 1;

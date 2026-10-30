@@ -2,7 +2,139 @@
   - ESM syntax in a file loaded as CommonJS (vite.config.js:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
 Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.[39m
 
-  [32m[1mVITE[22m v8.3.5[39m  [2mready in [0m[1m789[22m[2m[0m ms[22m
+  [32m[1mVITE[22m v8.3.5[39m  [2mready in [0m[1m282[22m[2m[0m ms[22m
 
   [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
-  [32m➜[39m  [1mNetwork[22m: [36mhttp://50.0.4.9:[1m5173[22m/[39m  [2mWi-Fi 6[22m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://10.79.8.108:[1m5173[22m/[39m  [2mWi-Fi 6[22m
+[2m10:47:18 pm[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mC:/Users/thawa/OneDrive/Documents/Pravaah/Pravaah/impact-map.js[39m:482:5
+[33m  480 |      ${affectedEvidenceRecords.length > 10 ? `<p class="im-evidence-note">... and ${affectedEvidenceRecords.length - 1...
+  481 |  
+  482 |      `}
+      |       ^
+  483 |  
+  484 |      html += `[39m
+      at TransformPluginContext._formatLog (file:///C:/Users/thawa/OneDrive/Documents/Pravaah/Pravaah/node_modules/vite/dist/node/chunks/node.js:8803:39)
+      at TransformPluginContext.error (file:///C:/Users/thawa/OneDrive/Documents/Pravaah/Pravaah/node_modules/vite/dist/node/chunks/node.js:8800:14)
+      at TransformPluginContext.transform (file:///C:/Users/thawa/OneDrive/Documents/Pravaah/Pravaah/node_modules/vite/dist/node/chunks/node.js:26558:10)
+      at async EnvironmentPluginContainer.transform (file:///C:/Users/thawa/OneDrive/Documents/Pravaah/Pravaah/node_modules/vite/dist/node/chunks/node.js:8582:14)
+      at async loadAndTransform (file:///C:/Users/thawa/OneDrive/Documents/Pravaah/Pravaah/node_modules/vite/dist/node/chunks/node.js:20155:26)
+[2m10:47:18 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: initTraceGraphPage is not defined
+[39m > HTMLDocument.<anonymous> app-shell.js:267:5
+    265 |      navigateToPage('overview');
+    266 |      initSimulatorPage();
+    267 |      initTraceGraphPage();
+        |       ^
+    268 |      initImpactMapPage();
+    269 |  });
+
+[2m11:26:49 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mimpact-map.js[22m
+[2m11:26:49 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: initTraceGraphPage is not defined
+[39m > HTMLDocument.<anonymous> app-shell.js:267:5
+    265 |      navigateToPage('overview');
+    266 |      initSimulatorPage();
+    267 |      initTraceGraphPage();
+        |       ^
+    268 |      initImpactMapPage();
+    269 |  });
+
+[2m11:27:03 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mtrace-graph.js[22m
+[2m11:27:03 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: initTraceGraphPage is not defined
+[39m > HTMLDocument.<anonymous> app-shell.js:267:5
+    265 |      navigateToPage('overview');
+    266 |      initSimulatorPage();
+    267 |      initTraceGraphPage();
+        |       ^
+    268 |      initImpactMapPage();
+    269 |  });
+
+[2m11:27:07 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mtrace-graph.js[22m
+[2m11:27:08 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: analysis.impactClassification is not a function
+[39m > impact-map.js:141:26
+    139 |              const app = applicationsData.find(a => a.id === appId);
+    140 |              if (app) {
+    141 |                  analysis.impactClassification('directlyAffected', {
+        |                            ^
+    142 |                                      id: app.id,
+    143 |                                      institution: app.institution,
+ > analyzeChangeImpact impact-map.js:138:30
+ > HTMLSelectElement.<anonymous> impact-map.js:574:27
+ > initImpactMapPage impact-map.js:602:24
+ > HTMLDocument.<anonymous> app-shell.js:268:5
+
+[2m11:27:40 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: analysis.impactClassification is not a function
+[39m > impact-map.js:141:26
+    139 |              const app = applicationsData.find(a => a.id === appId);
+    140 |              if (app) {
+    141 |                  analysis.impactClassification('directlyAffected', {
+        |                            ^
+    142 |                                      id: app.id,
+    143 |                                      institution: app.institution,
+ > analyzeChangeImpact impact-map.js:138:30
+ > HTMLSelectElement.<anonymous> impact-map.js:574:27
+ > initImpactMapPage impact-map.js:602:24
+ > HTMLDocument.<anonymous> app-shell.js:268:5
+
+[2m11:27:51 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mshots/app-dom.html[22m
+[2m11:27:52 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: analysis.impactClassification is not a function
+[39m > impact-map.js:141:26
+    139 |              const app = applicationsData.find(a => a.id === appId);
+    140 |              if (app) {
+    141 |                  analysis.impactClassification('directlyAffected', {
+        |                            ^
+    142 |                                      id: app.id,
+    143 |                                      institution: app.institution,
+ > analyzeChangeImpact impact-map.js:138:30
+ > HTMLSelectElement.<anonymous> impact-map.js:574:27
+ > initImpactMapPage impact-map.js:602:24
+ > HTMLDocument.<anonymous> app-shell.js:268:5
+
+[2m11:27:52 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mshots/app-dom.html[22m
+[2m11:28:04 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mshots/app-dom.html[22m
+[2m11:28:05 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: analysis.impactClassification is not a function
+[39m > impact-map.js:141:26
+    139 |              const app = applicationsData.find(a => a.id === appId);
+    140 |              if (app) {
+    141 |                  analysis.impactClassification('directlyAffected', {
+        |                            ^
+    142 |                                      id: app.id,
+    143 |                                      institution: app.institution,
+ > analyzeChangeImpact impact-map.js:138:30
+ > HTMLSelectElement.<anonymous> impact-map.js:574:27
+ > initImpactMapPage impact-map.js:602:24
+ > HTMLDocument.<anonymous> app-shell.js:268:5
+
+[2m11:28:06 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mshots/app-dom.html[22m
+[2m11:28:08 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mshots/app-dom.html[22m
+[2m11:29:06 pm[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mTypeError[22m: analysis.impactClassification is not a function
+[39m > impact-map.js:141:26
+    139 |              const app = applicationsData.find(a => a.id === appId);
+    140 |              if (app) {
+    141 |                  analysis.impactClassification('directlyAffected', {
+        |                            ^
+    142 |                                      id: app.id,
+    143 |                                      institution: app.institution,
+ > analyzeChangeImpact impact-map.js:138:30
+ > HTMLSelectElement.<anonymous> impact-map.js:574:27
+ > initImpactMapPage impact-map.js:602:24
+ > HTMLDocument.<anonymous> app-shell.js:268:5
+
+[2m11:29:34 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mimpact-map.js[22m
+[2m11:29:38 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mimpact-map.js[22m
+[2m11:29:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mimpact-map.js[22m
+[2m11:30:56 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m11:31:01 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m11:31:46 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/app-shell.css?direct[22m
+[2m11:33:25 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m11:33:29 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m11:33:32 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m11:33:36 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m11:33:39 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m11:33:44 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m11:33:48 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m11:34:20 pm[22m [36m[1m[vite][22m[39m [32mvite.config.js changed, restarting server...[39m
+[33m(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vite.config.js:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.[39m
+[2m11:34:20 pm[22m [36m[1m[vite][22m[39m server restarted.
