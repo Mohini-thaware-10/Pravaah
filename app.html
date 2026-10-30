@@ -140,7 +140,7 @@
                 </div>
 
                 <div class="nav__divider"></div>
-                <div class="nav__section-label">ADMINISTRATION</div>
+<div class="nav__section-label">ADMINISTRATION</div>
                 <div class="nav__section">
                     <button class="nav__item" data-page="approval-stages" title="Approval Stages">
                         <span class="nav__icon">
@@ -170,6 +170,37 @@
                             </svg>
                         </span>
                         <span class="nav__text">User & Role Management</span>
+                    </button>
+                </div>
+                <div class="nav__section-label">APPLICATION INTELLIGENCE</div>
+                <div class="nav__section">
+                    <button class="nav__item" data-page="pre-submission-simulator" title="Pre-Submission Simulator">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="2" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                <rect x="10" y="2" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M8 9h2M9 6v2" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Pre-Submission Simulator</span>
+                    </button>
+                    <button class="nav__item" data-page="trace-graph" title="Evidence-to-Decision Trace">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="9" cy="9" r="5" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M3 9h12M9 3v12" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Evidence-to-Decision Trace</span>
+                    </button>
+                    <button class="nav__item" data-page="impact-map" title="Regulatory Change Impact">
+                        <span class="nav__icon">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 3h3M3 9h3M3 15h3" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M3 3v3M9 3v3M15 3v3" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </span>
+                        <span class="nav__text">Regulatory Change Impact</span>
                     </button>
                 </div>
             </nav>
@@ -3034,7 +3065,212 @@
                         </div>
                     </div>
 
-                    <div class="urm-toast" id="urmToast" role="status" aria-live="polite"></div>
+<div class="urm-toast" id="urmToast" role="status" aria-live="polite"></div>
+                </section>
+
+                <!-- Pre-Submission Simulator Page -->
+                <section class="page" id="page-pre-submission-simulator">
+                    <div class="page__header sim-header">
+                        <div class="sim-header__left">
+                            <div class="sim-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="breadcrumb__separator">/</span>
+                                <span>Pre-Submission Simulator</span>
+                            </div>
+                            <h1 class="sim-title">Pre-Submission Failure Simulator</h1>
+                            <p class="sim-description">Interactive readiness-testing tool that helps an applicant identify avoidable application problems before submitting for review.</p>
+                            <div class="sim-badge">DEMO SIMULATION — NOT AN OFFICIAL AICTE ELIGIBILITY DECISION</div>
+                        </div>
+                        <div class="sim-header__right">
+                            <div class="app-selector">
+                                <label class="sim-label" for="simAppSelect">Select Application</label>
+                                <select id="simAppSelect" class="sim-select sim-select--full" aria-label="Select application for simulation"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sim-main">
+                        <div class="sim-panel sim-panel--summary" aria-labelledby="simSummaryTitle">
+                            <div class="sim-panel__head">
+                                <div>
+                                    <h2 class="sim-panel__title" id="simSummaryTitle">Readiness Summary</h2>
+                                    <p class="sim-panel__sub">Overall application readiness status</p>
+                                </div>
+                            </div>
+                            <div class="sim-summary-grid" id="simSummaryGrid">
+                                <!-- Summary cards generated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="sim-panel sim-panel--findings" aria-labelledby="simFindingsTitle">
+                            <div class="sim-panel__head">
+                                <div>
+                                    <h2 class="sim-panel__title" id="simFindingsTitle">Simulation Findings</h2>
+                                    <p class="sim-panel__sub">Issues detected during pre-submission review</p>
+                                </div>
+                            </div>
+                            <div class="sim-findings-panel" id="simFindingsPanel">
+                                <!-- Findings generated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="sim-panel sim-panel--actions" aria-labelledby="simActionsTitle">
+                            <div class="sim-panel__head">
+                                <div>
+                                    <h2 class="sim-panel__title" id="simActionsTitle">Corrective Actions</h2>
+                                    <p class="sim-panel__sub">Actions to address identified issues</p>
+                                </div>
+                            </div>
+                            <div class="sim-actions-panel" id="simActionsPanel">
+                                <!-- Actions generated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sim-panel sim-panel--history" aria-labelledby="simHistoryTitle">
+                        <div class="sim-panel__head">
+                            <div>
+                                <h2 class="sim-panel__title" id="simHistoryTitle">Simulation History</h2>
+                                <p class="sim-panel__sub">Previous simulation runs</p>
+                            </div>
+                        </div>
+                        <div class="sim-history-panel" id="simHistoryPanel">
+                            <!-- History generated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Evidence-to-Decision Trace Graph Page -->
+                <section class="page" id="page-trace-graph">
+                    <div class="page__header tg-header">
+                        <div class="tg-header__left">
+                            <div class="tg-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="breadcrumb__separator">/</span>
+                                <span>Evidence-to-Decision Trace</span>
+                            </div>
+                            <h1 class="tg-title">Evidence-to-Decision Trace Graph</h1>
+                            <p class="tg-description">Visualize how source, requirement, evidence, finding, decision and follow-up action are connected.</p>
+                            <div class="tg-badge">DEMONSTRATION TRACE — SOURCE VALIDITY AND OFFICIAL STATUS MUST BE VERIFIED.</div>
+                        </div>
+                        <div class="tg-header__right">
+                            <div class="app-selector">
+                                <label class="sim-label" for="tgAppSelect">Select Application</label>
+                                <select id="tgAppSelect" class="sim-select sim-select--full" aria-label="Select application for trace graph"></select>
+                            </div>
+                            <div class="tg-controls">
+                                <button id="tgResetBtn" class="tg-btn tg-btn--secondary">Reset Graph</button>
+                                <button id="tgSearchBtn" class="tg-btn tg-btn--secondary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tg-main">
+                        <div class="tg-panel tg-panel--graph" aria-labelledby="tgGraphTitle">
+                            <div class="tg-panel__head">
+                                <div>
+                                    <h2 class="tg-panel__title" id="tgGraphTitle">Trace Graph</h2>
+                                    <p class="tg-panel__sub">Interactive graph showing relationships between records</p>
+                                </div>
+                            </div>
+                            <div class="tg-graph-container" id="tgGraphContainer">
+                                <!-- Graph SVG generated by JS -->
+                                <div class="tg-no-graph">Select an application to generate the trace graph</div>
+                            </div>
+                        </div>
+
+                        <div class="tg-panel tg-panel--details" aria-labelledby="tgDetailsTitle">
+                            <div class="tg-panel__head">
+                                <div>
+                                    <h2 class="tg-panel__title" id="tgDetailsTitle">Selected Node Details</h2>
+                                    <p class="tg-panel__sub">Inspect record fields and relationships</p>
+                                </div>
+                            </div>
+                            <div class="tg-details-panel" id="tgDetailsPanel">
+                                <div class="tg-empty">Click a node in the graph to inspect its details</div>
+                            </div>
+                        </div>
+
+                        <div class="tg-panel tg-panel--trace" aria-labelledby="tgTraceTitle">
+                            <div class="tg-panel__head">
+                                <div>
+                                    <h2 class="tg-panel__title" id="tgTraceTitle">Trace Completeness</h2>
+                                    <p class="tg-panel__sub">Relationship coverage summary</p>
+                                </div>
+                            </div>
+                            <div class="tg-trace-summary" id="tgTraceSummary">
+                                <!-- Trace summary generated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Regulatory Change Impact Map Page -->
+                <section class="page" id="page-impact-map">
+                    <div class="page__header im-header">
+                        <div class="im-header__left">
+                            <div class="im-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="breadcrumb__separator">/</span>
+                                <span>Regulatory Change Impact</span>
+                            </div>
+                            <h1 class="im-title">Regulatory Change Impact Map</h1>
+                            <p class="im-description">Demonstrate how a change in a configured regulatory source or requirement could affect related obligations, evidence records, applications and review tasks.</p>
+                            <div class="im-badge">ILLUSTRATIVE CHANGE ANALYSIS — VERIFY THE OFFICIAL SOURCE BEFORE TAKING ACTION.</div>
+                        </div>
+                        <div class="im-header__right">
+                            <div class="change-selector">
+                                <label class="im-label" for="imChangeSelect">Select Change Scenario</label>
+                                <select id="imChangeSelect" class="im-select im-select--full" aria-label="Select regulatory change scenario"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="im-main">
+                        <div class="im-panel im-panel--change" aria-labelledby="imChangeTitle">
+                            <div class="im-panel__head">
+                                <div>
+                                    <h2 class="im-panel__title" id="imChangeTitle">Change Scenario</h2>
+                                    <p class="im-panel__sub">Details of the selected regulatory change</p>
+                                </div>
+                            </div>
+                            <div class="im-change-details" id="imChangeDetails">
+                                <!-- Change details generated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="im-panel im-panel--impact" aria-labelledby="imImpactTitle">
+                            <div class="im-panel__head">
+                                <div>
+                                    <h2 class="im-panel__title" id="imImpactTitle">Impact Summary</h2>
+                                    <p class="im-panel__sub">Affected requirements, evidence, applications and tasks</p>
+                                </div>
+                            </div>
+                            <div class="im-impact-summary" id="imImpactSummary">
+                                <!-- Impact summary generated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="im-panel im-panel--actions" aria-labelledby="imAckTitle">
+                            <div class="im-panel__head">
+                                <div>
+                                    <h2 class="im-panel__title" id="imAckTitle">Reviewer Acknowledgment</h2>
+                                    <p class="im-panel__sub">Acknowledge and review identified impacts</p>
+                                </div>
+                            </div>
+                            <div class="im-acknowledgment-panel" id="imAckPanel">
+                                <div class="im-ack-item">
+                                    <label class="im-ack-label">Acknowledge for Review</label>
+                                    <button class="im-ack-btn im-ack-btn--primary" id="imAcknowledgeBtn">Acknowledge</button>
+                                </div>
+                                <div class="im-ack-item">
+                                    <label class="im-ack-label">Add Review Note</label>
+                                    <textarea class="im-ack-textarea" id="imReviewNote" placeholder="Add a review note..."></textarea>
+                                </div>
+                                <button class="im-ack-btn im-ack-btn--secondary" id="imMarkReviewedBtn">Mark Reviewed</button>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <section class="page" id="page-settings">
@@ -3419,6 +3655,9 @@
     </div>
 
     <script src="app-shell.js"></script>
+    <script src="pre-submission-simulator.js"></script>
+    <script src="trace-graph.js"></script>
+    <script src="impact-map.js"></script>
     <script src="dashboard.js"></script>
     <script src="applications.js"></script>
     <script src="workflow.js"></script>

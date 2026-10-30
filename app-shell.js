@@ -69,7 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
         'audit-trail': 'Audit Trail',
         'user-role-management': 'User & Role Management',
         'help': 'Help & Guidelines',
-        'settings': 'Settings'
+        'settings': 'Settings',
+        'pre-submission-simulator': 'Pre-Submission Simulator',
+        'trace-graph': 'Evidence-to-Decision Trace',
+        'impact-map': 'Regulatory Change Impact'
     };
     
     function navigateToPage(pageId) {
@@ -260,4 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize - make sure overview is active
     navigateToPage('overview');
+    initSimulatorPage();
+    initTraceGraphPage();
+    initImpactMapPage();
 });
