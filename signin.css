@@ -1,8 +1,8 @@
 /* PRAVAAH - Sign-in page
-   Brand system mirrors the public landing page (navy + royal blue). */
+   Brand system uses the consolidated design system. */
 
 :root {
-    --bg-page: #F5F8FC;
+    --bg-page: #F8FAFC;
     --bg-surface: #FFFFFF;
     --bg-subtle: #F8FAFC;
     --navy: #17365D;
@@ -11,16 +11,15 @@
     --action-blue-hover: #1D4ED8;
     --text-primary: #172B4D;
     --text-secondary: #64748B;
-    --text-muted: #94A3B8;
+    --text-muted: #64748B;
     --border-color: #E2E8F0;
     --border-strong: #D8DEE8;
     --border-hover: #C3CDDB;
-    --pale-blue: #EAF2FF;
-    --info-bg: #EFF6FF;
-    --info-border: #BFDBFE;
-    --info-text: #1D4ED8;
-    --error-bg: #FEF2F2;
-    --error-border: #FECACA;
+    --info-bg: #DBEAFE;
+    --info-border: #3B82F633;
+    --info-text: #2563EB;
+    --error-bg: #FEE2E2;
+    --error-border: #EF444433;
     --error-text: #B91C1C;
     --focus-ring: rgba(37, 99, 235, 0.16);
     --focus-ring-strong: rgba(37, 99, 235, 0.35);

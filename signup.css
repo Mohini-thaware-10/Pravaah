@@ -1,5 +1,6 @@
 /* PRAVAAH - Create account page
    Builds on signin.css so both authentication pages share one design system. */
+/* Both auth pages share the consolidated design system from signin.css. */
 
 /* Specificity is intentionally higher than signin.css because Vite may emit
    the shared stylesheet after this file in the production build. */

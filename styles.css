@@ -1,15 +1,12 @@
-/* PRAVAAH Landing Page - Professional Redesign */
+/* PRAVAAH Design System - Consolidated */
 :root {
-    --bg-primary: #F7F9FC;
+    --bg-primary: #F8FAFC;
     --bg-surface: #FFFFFF;
     --navy: #17365D;
     --action-blue: #2563EB;
     --text-primary: #172B4D;
     --text-secondary: #64748B;
     --border-color: #E2E8F0;
-    --pale-blue: #EAF2FF;
-    --soft-cream: #FFF7E0;
-    --soft-teal: #E4F5F0;
     --success: #22C55E;
     --warning: #F59E0B;
     --info: #3B82F6;
