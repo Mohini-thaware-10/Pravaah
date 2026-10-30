@@ -484,6 +484,14 @@ function renderTraceGraph(nodes, edges, containerId) {
     // Calculate positions using simple layered layout
     const nodeTypes = { Source: 0, Requirement: 1, Evidence: 2, 'Reviewer Finding': 3, Decision: 4, 'Follow-up Action': 5 };
     const typeOrder = ['Source', 'Requirement', 'Evidence', 'Reviewer Finding', 'Decision', 'Follow-up Action'];
+    const typeColors = {
+        Source: '#2563EB',
+        Requirement: '#1d4ed8',
+        Evidence: '#059669',
+        'Reviewer Finding': '#dc2626',
+        Decision: '#7c3aed',
+        'Follow-up Action': '#ea580c'
+    };
 
     // Position nodes in layers horizontally, spaced vertically
     const layerPositions = {};
@@ -576,15 +584,6 @@ function renderTraceGraph(nodes, edges, containerId) {
         circle.setAttribute('r', nodeRadius);
 
         // Color by type
-        const typeColors = {
-            Source: '#2563EB',
-            Requirement: '#1d4ed8',
-            Evidence: '#059669',
-            'Reviewer Finding': '#dc2626',
-            Decision: '#7c3aed',
-            'Follow-up Action': '#ea580c'
-        };
-
         circle.setAttribute('fill', typeColors[node.type] || '#64748b');
         circle.setAttribute('stroke', '#1e293b');
         circle.setAttribute('stroke-width', '2');
@@ -701,11 +700,11 @@ function selectNode(nodeId, nodes, edges) {
 function deselectNode() {
     selectedNodeId = null;
     document.querySelectorAll('.tg-node--selected').forEach(c => c.classList.remove('tg-node--selected'));
-    const detailsPanel = document.getElementById('tg-details-panel-content');
+    const detailsPanel = document.getElementById('tgDetailsPanel');
     if (detailsPanel) {
         detailsPanel.innerHTML = '<p class="tg-empty">Click a node to inspect its details</p>';
     }
-    const summaryPanel = document.getElementById('tg-trace-summary');
+    const summaryPanel = document.getElementById('tgTraceSummary');
     if (summaryPanel) {
         summaryPanel.innerHTML = '<p>No relationships selected</p>';
     }
@@ -715,7 +714,7 @@ function showNodeDetailsById(nodeId, nodes, edges) {
     const node = nodes.find(n => n.id === nodeId);
     if (!node) return;
 
-    const detailsPanel = document.getElementById('tg-details-panel');
+    const detailsPanel = document.getElementById('tgDetailsPanel');
     if (!detailsPanel) return;
 
     // Build details HTML from actual fields
@@ -726,7 +725,7 @@ function showNodeDetailsById(nodeId, nodes, edges) {
                 <span class="tg-detail-id">ID: ${node.id}</span>
                 <span class="tg-detail-type">${node.type}</span>
             </div>
-            <div class="tg-detail-title">${escapeHtml(node.title)}</span>
+            <div class="tg-detail-title">${escapeHtml(node.title)}</div>
         </div>
         <div class="tg-detail-fields">
     `;
@@ -889,7 +888,7 @@ function escapeHtml(text) {
 function initTraceGraphPage() {
     const tgAppSelect = document.getElementById('tgAppSelect');
     const graphContainer = document.getElementById('tgGraphContainer');
-    const detailsPanel = document.getElementById('tg-details-panel');
+    const detailsPanel = document.getElementById('tgDetailsPanel');
     const traceSummary = document.getElementById('tgTraceSummary');
 
     if (!tgAppSelect || !graphContainer || !detailsPanel) return;

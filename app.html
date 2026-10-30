@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="app-shell.css">
+    <link rel="stylesheet" href="modules.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%230b1f44'/><path d='M16 20h32M16 32h20M16 44h28' stroke='%23ff6b1c' stroke-width='4' stroke-linecap='round'/></svg>">
 </head>
 <body>
@@ -3005,26 +3006,36 @@
                         </div>
                     </div>
 
-                    <section class="hlp-panel" aria-labelledby="hlpNavTitle">
-                        <div class="hlp-section-head">
-                            <div>
-                                <h2 class="hlp-section-title" id="hlpNavTitle">Navigation Guide</h2>
-                                <p class="hlp-section-subtitle">Key destinations available in this demo.</p>
+                    <section class="hlp-panel hlp-panel--toolbar" aria-label="Search and filter help">
+                        <div class="hlp-toolbar">
+                            <div class="hlp-search">
+                                <label class="hlp-search__label" for="hlpSearch">Search help articles</label>
+                                <input id="hlpSearch" class="hlp-input" type="search" placeholder="Search topics, modules, or keywords..." autocomplete="off">
+                            </div>
+                            <div class="hlp-cats" id="hlpCats" role="group" aria-label="Filter by category"></div>
+                        </div>
+                        <p class="hlp-result-count" id="hlpResultCount" aria-live="polite"></p>
+                    </section>
+
+                    <div class="hlp-layout">
+                        <div class="hlp-content">
+                            <div class="hlp-detail" id="hlpDetail" hidden></div>
+                            <div class="hlp-articles" id="hlpArticles"></div>
+                            <div class="hlp-empty" id="hlpEmpty" hidden>
+                                <strong>No articles matched your search.</strong>
+                                <span>Try a different keyword or choose another category.</span>
                             </div>
                         </div>
-                        <ul class="hlp-list">
-                            <li><strong>Overview/Approval Dashboard</strong> — KPIs, filters, attention items and activity (illustrative).</li>
-                            <li><strong>Applications</strong> — Browse, filter, sort, view details and manage demo actions.</li>
-                            <li><strong>Workflow Tracking</strong> — Pipeline visualization, stage details and bottlenecks.</li>
-                            <li><strong>Document Verification</strong> — Sample checklist and document preview.</li>
-                            <li><strong>Compliance Monitoring</strong> — Demo compliance register and review workspace.</li>
-                            <li><strong>Deadline & Alerts</strong> — Alerts, calendar and notification preferences.</li>
-                            <li><strong>Reports &amp; Analytics</strong> — Report Centre with filters, library, PDF and PPTX exports from local demo data.</li>
-                            <li><strong>Approval Stages</strong> — Configure demo stages, reorder, preview workflow.</li>
-                            <li><strong>Audit Trail</strong> — Illustrative activity log with filters, details and CSV export.</li>
-                            <li><strong>User &amp; Role Management</strong> — Demo users/roles and capability matrix.</li>
-                            <li><strong>Settings &amp; Profile</strong> — Local preferences and fictional profile.</li>
-                        </ul>
+                    </div>
+
+                    <section class="hlp-panel" aria-labelledby="hlpFaqTitle">
+                        <div class="hlp-section-head">
+                            <div>
+                                <h2 class="hlp-section-title" id="hlpFaqTitle">Frequently Asked Questions</h2>
+                                <p class="hlp-section-subtitle">Common questions about the demo environment.</p>
+                            </div>
+                        </div>
+                        <div class="hlp-faq" id="hlpFaq"></div>
                     </section>
 
                     <section class="hlp-panel" aria-labelledby="hlpNotesTitle">
@@ -3808,6 +3819,7 @@
     <script src="approval-stages.js"></script>
     <script src="audit-trail.js"></script>
     <script src="user-roles.js"></script>
+    <script src="help.js"></script>
     <script src="settings-profile.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>

@@ -569,32 +569,35 @@ function initImpactMapPage() {
 
     let currentAnalysis = null;
 
-    imChangeSelect.addEventListener('change', function() {
-        const changeId = this.value;
-        currentAnalysis = analyzeChangeImpact(changeId);
-        if (currentAnalysis) {
-            imMain.innerHTML = renderImpactAnalysis(currentAnalysis);
-            
-            // Attach event handlers for acknowledgment buttons
-            const acknowledgeBtn = document.getElementById('imAcknowledgeBtn');
-            const markReviewedBtn = document.getElementById('imMarkReviewedBtn');
-            const reviewNote = document.getElementById('imReviewNote');
+    function renderAnalysis() {
+        if (!currentAnalysis) return;
+        imMain.innerHTML = renderImpactAnalysis(currentAnalysis);
 
-            if (acknowledgeBtn) {
-                acknowledgeBtn.onclick = function() {
-                    reviewerAcknowledgment.acknowledged = true;
-                    reviewerAcknowledgment.reviewNotes = reviewNote ? reviewNote.value : '';
-                    renderImpactAnalysis(currentAnalysis); // Re-render with updated state
-                };
-            }
+        const acknowledgeBtn = document.getElementById('imAcknowledgeBtn');
+        const markReviewedBtn = document.getElementById('imMarkReviewedBtn');
+        const reviewNote = document.getElementById('imReviewNote');
+        const ack = currentAnalysis.reviewerAcknowledgment;
 
-            if (markReviewedBtn) {
-                markReviewedBtn.onclick = function() {
-                    reviewerAcknowledgment.reviewed = true;
-                    renderImpactAnalysis(currentAnalysis); // Re-render with updated state
-                };
-            }
+        if (acknowledgeBtn && ack) {
+            acknowledgeBtn.onclick = function() {
+                ack.acknowledged = true;
+                ack.reviewNotes = reviewNote ? reviewNote.value : (ack.reviewNotes || '');
+                renderAnalysis();
+            };
         }
+
+        if (markReviewedBtn && ack) {
+            markReviewedBtn.onclick = function() {
+                ack.reviewed = true;
+                ack.reviewNotes = reviewNote ? reviewNote.value : (ack.reviewNotes || '');
+                renderAnalysis();
+            };
+        }
+    }
+
+    imChangeSelect.addEventListener('change', function() {
+        currentAnalysis = analyzeChangeImpact(this.value);
+        renderAnalysis();
     });
 
     // Initialize with first scenario

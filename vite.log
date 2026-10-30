@@ -138,3 +138,128 @@ Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.[39m
   - ESM syntax in a file loaded as CommonJS (vite.config.js:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
 Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.[39m
 [2m11:34:20 pm[22m [36m[1m[vite][22m[39m server restarted.
+[2m12:05:45 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m12:07:18 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/modules.css?direct, /modules.css[22m
+[2m12:07:22 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/modules.css?direct, /modules.css[22m
+[2m12:07:27 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/modules.css?direct, /modules.css[22m
+[2m12:07:38 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/modules.css?direct, /modules.css[22m
+[2m12:08:03 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m12:08:39 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/modules.css?direct, /modules.css[22m
+[2m12:08:43 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mapp.html[22m
+[2m12:10:01 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: reviewerAcknowledgment is not defined
+[39m > acknowledgeBtn.onclick impact-map.js:585:21
+    583 |              if (acknowledgeBtn) {
+    584 |                  acknowledgeBtn.onclick = function() {
+    585 |                      reviewerAcknowledgment.acknowledged = true;
+        |                       ^
+    586 |                      reviewerAcknowledgment.reviewNotes = reviewNote ? reviewNote.value : '';
+    587 |                      renderImpactAnalysis(currentAnalysis); // Re-render with updated state
+
+[2m12:10:01 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: reviewerAcknowledgment is not defined
+[39m > markReviewedBtn.onclick impact-map.js:593:21
+    591 |              if (markReviewedBtn) {
+    592 |                  markReviewedBtn.onclick = function() {
+    593 |                      reviewerAcknowledgment.reviewed = true;
+        |                       ^
+    594 |                      renderImpactAnalysis(currentAnalysis); // Re-render with updated state
+    595 |                  };
+
+[2m12:10:57 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mtrace-graph.js[22m
+[2m12:11:01 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mtrace-graph.js[22m
+[2m12:11:05 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mtrace-graph.js[22m
+[2m12:11:05 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: typeColors is not defined
+[39m > trace-graph.js:650:23
+    648 |      let legendHTML = '<h4>Node Types</h4>';
+    649 |      typeOrder.forEach(type => {
+    650 |          const color = typeColors[type] || '#64748b';
+        |                         ^
+    651 |          legendHTML += `<div class="tg-legend-item"><span class="tg-legend-color" style="background: ${color};"></span...
+    652 |      });
+ > renderTraceGraph trace-graph.js:649:15
+ > HTMLSelectElement.<anonymous> trace-graph.js:911:13
+ > initTraceGraphPage trace-graph.js:918:21
+ > HTMLDocument.<anonymous> app-shell.js:267:5
+
+[2m12:11:08 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mtrace-graph.js[22m
+[2m12:11:08 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: typeColors is not defined
+[39m > trace-graph.js:650:23
+    648 |      let legendHTML = '<h4>Node Types</h4>';
+    649 |      typeOrder.forEach(type => {
+    650 |          const color = typeColors[type] || '#64748b';
+        |                         ^
+    651 |          legendHTML += `<div class="tg-legend-item"><span class="tg-legend-color" style="background: ${color};"></span...
+    652 |      });
+ > renderTraceGraph trace-graph.js:649:15
+ > HTMLSelectElement.<anonymous> trace-graph.js:911:13
+ > initTraceGraphPage trace-graph.js:918:21
+ > HTMLDocument.<anonymous> app-shell.js:267:5
+
+[2m12:11:13 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mimpact-map.js[22m
+[2m12:11:13 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: typeColors is not defined
+[39m > trace-graph.js:650:23
+    648 |      let legendHTML = '<h4>Node Types</h4>';
+    649 |      typeOrder.forEach(type => {
+    650 |          const color = typeColors[type] || '#64748b';
+        |                         ^
+    651 |          legendHTML += `<div class="tg-legend-item"><span class="tg-legend-color" style="background: ${color};"></span...
+    652 |      });
+ > renderTraceGraph trace-graph.js:649:15
+ > HTMLSelectElement.<anonymous> trace-graph.js:911:13
+ > initTraceGraphPage trace-graph.js:918:21
+ > HTMLDocument.<anonymous> app-shell.js:267:5
+
+[2m12:11:57 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/modules.css?direct, /modules.css[22m
+[2m12:12:15 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mreports-analytics.js[22m
+[2m12:12:15 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: typeColors is not defined
+[39m > trace-graph.js:650:23
+    648 |      let legendHTML = '<h4>Node Types</h4>';
+    649 |      typeOrder.forEach(type => {
+    650 |          const color = typeColors[type] || '#64748b';
+        |                         ^
+    651 |          legendHTML += `<div class="tg-legend-item"><span class="tg-legend-color" style="background: ${color};"></span...
+    652 |      });
+ > renderTraceGraph trace-graph.js:649:15
+ > HTMLSelectElement.<anonymous> trace-graph.js:911:13
+ > initTraceGraphPage trace-graph.js:918:21
+ > HTMLDocument.<anonymous> app-shell.js:267:5
+
+[2m12:12:28 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mreports-analytics.js[22m
+[2m12:12:28 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: typeColors is not defined
+[39m > trace-graph.js:650:23
+    648 |      let legendHTML = '<h4>Node Types</h4>';
+    649 |      typeOrder.forEach(type => {
+    650 |          const color = typeColors[type] || '#64748b';
+        |                         ^
+    651 |          legendHTML += `<div class="tg-legend-item"><span class="tg-legend-color" style="background: ${color};"></span...
+    652 |      });
+ > renderTraceGraph trace-graph.js:649:15
+ > HTMLSelectElement.<anonymous> trace-graph.js:911:13
+ > initTraceGraphPage trace-graph.js:918:21
+ > HTMLDocument.<anonymous> app-shell.js:267:5
+
+[2m12:12:52 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: typeColors is not defined
+[39m > trace-graph.js:650:23
+    648 |      let legendHTML = '<h4>Node Types</h4>';
+    649 |      typeOrder.forEach(type => {
+    650 |          const color = typeColors[type] || '#64748b';
+        |                         ^
+    651 |          legendHTML += `<div class="tg-legend-item"><span class="tg-legend-color" style="background: ${color};"></span...
+    652 |      });
+ > renderTraceGraph trace-graph.js:649:15
+ > HTMLSelectElement.<anonymous> trace-graph.js:911:13
+ > initTraceGraphPage trace-graph.js:918:21
+ > HTMLDocument.<anonymous> app-shell.js:267:5
+
+[2m12:13:03 am[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m [31m[Unhandled error] [1mReferenceError[22m: typeColors is not defined
+[39m > trace-graph.js:650:23
+    648 |      let legendHTML = '<h4>Node Types</h4>';
+    649 |      typeOrder.forEach(type => {
+    650 |          const color = typeColors[type] || '#64748b';
+        |                         ^
+    651 |          legendHTML += `<div class="tg-legend-item"><span class="tg-legend-color" style="background: ${color};"></span...
+    652 |      });
+ > renderTraceGraph trace-graph.js:649:15
+ > HTMLSelectElement.<anonymous> trace-graph.js:911:13
+
+[2m12:13:51 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mtrace-graph.js[22m
+[2m12:13:52 am[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mtrace-graph.js[22m

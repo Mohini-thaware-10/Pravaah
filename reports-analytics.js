@@ -120,7 +120,7 @@ function rptRenderKpi(){
             : k.icon==="shield" ? '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2.5L3 4v4.5c0 3 2.1 5.8 5 6.5 2.9-.7 5-3.5 5-6.5V4L8 2.5z" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 8l1.2 1.2L10 6.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
             : '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3.5M8 10.8v.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
         const trendClass = k.trend==="up"?"up":k.trend==="down"?"down":"neutral";
-        const arrow = k.trend==="up"?"?":k.trend==="down"?"?":"�";
+        const arrow = k.trend==="up"?"\u2191":k.trend==="down"?"\u2193":"\u2192";
         return `<article class="rpt-kpi"><div class="rpt-kpi__head"><span class="rpt-kpi__icon">${icon}</span><span class="rpt-kpi__demo">Illustrative</span></div><div class="rpt-kpi__value">${rptFormatNum(k.value)}</div><div class="rpt-kpi__label">${rptEsc(k.label)}</div><div class="rpt-kpi__footer"><span class="rpt-kpi__delta rpt-kpi__delta--${trendClass}">${arrow} ${rptEsc(k.delta)}</span><span class="rpt-kpi__note">${rptEsc(k.note)}</span></div></article>`;
     }).join("");
 }
@@ -435,3 +435,222 @@ document.addEventListener("DOMContentLoaded", function(){
     const filterSelects = document.querySelectorAll("#page-reports-analytics .rpt-filter-select");
     filterSelects.forEach(s=>{ s.onchange=()=>{ rptShowToast("Filter updated (demo)."); rptRenderLibrary(); }; });
 });
+
+function rptRenderTrend(){
+    const bars = document.getElementById("rptTrendBars");
+    const legend = document.getElementById("rptTrendLegend");
+    if(!bars) return;
+    const set = rptTrend.find(t=>t.period===rptTrendPeriod) || rptTrend[0];
+    const d = set.data;
+    const max = Math.max.apply(null, d.submitted.concat(d.processed).concat([1]));
+    bars.innerHTML = d.labels.map((label,i)=>{
+        const sh = Math.max(3, Math.round((d.submitted[i]/max)*112));
+        const ph = Math.max(3, Math.round((d.processed[i]/max)*112));
+        return `<div class="rpt-bar-group" title="${rptEsc(label)}: ${d.submitted[i]} submitted, ${d.processed[i]} processed">
+            <div class="rpt-bar-col">
+                <div class="rpt-bar rpt-bar--submitted" style="height:${sh}px"></div>
+                <div class="rpt-bar rpt-bar--processed" style="height:${ph}px"></div>
+            </div>
+            <span class="rpt-bar__label">${rptEsc(label)}</span>
+        </div>`;
+    }).join("");
+    if(legend){
+        legend.innerHTML = '<span class="rpt-legend-item"><span class="rpt-legend-dot"></span>Submitted</span><span class="rpt-legend-item"><span class="rpt-legend-dot rpt-legend-dot--processed"></span>Processed</span>';
+    }
+    document.querySelectorAll("#page-reports-analytics .rpt-trend-btn").forEach(b=>{
+        const on = b.getAttribute("data-period")===rptTrendPeriod;
+        b.classList.toggle("active", on);
+        b.setAttribute("aria-pressed", on ? "true":"false");
+    });
+}
+
+function rptBarRow(name, value, max, suffix){
+    const pct = Math.max(2, Math.round((value/(max||1))*100));
+    return `<div class="rpt-stage-row"><span class="rpt-stage-row__name">${rptEsc(name)}</span><span class="rpt-stage-row__bar"><span class="rpt-stage-row__fill" style="width:${pct}%"></span></span><span class="rpt-stage-row__val">${rptFormatNum(value)}${suffix||""}</span></div>`;
+}
+
+function rptRenderStage(){
+    const host = document.getElementById("rptStageList");
+    if(!host) return;
+    const max = Math.max.apply(null, rptStage.map(s=>s.count).concat([1]));
+    host.innerHTML = rptStage.map(s=>rptBarRow(s.stage, s.count, max)).join("");
+}
+
+function rptRenderPendency(){
+    const host = document.getElementById("rptPendencyList");
+    if(!host) return;
+    const max = Math.max.apply(null, rptPendency.map(s=>s.pending).concat([1]));
+    host.innerHTML = rptPendency.map(s=>rptBarRow(s.stage, s.pending, max)).join("");
+}
+
+function rptRenderTime(){
+    const host = document.getElementById("rptTimeList");
+    if(!host) return;
+    const max = Math.max.apply(null, rptTime.map(s=>s.days).concat([1]));
+    host.innerHTML = rptTime.map(s=>rptBarRow(s.stage, s.days, max, " d")).join("");
+}
+
+function rptRenderAge(){
+    const host = document.getElementById("rptAgeList");
+    if(!host) return;
+    const max = Math.max.apply(null, rptAge.map(s=>s.count).concat([1]));
+    host.innerHTML = rptAge.map(s=>rptBarRow(s.label, s.count, max)).join("");
+}
+
+function rptRenderCompliance(){
+    const host = document.getElementById("rptComplianceList");
+    if(!host) return;
+    host.innerHTML = rptCompliance.map(s=>`<div class="rpt-stat-row"><span class="rpt-stat-row__label">${rptEsc(s.label)}</span><span class="rpt-stat-row__value">${rptFormatNum(s.value)}</span></div>`).join("");
+}
+
+function rptRenderDeadline(){
+    const host = document.getElementById("rptDeadlineTrend");
+    const legend = document.getElementById("rptDeadlineLegend");
+    if(!host) return;
+    const max = Math.max.apply(null, rptDeadlineTrend.map(s=>Math.max(s.upcoming, s.overdue)).concat([1]));
+    host.innerHTML = '<div class="rpt-trend-bars rpt-trend-bars--deadline">' + rptDeadlineTrend.map(s=>{
+        const uh = Math.max(3, Math.round((s.upcoming/max)*112));
+        const oh = Math.max(3, Math.round((s.overdue/max)*112));
+        return `<div class="rpt-bar-group" title="${s.month}: ${s.upcoming} upcoming, ${s.overdue} overdue">
+            <div class="rpt-bar-col">
+                <div class="rpt-bar rpt-bar--upcoming" style="height:${uh}px"></div>
+                <div class="rpt-bar rpt-bar--overdue" style="height:${oh}px"></div>
+            </div>
+            <span class="rpt-bar__label">${s.month}</span>
+        </div>`;
+    }).join("") + "</div>";
+    if(legend){
+        legend.innerHTML = '<span class="rpt-legend-item"><span class="rpt-legend-dot"></span>Upcoming</span><span class="rpt-legend-item"><span class="rpt-legend-dot rpt-legend-dot--overdue"></span>Overdue</span>';
+    }
+}
+
+function rptParseDate(str){
+    const parts = String(str).trim().split(/\s+/);
+    if(parts.length < 3) return 0;
+    const mi = RPT_MONTHS.indexOf(parts[1]);
+    const d = new Date(Number(parts[2]), mi < 0 ? 0 : mi, Number(parts[0]));
+    return d.getTime() || 0;
+}
+
+function rptGetInstSorted(){
+    const list = rptInstitutions.slice();
+    const s = rptInstSort;
+    list.sort((a,b)=>{
+        if(s==="name-asc") return a.name.localeCompare(b.name);
+        if(s==="name-desc") return b.name.localeCompare(a.name);
+        if(s==="total-desc") return b.total - a.total;
+        if(s==="pending-desc") return b.pending - a.pending;
+        if(s==="completed-desc") return b.completed - a.completed;
+        if(s==="compliance-desc") return b.compliance - a.compliance;
+        if(s==="oldest-asc") return rptParseDate(a.oldest) - rptParseDate(b.oldest);
+        return 0;
+    });
+    return list;
+}
+
+function rptRenderInst(){
+    const body = document.getElementById("rptInstBody");
+    if(!body) return;
+    const all = rptGetInstSorted();
+    const per = Math.max(1, Number(rptInstPerPage) || 5);
+    const pages = Math.max(1, Math.ceil(all.length / per));
+    if(rptInstPage > pages) rptInstPage = pages;
+    if(rptInstPage < 1) rptInstPage = 1;
+    const start = (rptInstPage - 1) * per;
+    const rows = all.slice(start, start + per);
+    body.innerHTML = rows.map(inst=>`<tr data-inst="${rptEsc(inst.id)}" tabindex="0" role="button" aria-label="Open ${rptEsc(inst.name)} summary">
+        <td><span class="rpt-inst-name">${rptEsc(inst.name)}</span><span class="rpt-inst-id">${rptEsc(inst.id)}</span></td>
+        <td>${rptFormatNum(inst.total)}</td>
+        <td>${rptFormatNum(inst.pending)}</td>
+        <td>${rptFormatNum(inst.completed)}</td>
+        <td>${rptFormatNum(inst.compliance)}</td>
+        <td>${rptEsc(inst.oldest)}</td>
+        <td><span class="rpt-status-chip">${rptEsc(inst.status)}</span></td>
+    </tr>`).join("") || '<tr><td colspan="7">No institutions to display.</td></tr>';
+    const info = document.getElementById("rptInstPageInfo");
+    if(info) info.textContent = "Page " + rptInstPage + " of " + pages + " (Demo)";
+    const prev = document.getElementById("rptInstPrev");
+    if(prev) prev.disabled = rptInstPage <= 1;
+    const next = document.getElementById("rptInstNext");
+    if(next) next.disabled = rptInstPage >= pages;
+}
+
+function rptOpenInstDrawer(id){
+    const inst = rptInstitutions.find(x=>x.id===id);
+    if(!inst) return;
+    const set = (elId,val)=>{ const el=document.getElementById(elId); if(el) el.textContent = val; };
+    set("rptInstDrawerTitle", inst.name);
+    set("rptInstDrawerId", "ID: " + inst.id);
+    set("rptInstDrawerTotal", rptFormatNum(inst.total));
+    set("rptInstDrawerPending", rptFormatNum(inst.pending));
+    set("rptInstDrawerCompleted", rptFormatNum(inst.completed));
+    set("rptInstDrawerCompliance", rptFormatNum(inst.compliance));
+    set("rptInstDrawerOldest", inst.oldest);
+    set("rptInstDrawerStatus", inst.status);
+    const d = document.getElementById("rptInstDrawer");
+    if(d){ d.classList.add("active"); d.setAttribute("aria-hidden","false"); }
+}
+
+function rptCloseInstDrawer(){
+    const d = document.getElementById("rptInstDrawer");
+    if(d){ d.classList.remove("active"); d.setAttribute("aria-hidden","true"); }
+}
+
+function rptInitAnalytics(){
+    rptRenderTrend();
+    rptRenderStage();
+    rptRenderPendency();
+    rptRenderTime();
+    rptRenderAge();
+    rptRenderCompliance();
+    rptRenderDeadline();
+    rptRenderInst();
+
+    document.querySelectorAll("#page-reports-analytics .rpt-trend-btn").forEach(b=>{
+        b.addEventListener("click", function(){
+            rptTrendPeriod = b.getAttribute("data-period") || "Day";
+            rptRenderTrend();
+        });
+    });
+
+    const sort = document.getElementById("rptInstSort");
+    if(sort) sort.addEventListener("change", function(){ rptInstSort = sort.value; rptInstPage = 1; rptRenderInst(); });
+    const per = document.getElementById("rptInstPerPage");
+    if(per) per.addEventListener("change", function(){ rptInstPerPage = Number(per.value) || 5; rptInstPage = 1; rptRenderInst(); });
+    const prev = document.getElementById("rptInstPrev");
+    if(prev) prev.addEventListener("click", function(){ if(rptInstPage > 1){ rptInstPage--; rptRenderInst(); } });
+    const next = document.getElementById("rptInstNext");
+    if(next) next.addEventListener("click", function(){ rptInstPage++; rptRenderInst(); });
+
+    const body = document.getElementById("rptInstBody");
+    if(body){
+        body.addEventListener("click", function(e){
+            const tr = e.target.closest("tr[data-inst]");
+            if(tr) rptOpenInstDrawer(tr.getAttribute("data-inst"));
+        });
+        body.addEventListener("keydown", function(e){
+            if(e.key === "Enter" || e.key === " "){
+                const tr = e.target.closest("tr[data-inst]");
+                if(tr){ e.preventDefault(); rptOpenInstDrawer(tr.getAttribute("data-inst")); }
+            }
+        });
+    }
+    const dc = document.getElementById("rptInstDrawerClose");
+    if(dc) dc.addEventListener("click", rptCloseInstDrawer);
+    const dcb = document.getElementById("rptInstDrawerCloseBtn");
+    if(dcb) dcb.addEventListener("click", rptCloseInstDrawer);
+    const db = document.querySelector("#rptInstDrawer .rpt-drawer__backdrop");
+    if(db) db.addEventListener("click", rptCloseInstDrawer);
+
+    const vc = document.getElementById("rptViewCompliance");
+    if(vc) vc.addEventListener("click", function(){ const n = document.querySelector('.nav__item[data-page="compliance-monitoring"]'); if(n) n.click(); });
+    const vd = document.getElementById("rptViewDeadline");
+    if(vd) vd.addEventListener("click", function(){ const n = document.querySelector('.nav__item[data-page="deadline-alerts"]'); if(n) n.click(); });
+
+    const gen = document.getElementById("rptGenerateBtn");
+    if(gen) gen.addEventListener("click", function(){
+        rptOpenPreview({ id:"FILTERED", name:"Filtered Report Preview", desc:rptGetFiltersText(), generated:rptFmtDate(RPT_DEMO_TODAY) });
+    });
+}
+
+document.addEventListener("DOMContentLoaded", rptInitAnalytics);
