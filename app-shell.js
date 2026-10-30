@@ -72,7 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
         'settings': 'Settings',
         'pre-submission-simulator': 'Pre-Submission Simulator',
         'trace-graph': 'Evidence-to-Decision Trace',
-        'impact-map': 'Regulatory Change Impact'
+        'impact-map': 'Regulatory Change Impact',
+        'notifications': 'Notifications',
+        'my-tasks': 'My Tasks'
     };
     
     function navigateToPage(pageId) {

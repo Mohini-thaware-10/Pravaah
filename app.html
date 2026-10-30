@@ -27,7 +27,7 @@
             <div class="sidebar__header">
                 <div class="sidebar__brand">
                     <div class="sidebar__logo">
-                        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <rect width="40" height="40" rx="6" fill="#0b1f44"/>
                             <path d="M10 12h20M10 20h12M10 28h16" stroke="#ff6b1c" stroke-width="3" stroke-linecap="round"/>
                             <circle cx="28" cy="20" r="2" fill="#ff6b1c"/>
@@ -38,203 +38,23 @@
                         <div class="sidebar__brand-label">Approval Management</div>
                     </div>
                 </div>
-                <button class="sidebar__collapse" id="sidebarCollapse" aria-label="Toggle sidebar">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
+                <div class="sidebar__actions">
+                    <button class="sidebar__action" id="newWorkspaceBtn" type="button" aria-label="New view (demo only)" title="New view (demo only)">
+                        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <button class="sidebar__collapse" id="sidebarCollapse" type="button" aria-label="Collapse sidebar" aria-expanded="true" aria-controls="sidebarNav">
+                        <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
-
-            <button class="sidebar__new-btn" id="newWorkspaceBtn">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <span class="sidebar__new-text">+ New View</span>
-            </button>
-
-            <nav class="sidebar__nav">
-                <div class="nav__section">
-                    <div class="nav__section-label">OVERVIEW</div>
-                    <button class="nav__item active" data-page="overview" title="Overview">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="2" y="2" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                                <rect x="10" y="2" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                                <rect x="2" y="10" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                                <rect x="10" y="10" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Overview</span>
-                    </button>
-                    <button class="nav__item" data-page="approval-dashboard" title="Approval Dashboard">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="2" y="3" width="14" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M6 8h6M6 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Approval Dashboard</span>
-                    </button>
-                    <div class="nav__section-label">APPROVAL MANAGEMENT</div>
-                    <button class="nav__item" data-page="applications" title="Applications">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 4h10v10H4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <path d="M6 7h6M6 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Applications</span>
-                    </button>
-                    <button class="nav__item" data-page="workflow-tracking" title="Workflow Tracking">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="4" cy="9" r="2" stroke="currentColor" stroke-width="1.5"/>
-                                <circle cx="9" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/>
-                                <circle cx="14" cy="9" r="2" stroke="currentColor" stroke-width="1.5"/>
-                                <circle cx="9" cy="14" r="2" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M6 9h2M9 6v2M12 9h2M9 12v2" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Workflow Tracking</span>
-                    </button>
-                    <div class="nav__section-label">DOCUMENT INTELLIGENCE</div>
-                    <button class="nav__item" data-page="document-verification" title="Document Verification">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 3h6l3 3v9H5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <path d="M11 3v3h3" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M7 10l1.5 1.5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Document Verification</span>
-                    </button>
-                    <div class="nav__section-label">COMPLIANCE CENTER</div>
-                    <button class="nav__item" data-page="compliance-monitoring" title="Compliance Monitoring">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 2l6 3v5c0 3.5-2.5 6-6 7-3.5-1-6-3.5-6-7V5l6-3z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <path d="M6 9l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Compliance Monitoring</span>
-                    </button>
-                    <div class="nav__section-label">ALERTS &amp; DEADLINES</div>
-                    <button class="nav__item" data-page="deadline-alerts" title="Deadline & Alerts">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M9 5v4l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Deadline & Alerts</span>
-                    </button>
-                    <div class="nav__section-label">ANALYTICS &amp; REPORTS</div>
-                    <button class="nav__item" data-page="reports-analytics" title="Reports & Analytics">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 14V4M7 14V8M11 14V6M15 14V2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Reports & Analytics</span>
-                    </button>
-                    <div class="nav__section-label">COMPLIANCE CONTINUITY</div>
-                    <button class="nav__item" data-page="approval-to-compliance" title="Approval-to-Compliance">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 2l6 3v5c0 3.5-2.5 6-6 7-3.5-1-6-3.5-6-7V5l6-3z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <path d="M6 9l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Approval-to-Compliance</span>
-                    </button>
-                </div>
-
-                <div class="nav__divider"></div>
-<div class="nav__section-label">ADMINISTRATION</div>
-                <div class="nav__section">
-                    <button class="nav__item" data-page="approval-stages" title="Approval Stages">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="6" cy="6" r="2" stroke="currentColor" stroke-width="1.5"/>
-                                <circle cx="12" cy="6" r="2" stroke="currentColor" stroke-width="1.5"/>
-                                <circle cx="6" cy="12" r="2" stroke="currentColor" stroke-width="1.5"/>
-                                <circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M8 6h2M12 8v2M6 8v2M8 12h2" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Approval Stages</span>
-                    </button>
-                    <button class="nav__item" data-page="audit-trail" title="Audit Trail">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 4h12M3 9h8M3 14h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Audit Trail</span>
-                    </button>
-                    <button class="nav__item" data-page="user-role-management" title="User & Role Management">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M3 15c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">User & Role Management</span>
-                    </button>
-                </div>
-                <div class="nav__section-label">APPLICATION INTELLIGENCE</div>
-                <div class="nav__section">
-                    <button class="nav__item" data-page="pre-submission-simulator" title="Pre-Submission Simulator">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="2" y="2" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                                <rect x="10" y="2" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M8 9h2M9 6v2" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Pre-Submission Simulator</span>
-                    </button>
-                    <button class="nav__item" data-page="trace-graph" title="Evidence-to-Decision Trace">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="9" cy="9" r="5" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M3 9h12M9 3v12" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Evidence-to-Decision Trace</span>
-                    </button>
-                    <button class="nav__item" data-page="impact-map" title="Regulatory Change Impact">
-                        <span class="nav__icon">
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 3h3M3 9h3M3 15h3" stroke="currentColor" stroke-width="1.5"/>
-                                <path d="M3 3v3M9 3v3M15 3v3" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </span>
-                        <span class="nav__text">Regulatory Change Impact</span>
-                    </button>
-                </div>
-            </nav>
+            <nav class="sidebar__nav" id="sidebarNav" aria-label="Primary navigation"></nav>
 
             <div class="sidebar__bottom">
-                <button class="nav__item" data-page="help" title="Help & Guidelines">
-                    <span class="nav__icon">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/>
-                            <path d="M9 13v-1M9 7.5c0-.828.672-1.5 1.5-1.5S12 6.672 12 7.5c0 .828-.672 1.5-1.5 1.5-.828 0-1.5.672-1.5 1.5V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                    </span>
-                    <span class="nav__text">Help & Guidelines</span>
-                </button>
-                <button class="nav__item" data-page="settings" title="Settings">
-                    <span class="nav__icon">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="9" cy="9" r="2" stroke="currentColor" stroke-width="1.5"/>
-                            <path d="M15 9c0-.69-.056-1.357-.162-2.004l1.702-1.316-1-1.732-1.88.774c-.524-.468-1.108-.874-1.738-1.204L12 1h-2l-.5 2.518c-.63.33-1.214.736-1.738 1.204l-1.88-.774-1 1.732 1.702 1.316A7.37 7.37 0 003 9c0 .69.056 1.357.162 2.004l-1.702 1.316 1 1.732 1.88-.774c.524.468 1.108.874 1.738 1.204L6 17h2l.5-2.518c.63-.33 1.214-.736 1.738-1.204l1.88.774 1-1.732-1.702-1.316c.106-.647.162-1.314.162-2.004z" stroke="currentColor" stroke-width="1.5"/>
-                        </svg>
-                    </span>
-                    <span class="nav__text">Settings</span>
-                </button>
-<div class="user-profile">
+                <div class="user-profile">
                     <div class="user-avatar">PA</div>
                     <div class="user-info">
                         <div class="user-name">Portal Administrator</div>
@@ -246,6 +66,7 @@
                 </div>
             </div>
         </aside>
+        <div class="sidebar-backdrop" id="sidebarBackdrop" aria-hidden="true"></div>
 
         <!-- Main Content -->
         <div class="main-wrapper">
@@ -3424,6 +3245,187 @@
                     </div>
                 </section>
 
+                <section class="page" id="page-my-tasks">
+                    <div class="page__header mt-header">
+                        <div class="mt-header__left">
+                            <div class="mt-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="mt-breadcrumb__sep">/</span>
+                                <span>Tasks &amp; Alerts</span>
+                            </div>
+                            <h1 class="mt-title">My Tasks</h1>
+                            <p class="mt-description">Review your assigned verification, review and compliance actions across demo applications.</p>
+                            <div class="mt-header__tags">
+                                <span class="mt-banner">Demo environment — tasks are generated from illustrative application data.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cmp-kpi-grid mt-kpi" role="group" aria-label="Task summary">
+                        <div class="cmp-kpi cmp-kpi--total">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--navy" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 4h10M3 8h10M3 12h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value" id="mtKpiOpen">0</div>
+                            <div class="cmp-kpi__label">Open Tasks</div>
+                            <div class="cmp-kpi__text">Actions awaiting your review across active demo applications.</div>
+                        </div>
+                        <div class="cmp-kpi cmp-kpi--deadline">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--amber" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.5V8l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value" id="mtKpiDue">0</div>
+                            <div class="cmp-kpi__label">Due Soon</div>
+                            <div class="cmp-kpi__text">Tasks with a deadline in the next few days.</div>
+                        </div>
+                        <div class="cmp-kpi cmp-kpi--action">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--red" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2l6 11H2L8 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 6v3M8 11v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value" id="mtKpiOverdue">0</div>
+                            <div class="cmp-kpi__label">Overdue</div>
+                            <div class="cmp-kpi__text">Tasks that need attention immediately.</div>
+                        </div>
+                        <div class="cmp-kpi cmp-kpi--compliant">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--green" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value" id="mtKpiDone">0</div>
+                            <div class="cmp-kpi__label">Completed</div>
+                            <div class="cmp-kpi__text">Tasks marked complete in this demo session.</div>
+                        </div>
+                    </div>
+
+                    <section class="mt-panel" aria-labelledby="mtListTitle">
+                        <div class="mt-toolbar">
+                            <div class="mt-field">
+                                <label class="mt-label" for="mtSearch">Search tasks</label>
+                                <input class="mt-input" id="mtSearch" type="search" placeholder="Task, application or institution">
+                            </div>
+                            <div class="mt-field mt-field--sm">
+                                <label class="mt-label" for="mtPriority">Priority</label>
+                                <select class="mt-select" id="mtPriority">
+                                    <option value="all">All priorities</option>
+                                    <option value="high">High</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="low">Low</option>
+                                </select>
+                            </div>
+                            <div class="mt-field mt-field--sm">
+                                <label class="mt-label" for="mtStatus">Status</label>
+                                <select class="mt-select" id="mtStatus">
+                                    <option value="all">All statuses</option>
+                                    <option value="open">Open</option>
+                                    <option value="due">Due Soon</option>
+                                    <option value="overdue">Overdue</option>
+                                    <option value="done">Completed</option>
+                                </select>
+                            </div>
+                            <span class="mt-count" id="mtCount" aria-live="polite"></span>
+                        </div>
+                        <div class="mt-table-wrap">
+                            <table class="mt-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Task</th>
+                                        <th scope="col">Application</th>
+                                        <th scope="col">Stage</th>
+                                        <th scope="col">Priority</th>
+                                        <th scope="col">Due</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col"><span class="mt-visually-hidden">Action</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mtBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="mt-empty" id="mtEmpty" hidden>No tasks match the current filters.</div>
+                        <p class="mt-note">Task completion is stored in this browser session only and resets on reload.</p>
+                    </section>
+                </section>
+
+                <section class="page" id="page-notifications">
+                    <div class="page__header nf-header">
+                        <div class="nf-header__left">
+                            <div class="nf-breadcrumb">
+                                <span>PRAVAAH</span>
+                                <span class="nf-breadcrumb__sep">/</span>
+                                <span>Tasks &amp; Alerts</span>
+                            </div>
+                            <h1 class="nf-title">Notifications</h1>
+                            <p class="nf-description">Review recent demo alerts for applications, deadlines, workflows and compliance activity.</p>
+                            <div class="nf-header__tags">
+                                <span class="nf-banner">Demo environment — notifications are illustrative and not connected to live systems.</span>
+                            </div>
+                        </div>
+                        <div class="nf-header__actions">
+                            <button class="nf-mark-all" id="nfMarkAll" type="button">Mark all as read</button>
+                        </div>
+                    </div>
+
+                    <div class="cmp-kpi-grid nf-kpi" role="group" aria-label="Notification summary">
+                        <div class="cmp-kpi cmp-kpi--total">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--navy" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2a4 4 0 00-4 4v3l-1 2h10l-1-2V6a4 4 0 00-4-4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6.5 12.5a1.5 1.5 0 003 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value" id="nfKpiUnread">0</div>
+                            <div class="cmp-kpi__label">Unread</div>
+                            <div class="cmp-kpi__text">Alerts you have not reviewed yet.</div>
+                        </div>
+                        <div class="cmp-kpi cmp-kpi--action">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--red" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2l6 11H2L8 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 6v3M8 11v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value" id="nfKpiAction">0</div>
+                            <div class="cmp-kpi__label">Action Required</div>
+                            <div class="cmp-kpi__text">Alerts linked to pending decisions or documents.</div>
+                        </div>
+                        <div class="cmp-kpi cmp-kpi--deadline">
+                            <div class="cmp-kpi__head">
+                                <span class="cmp-kpi__icon cmp-kpi__icon--amber" aria-hidden="true">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 4.5V8l2 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                </span>
+                                <span class="cmp-kpi__demo">Demo data</span>
+                            </div>
+                            <div class="cmp-kpi__value" id="nfKpiDeadline">0</div>
+                            <div class="cmp-kpi__label">Deadline Alerts</div>
+                            <div class="cmp-kpi__text">Upcoming or overdue deadline notices.</div>
+                        </div>
+                    </div>
+
+                    <section class="nf-panel" aria-labelledby="nfListTitle">
+                        <div class="nf-toolbar">
+                            <div class="nf-filters" id="nfFilters" role="group" aria-label="Filter notifications">
+                                <button class="nf-filter active" type="button" data-filter="all" aria-pressed="true">All</button>
+                                <button class="nf-filter" type="button" data-filter="unread" aria-pressed="false">Unread</button>
+                                <button class="nf-filter" type="button" data-filter="action" aria-pressed="false">Action required</button>
+                                <button class="nf-filter" type="button" data-filter="deadline" aria-pressed="false">Deadlines</button>
+                            </div>
+                            <span class="nf-count" id="nfCount" aria-live="polite"></span>
+                        </div>
+                        <div class="nf-list" id="nfList"></div>
+                        <div class="nf-empty" id="nfEmpty" hidden>No notifications match this filter.</div>
+                    </section>
+                </section>
+
                 <section class="page" id="page-settings">
                     <div class="page__header stg-header">
                         <div class="stg-header__left">
@@ -3805,12 +3807,15 @@
         </div>
     </div>
 
+    <script src="sidebar.js"></script>
     <script src="app-shell.js"></script>
     <script src="pre-submission-simulator.js"></script>
     <script src="trace-graph.js"></script>
     <script src="impact-map.js"></script>
     <script src="dashboard.js"></script>
-<script src="applications.js"></script>
+    <script src="applications.js"></script>
+    <script src="my-tasks.js"></script>
+    <script src="notifications-page.js"></script>
 <script src="document-verification.js"></script>
 <script src="workflow.js"></script>
     <script src="compliance.js"></script>
